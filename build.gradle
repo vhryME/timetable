@@ -1,0 +1,67 @@
+plugins {
+    id 'io.spring.dependency-management' version "$springDependencyManagementPluginVersion" apply false
+    id 'org.springframework.boot' version "$springBootVersion" apply false
+    id 'io.franzbecker.gradle-lombok' version '3.3.0' apply false
+    id 'java'
+    id 'maven'
+    id 'application'
+}
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'application'
+
+    mainClassName ='com.epolsoft.Application'
+
+    group = 'com.epolsoft.cloud'
+    version = '0.1.0'
+}
+
+sourceCompatibility = '11'
+targetCompatibility = '11'
+
+subprojects {
+    apply plugin: 'maven'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.franzbecker.gradle-lombok'
+
+    repositories {
+        mavenLocal()
+        jcenter()
+        mavenCentral()
+    }
+
+    bootJar {
+        enabled = false
+    }
+
+    jar {
+        enabled = true
+    }
+
+    dependencies {
+        compileOnly "org.projectlombok:lombok"
+        testCompileOnly "org.projectlombok:lombok:"
+        annotationProcessor "org.projectlombok:lombok"
+        testAnnotationProcessor "org.projectlombok:lombok"
+    }
+}
+
+project(':configuration') {
+    dependencies {
+        compile "org.springframework.boot:spring-boot-starter:1.5.4.RELEASE"
+    }
+}
+
+project(':adapter:web') {
+    dependencies {
+        implementation project(':core')
+        implementation group: 'org.springframework', name: 'spring-web', version: '4.3.11.RELEASE'
+    }
+}
+
+project(':core') {
+    dependencies {
+        implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.4.6'
+    }
+}

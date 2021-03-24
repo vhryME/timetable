@@ -1,0 +1,13 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'host-trainee'
+include 'core'
+include 'adapter'
+include 'adapter:web'
+include 'common'
+include 'configuration'
+
