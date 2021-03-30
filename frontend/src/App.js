@@ -1,13 +1,8 @@
-import "./App.css";
-import ServerAnswer from "./components/serverAnswer";
+import React from "react";
+import MainLayout from "./layouts/mainLayout/MainLayout";
 
 function App() {
-  return (
-    <div className="App">
-      <h3>Hello World!</h3>
-      <ServerAnswer />
-    </div>
-  );
+  return <MainLayout />;
 }
 
 export default App;

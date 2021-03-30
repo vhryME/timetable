@@ -5,9 +5,10 @@ pluginManagement {
 }
 
 rootProject.name = 'host-trainee'
-include 'core'
-include 'adapter'
-include 'adapter:web'
+
 include 'common'
 include 'configuration'
+include 'adapter:web'
+include 'adapter:persistence'
+include 'core'
 

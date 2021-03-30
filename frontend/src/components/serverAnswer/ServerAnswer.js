@@ -3,7 +3,7 @@ import React from "react";
 class ServerAnswer extends React.Component {
   onErrorClickHandle = () => this.props.serverGetError();
 
-  onNormalClickHandle = () => this.props.serverGetPost();
+  onNormalClickHandle = () => this.props.serverGetHelloWorld();
 
   render() {
     return (

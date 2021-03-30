@@ -1,5 +1,5 @@
 import {
-  SERVER_REQUEST,
+  SERVER_REQUEST_LOADING,
   SERVER_REQUEST_FAILED,
   SERVER_REQUEST_SUCCESS,
 } from "../actionsTypes/server";
@@ -14,7 +14,7 @@ const initialState = {
 export default function serverReducer(state = initialState, action) {
   const newState = { ...state };
   switch (action.type) {
-    case SERVER_REQUEST:
+    case SERVER_REQUEST_LOADING:
       newState.responseCode = "";
       newState.responseData = "";
       newState.loading = true;
@@ -22,6 +22,7 @@ export default function serverReducer(state = initialState, action) {
       return newState;
 
     case SERVER_REQUEST_FAILED:
+      console.log(action.payload);
       newState.responseCode = action.payload.response.status;
       newState.responseData = action.payload.message;
       newState.loading = false;
@@ -29,6 +30,7 @@ export default function serverReducer(state = initialState, action) {
       return newState;
 
     case SERVER_REQUEST_SUCCESS:
+      console.log(action.payload);
       newState.responseCode = action.payload.status;
       newState.responseData = JSON.stringify(action.payload.data);
       newState.loading = false;
