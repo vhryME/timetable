@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { serverGetPost, serverGetError } from "./actions";
+import { serverGetHelloWorld, serverGetError } from "./actions";
 import ServerAnswer from "./ServerAnswer";
 
 const mapStateToProps = (state, self) => {
@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch) => {
     ...bindActionCreators(
       {
         serverGetError,
-        serverGetPost,
+        serverGetHelloWorld,
       },
       dispatch
     ),

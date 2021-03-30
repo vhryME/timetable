@@ -1,29 +1,21 @@
 plugins {
-    id 'io.spring.dependency-management' version "$springDependencyManagementPluginVersion" apply false
-    id 'org.springframework.boot' version "$springBootVersion" apply false
+    id 'io.spring.dependency-management' version "$springDependencyManagementPluginVersion"
     id 'io.franzbecker.gradle-lombok' version '3.3.0' apply false
-    id 'java'
-    id 'maven'
-    id 'application'
 }
 
 allprojects {
-    apply plugin: 'java'
-    apply plugin: 'application'
-
-    mainClassName ='com.epolsoft.Application'
-
     group = 'com.epolsoft.cloud'
     version = '0.1.0'
 }
 
-sourceCompatibility = '11'
-targetCompatibility = '11'
-
 subprojects {
-    apply plugin: 'maven'
-    apply plugin: 'org.springframework.boot'
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'application'
+    apply plugin: 'io.spring.dependency-management'
     apply plugin: 'io.franzbecker.gradle-lombok'
+
+    applicationDefaultJvmArgs = ["-Dspring.output.ansi.enabled=ALWAYS"]
 
     repositories {
         mavenLocal()
@@ -31,12 +23,10 @@ subprojects {
         mavenCentral()
     }
 
-    bootJar {
-        enabled = false
-    }
-
-    jar {
-        enabled = true
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.boot:spring-boot-dependencies:$springBootVersion")
+        }
     }
 
     dependencies {
@@ -45,23 +35,31 @@ subprojects {
         annotationProcessor "org.projectlombok:lombok"
         testAnnotationProcessor "org.projectlombok:lombok"
     }
-}
 
-project(':configuration') {
-    dependencies {
-        compile "org.springframework.boot:spring-boot-starter:1.5.4.RELEASE"
+
+    compileJava {
+        sourceCompatibility = 11
+        targetCompatibility = 11
     }
 }
 
-project(':adapter:web') {
-    dependencies {
-        implementation project(':core')
-        implementation group: 'org.springframework', name: 'spring-web', version: '4.3.11.RELEASE'
-    }
-}
-
-project(':core') {
-    dependencies {
-        implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.4.6'
-    }
-}
+//task buildDocker(type: Docker, dependsOn: build) {
+//    push = false
+//    applicationName = rootProject.name
+//    dockerfile = file('Dockerfile')
+//
+//    doFirst {
+//        // Rename the app jar to "app.jar" so that the Dockerfile does not require renames
+//        copy {
+//            from "${project.buildDir}/libs"
+//            into stageDir
+//            include "${rootProject.name}-${version}.jar"
+//            rename("${rootProject.name}-${version}.jar", "app.jar")
+//        }
+//    }
+//
+//    doLast {
+//        println "Run the Docker Container"
+//        println "docker run -ti -p 8080:8080 $project.group/$applicationName:$version"
+//    }
+//}
