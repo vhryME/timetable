@@ -1,14 +1,4 @@
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-    }
-}
-
 rootProject.name = 'host-trainee'
 
-include 'common'
-include 'configuration'
-include 'adapter:web'
-include 'adapter:persistence'
-include 'core'
-
+includeBuild 'backend'
+include 'frontend'

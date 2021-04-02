@@ -1,0 +1,103 @@
+plugins {
+    id "org.springframework.boot" version "$springBootVersion"
+    id 'io.spring.dependency-management' version "${springDependencyManagementPluginVersion}"
+    id "com.github.node-gradle.node" version "${nodePluginVersion}"
+    id 'io.franzbecker.gradle-lombok' version "${lombokPluginVersion}"
+}
+
+group = 'trainee'
+version = '0.1.0'
+
+apply plugin: 'java'
+apply plugin: 'java-library'
+apply plugin: 'application'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'io.franzbecker.gradle-lombok'
+
+applicationDefaultJvmArgs = ["-Dspring.output.ansi.enabled=ALWAYS"]
+
+repositories {
+    mavenLocal()
+    jcenter()
+    mavenCentral()
+}
+
+compileJava {
+    sourceCompatibility = 11
+    targetCompatibility = 11
+}
+
+springBoot {
+    mainClassName = 'com.epolsoft.Application'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+    }
+}
+
+dependencies {
+    implementation project(':configuration')
+
+    compileOnly "org.projectlombok:lombok"
+    testCompileOnly "org.projectlombok:lombok:"
+    annotationProcessor "org.projectlombok:lombok"
+    testAnnotationProcessor "org.projectlombok:lombok"
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'application'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'io.franzbecker.gradle-lombok'
+
+    applicationDefaultJvmArgs = ["-Dspring.output.ansi.enabled=ALWAYS"]
+
+    repositories {
+        mavenLocal()
+        jcenter()
+        mavenCentral()
+    }
+
+    compileJava {
+        sourceCompatibility = 11
+        targetCompatibility = 11
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+        }
+    }
+
+    dependencies {
+        compileOnly "org.projectlombok:lombok"
+        testCompileOnly "org.projectlombok:lombok:"
+        annotationProcessor "org.projectlombok:lombok"
+        testAnnotationProcessor "org.projectlombok:lombok"
+    }
+
+}
+
+//FRONTEND
+node {
+    download = true
+    version = '14.16.0'
+    workDir = file("${project.projectDir}/.gradle/nodejs")
+    npmWorkDir = file("${project.projectDir}/.gradle/npm")
+    nodeProjectDir = file("../frontend")
+}
+
+task buildFrontend(type: NpmTask, dependsOn: "npmInstall") {
+    args = ['run', 'build']
+}
+
+bootJar.dependsOn("buildFrontend")
+
+bootJar {
+    from('../frontend/public') {
+        into 'static'
+    }
+}
