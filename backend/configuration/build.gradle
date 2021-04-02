@@ -1,0 +1,9 @@
+dependencies {
+    implementation project(':common')
+    implementation project(':core')
+    implementation project(':adapter:web')
+    implementation project(':adapter:persistence')
+
+    implementation ('org.springframework.boot:spring-boot-starter-web')
+    runtimeOnly 'com.h2database:h2' //TODO switch to real ab
+}

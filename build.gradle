@@ -1,65 +1,12 @@
-plugins {
-    id 'io.spring.dependency-management' version "$springDependencyManagementPluginVersion"
-    id 'io.franzbecker.gradle-lombok' version '3.3.0' apply false
-}
-
 allprojects {
-    group = 'com.epolsoft.cloud'
+    group = 'com.epolsoft'
     version = '0.1.0'
 }
 
 subprojects {
-    apply plugin: 'java'
-    apply plugin: 'java-library'
-    apply plugin: 'application'
-    apply plugin: 'io.spring.dependency-management'
-    apply plugin: 'io.franzbecker.gradle-lombok'
-
-    applicationDefaultJvmArgs = ["-Dspring.output.ansi.enabled=ALWAYS"]
-
     repositories {
         mavenLocal()
         jcenter()
         mavenCentral()
     }
-
-    dependencyManagement {
-        imports {
-            mavenBom("org.springframework.boot:spring-boot-dependencies:$springBootVersion")
-        }
-    }
-
-    dependencies {
-        compileOnly "org.projectlombok:lombok"
-        testCompileOnly "org.projectlombok:lombok:"
-        annotationProcessor "org.projectlombok:lombok"
-        testAnnotationProcessor "org.projectlombok:lombok"
-    }
-
-
-    compileJava {
-        sourceCompatibility = 11
-        targetCompatibility = 11
-    }
 }
-
-//task buildDocker(type: Docker, dependsOn: build) {
-//    push = false
-//    applicationName = rootProject.name
-//    dockerfile = file('Dockerfile')
-//
-//    doFirst {
-//        // Rename the app jar to "app.jar" so that the Dockerfile does not require renames
-//        copy {
-//            from "${project.buildDir}/libs"
-//            into stageDir
-//            include "${rootProject.name}-${version}.jar"
-//            rename("${rootProject.name}-${version}.jar", "app.jar")
-//        }
-//    }
-//
-//    doLast {
-//        println "Run the Docker Container"
-//        println "docker run -ti -p 8080:8080 $project.group/$applicationName:$version"
-//    }
-//}
