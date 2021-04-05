@@ -1,0 +1,12 @@
+allprojects {
+    group = 'com.epolsoft'
+    version = '0.1.0'
+}
+
+subprojects {
+    repositories {
+        mavenLocal()
+        jcenter()
+        mavenCentral()
+    }
+}
