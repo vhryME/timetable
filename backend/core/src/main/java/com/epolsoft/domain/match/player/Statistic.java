@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Statistic {
 
+    private Long id;
+
     private Integer level;
 
     private Integer kills;

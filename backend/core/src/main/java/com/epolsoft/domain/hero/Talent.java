@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Talent {
 
+    private Long id;
+
     private String name;
 
     private String description;

@@ -13,6 +13,8 @@ import java.util.Set;
 @AllArgsConstructor
 public class PlayerInMatch {
 
+    private Long id;
+
     private Player player;
 
     private Hero hero;

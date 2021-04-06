@@ -12,6 +12,8 @@ import java.util.Set;
 @AllArgsConstructor
 public class Team {
 
+    private Long id;
+
     private Set<PlayerInMatch> players;
 
     private Boolean isWinner;

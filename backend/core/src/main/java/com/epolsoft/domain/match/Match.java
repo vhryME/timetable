@@ -13,6 +13,8 @@ import java.util.Set;
 @AllArgsConstructor
 public class Match {
 
+    private Long id;
+
     private TypeOfMatch type;
 
     private LocalDate date;

@@ -13,6 +13,8 @@ import java.util.Set;
 @AllArgsConstructor
 public class Hero {
 
+    private Long id;
+
     private String name;
 
     private String icon;

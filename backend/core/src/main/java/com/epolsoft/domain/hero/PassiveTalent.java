@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PassiveTalent extends Talent {
 
+    private Long id;
+
     private String skill;
 
 }

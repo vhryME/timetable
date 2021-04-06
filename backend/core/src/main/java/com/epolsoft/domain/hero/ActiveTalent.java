@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ActiveTalent extends Talent{
+public class ActiveTalent extends Talent {
+
+    private Long id;
 
     private Double cost;
 

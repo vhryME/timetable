@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Player {
 
+    private Long id;
+
     private String login;
 
 }
