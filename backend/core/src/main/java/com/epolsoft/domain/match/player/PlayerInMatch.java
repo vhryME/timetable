@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -17,7 +17,7 @@ public class PlayerInMatch {
 
     private Hero hero;
 
-    private List<Talent> talents;
+    private Set<Talent> talents;
 
     private Statistic statistic;
 

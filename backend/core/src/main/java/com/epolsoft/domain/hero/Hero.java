@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -22,8 +23,8 @@ public class Hero {
 
     private Date dateOfCreated;
 
-    private List<Spell> spells;
+    private Set<Spell> spells;
 
-    private List<Talent> talents;
+    private Set<Talent> talents;
 
 }

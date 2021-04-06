@@ -4,8 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -14,14 +15,14 @@ public class Match {
 
     private TypeOfMatch type;
 
-    private Date date;
+    private LocalDate date;
 
     private Double duration;
 
-    private List<Map> maps;
+    private Set<Map> maps;
 
     private Region region;
 
-    private List<Team> teams;
+    private Set<Team> teams;
 
 }
