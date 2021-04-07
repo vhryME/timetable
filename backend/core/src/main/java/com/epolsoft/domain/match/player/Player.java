@@ -1,4 +1,4 @@
-package com.epolsoft.domain;
+package com.epolsoft.domain.match.player;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Message {
+public class Player {
 
     private Long id;
 
-    private String content;
+    private String login;
 
 }
