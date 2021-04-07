@@ -1,12 +1,11 @@
 package com.epolsoft.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+//todo not a jpa entity!
 public class Message {
 
     private Long id;
