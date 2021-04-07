@@ -1,4 +1,4 @@
-package com.epolsoft.domain;
+package com.epolsoft.domain.hero;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,10 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Message {
+public class ActiveTalent extends Talent {
 
     private Long id;
 
-    private String content;
+    private Double cost;
+
+    private Double timeOfRecovery;
 
 }

@@ -8,3 +8,13 @@ services:
       context: ./backend
     ports:
       - "9090:9090"
+
+  frontend:
+    container_name: frontend
+    restart: unless-stopped
+    build:
+      context: ./frontend
+    depends_on:
+      - backend
+    ports:
+    - "3000:3000"
