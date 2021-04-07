@@ -1,6 +1,8 @@
-package com.epolsoft.repo;
+package com.epolsoft.dto.match.player;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,13 +11,15 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "message")
-public class MessageJpa {
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "player")
+public class PlayerJpa {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    private String content;
+    private String login;
 
 }
