@@ -1,2 +1,25 @@
+#SERVER
 server:
   port: 9090
+
+#H2
+spring:
+  h2:
+    console:
+      enabled: true
+
+#DB
+spring.datasource:
+  platform: postgres
+  driverClassName: org.h2.Driver
+  url: jdbc:h2:mem:testdb
+  username: sa
+  password:
+
+#JPA
+spring.jpa:
+  show-sql: true
+  hibernate:
+    ddl-auto: update
+  properties:
+    hibernate.dialect: org.hibernate.dialect.H2Dialect
