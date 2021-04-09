@@ -6,6 +6,7 @@ import com.epolsoft.match.port.in.MatchUseCase;
 import com.epolsoft.match.port.out.MatchQueryPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class MatchService implements MatchUseCase {
         port.init();
     }
 
+
     @Override
     public Match getMatch(Long id) {
         Match match = new Match();
@@ -37,10 +39,16 @@ public class MatchService implements MatchUseCase {
         return match;
     }
 
+
     @Override
     public void deleteMatch(Long id) {
-
+        try {
+            port.deleteMatch(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 
     @Override
     public Match saveNewMatch(Match match) {
@@ -55,10 +63,12 @@ public class MatchService implements MatchUseCase {
         return matchFromDB;
     }
 
+
     @Override
     public Match updateMatch(Long id) {
         return null;
     }
+
 
     @Override
     public List<Match> findAll() {
@@ -73,14 +83,10 @@ public class MatchService implements MatchUseCase {
         return matches;
     }
 
-    @Override
-    public Page<Match> findAllPages(Integer pageSize, Integer pageNumber) {
-        return port.findAllPages(pageSize, pageNumber);
-    }
 
     @Override
-    public Page<Match> findPageOfMatch() {
-        return null;
+    public Page<Match> findPageOfMatch(Pageable pageable) {
+        return port.findPageOfMatch(pageable);
     }
 
 }
