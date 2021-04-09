@@ -18,6 +18,12 @@ public class MatchService implements MatchUseCase {
 
     private final MatchQueryPort port;
 
+
+    @Override
+    public void init() {
+        port.init();
+    }
+
     @Override
     public Match getMatch(Long id) {
         Match match = new Match();
@@ -65,6 +71,11 @@ public class MatchService implements MatchUseCase {
         }
 
         return matches;
+    }
+
+    @Override
+    public Page<Match> findAllPages(Integer pageSize, Integer pageNumber) {
+        return port.findAllPages(pageSize, pageNumber);
     }
 
     @Override
