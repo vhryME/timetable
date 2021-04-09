@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface MatchUseCase {
 
+    void init();
+
     Match getMatch(Long id);
 
     void deleteMatch(Long id);
@@ -18,6 +20,8 @@ public interface MatchUseCase {
     Match updateMatch(Long id);
 
     List<Match> findAll();
+
+    Page<Match> findAllPages(Integer pageSize, Integer pageNumber);
 
     Page<Match> findPageOfMatch();
 

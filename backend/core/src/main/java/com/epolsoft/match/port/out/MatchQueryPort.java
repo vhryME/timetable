@@ -13,6 +13,8 @@ import java.util.List;
 
 public interface MatchQueryPort {
 
+    void init();
+
     Match findMatchById(Long id) throws Exception;
 
     void deleteMatch(Long id) throws Exception;
@@ -21,7 +23,9 @@ public interface MatchQueryPort {
 
     Match updateMatch(Long id, Match match) throws Exception;
 
-    Page<Match> findPageOfMatch(MatchFiltered matchFiltered, Pageable pageable) throws Exception;
+//    Page<Match> findAllPages(MatchFiltered matchFiltered, Pageable pageable) throws Exception;
+
+    Page<Match> findAllPages(Integer pageSize, Integer pageNumber);
 
     List<Match> findAll() throws Exception;
 
