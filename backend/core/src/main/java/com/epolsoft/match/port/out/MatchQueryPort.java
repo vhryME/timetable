@@ -25,7 +25,7 @@ public interface MatchQueryPort {
 
 //    Page<Match> findAllPages(MatchFiltered matchFiltered, Pageable pageable) throws Exception;
 
-    Page<Match> findAllPages(Integer pageSize, Integer pageNumber);
+    Page<Match> findPageOfMatch(Pageable pageable);
 
     List<Match> findAll() throws Exception;
 
