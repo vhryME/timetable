@@ -4,6 +4,7 @@ import com.epolsoft.match.domain.Match;
 import com.epolsoft.match.port.in.MatchUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,9 +41,9 @@ public class MatchController {
     }
 
 
-    @GetMapping("/get_all_pages/{size}/{num}")
-    public Page<Match> getAllPages(@PathVariable("size") Integer pageSize, @PathVariable("num") Integer pageNumber) {
-        return useCase.findAllPages(pageSize, pageNumber);
+    @GetMapping("/get_pages")
+    public Page<Match> getAllPages(Pageable page) {
+        return useCase.findAllPages(page);
     }
 
 
