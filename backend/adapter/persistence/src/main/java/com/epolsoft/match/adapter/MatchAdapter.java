@@ -106,10 +106,17 @@ public class MatchAdapter implements MatchQueryPort {
 
 
     @Override
-    public Page<Match> findAllPages(Integer pageSize, Integer pageNumber) {
-        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+    public Page<Match> findAllPages(Pageable pageable) {
+        Page<MatchJpa> matchesJpaPage = repo.findAll(pageable);
 
-        Page<Match> matchesPage = repo.findAll(pageable).map(MatchMapper.INSTANCE::matchJpaToMatch);
+        Page<Match> matchesPage = matchesJpaPage.map(new Function<MatchJpa, Match>() {
+            @Override
+            public Match apply(MatchJpa matchJpa) {
+                return mapper.matchJpaToMatch(matchJpa);
+            }
+        });
+
+        //Page<Match> matchesPage = repo.findAll(pageable).map(MatchMapper.INSTANCE::matchJpaToMatch);
 
         return matchesPage;
     }
