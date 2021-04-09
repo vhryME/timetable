@@ -2,18 +2,19 @@ package com.epolsoft.match.adapter;
 
 
 import com.epolsoft.match.domain.Match;
-import com.epolsoft.match.dto.MatchJpa;
+import com.epolsoft.match.dto.*;
 import com.epolsoft.match.mapper.MatchMapper;
 import com.epolsoft.match.port.out.MatchQueryPort;
 import com.epolsoft.match.repo.MatchRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.*;
+import java.util.function.Function;
 
 
 @Component
@@ -22,6 +23,24 @@ public class MatchAdapter implements MatchQueryPort {
 
     private final MatchMapper mapper;
     private final MatchRepo repo;
+
+
+    @Override
+    public void init() {
+        MatchJpa matchJpa1 = new MatchJpa(1L, TypeOfMatchJpa.QuickMatch, LocalDate.now(), 600.0,
+                new HashSet<MapJpa>(Collections.singleton(MapJpa.AlteracPass)), RegionJpa.EU, new HashSet<TeamJpa>(Collections.singleton(null)));
+        MatchJpa matchJpa2 = new MatchJpa(2L, TypeOfMatchJpa.HeroLeague, LocalDate.now(), 15.364,
+                new HashSet<MapJpa>(Collections.singleton(MapJpa.BraxisOutpost)), RegionJpa.CN, new HashSet<TeamJpa>(Collections.singleton(null)));
+        MatchJpa matchJpa3 = new MatchJpa(3L, TypeOfMatchJpa.Brawl, LocalDate.now(), 0.3654,
+                new HashSet<MapJpa>(Collections.singleton(MapJpa.DragonShire)), RegionJpa.NA, new HashSet<TeamJpa>(Collections.singleton(null)));
+        MatchJpa matchJpa4 = new MatchJpa(4L, TypeOfMatchJpa.Unknown, LocalDate.now(), 9856.99,
+                new HashSet<MapJpa>(Collections.singleton(MapJpa.Unknown)), RegionJpa.Unknown, new HashSet<TeamJpa>(Collections.singleton(null)));
+
+        repo.save(matchJpa1);
+        repo.save(matchJpa2);
+        repo.save(matchJpa3);
+        repo.save(matchJpa4);
+    }
 
 
     @Override
@@ -47,9 +66,12 @@ public class MatchAdapter implements MatchQueryPort {
 
     @Override
     public Match saveNewMatch(Match match) throws Exception {
-        MatchJpa matchJpa = repo.save(mapper.matchToMatchJpa(match));
+        Optional<MatchJpa> matchJpa = Optional.of(repo.save(mapper.matchToMatchJpa(match)));
 
-        return mapper.matchJpaToMatch(matchJpa);
+        matchJpa.orElseThrow(
+                () -> new Exception("Saving of new match was rejected"));
+
+        return mapper.matchJpaToMatch(matchJpa.get());
     }
 
 
@@ -84,8 +106,12 @@ public class MatchAdapter implements MatchQueryPort {
 
 
     @Override
-    public Page<Match> findPageOfMatch(MatchFiltered matchFiltered, Pageable pageable) throws Exception {
-        return null;
+    public Page<Match> findAllPages(Integer pageSize, Integer pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+
+        Page<Match> matchesPage = repo.findAll(pageable).map(MatchMapper.INSTANCE::matchJpaToMatch);
+
+        return matchesPage;
     }
 
 }
