@@ -6,10 +6,13 @@ import com.epolsoft.match.dto.*;
 import com.epolsoft.match.mapper.MatchMapper;
 import com.epolsoft.match.port.out.MatchQueryPort;
 import com.epolsoft.match.repo.MatchRepo;
+import com.epolsoft.match.specification.MatchSpecification;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.criterion.CriteriaQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -89,7 +92,7 @@ public class MatchAdapter implements MatchQueryPort {
 
 
     @Override
-    public List<Match> findAll() throws Exception {
+    public List<Match> findAllMatches() throws Exception {
         Optional<List<MatchJpa>> matchesJpa = Optional.of(repo.findAll());
 
         matchesJpa.orElseThrow(
@@ -106,17 +109,32 @@ public class MatchAdapter implements MatchQueryPort {
 
 
     @Override
-    public Page<Match> findPageOfMatch(Pageable pageable) {
-        Page<MatchJpa> matchesJpaPage = repo.findAll(pageable);
+    public Page<Match> findPageOfMatch(Pageable pageable) throws Exception {
+        Optional<Page<MatchJpa>> optionalMatchesJpa = Optional.of(repo.findAll(pageable));
 
-        Page<Match> matchesPage = matchesJpaPage.map(new Function<MatchJpa, Match>() {
-            @Override
-            public Match apply(MatchJpa matchJpa) {
-                return mapper.matchJpaToMatch(matchJpa);
-            }
-        });
+        Page<MatchJpa> matchesJpaPage = optionalMatchesJpa.orElseThrow(
+                () -> new Exception("List of Matches with pageable from DB is null"));
 
-        //Page<Match> matchesPage = repo.findAll(pageable).map(MatchMapper.INSTANCE::matchJpaToMatch);
+        Page<Match> matchesPage = matchesJpaPage.map(mapper::matchJpaToMatch);
+
+        return matchesPage;
+    }
+
+
+    @Override
+    public Page<Match> findPageOfMatchFiltered(Pageable pageable, MatchFiltered matchFiltered) throws Exception {
+        MatchJpa matchJpa = mapper.matchFilteredToMatchJpa(matchFiltered);
+
+        Specification<MatchJpa> specification = Specification.
+                where(MatchSpecification.findByRegion(matchJpa.getRegion())).
+                and(MatchSpecification.findByType(matchJpa.getType()));
+
+        Optional<Page<MatchJpa>> optionalMatchesJpa = Optional.of(repo.findAll(specification, pageable));
+
+        Page<MatchJpa> matchesJpaPage = optionalMatchesJpa.orElseThrow(
+                () -> new Exception("List of Matches with pageable by criteria from DB is null"));
+
+        Page<Match> matchesPage = matchesJpaPage.map(mapper::matchJpaToMatch);
 
         return matchesPage;
     }
