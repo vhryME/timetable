@@ -65,8 +65,16 @@ public class MatchService implements MatchUseCase {
 
 
     @Override
-    public Match updateMatch(Long id) {
-        return null;
+    public Match updateMatch(Long id, Match match) {
+        Match matchUpdated = null;
+
+        try {
+            matchUpdated = port.updateMatch(id, match);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return matchUpdated;
     }
 
 
@@ -75,7 +83,7 @@ public class MatchService implements MatchUseCase {
         List<Match> matches = new ArrayList<>();
 
         try {
-            matches = port.findAll();
+            matches = port.findAllMatches();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -86,7 +94,29 @@ public class MatchService implements MatchUseCase {
 
     @Override
     public Page<Match> findPageOfMatch(Pageable pageable) {
-        return port.findPageOfMatch(pageable);
+        Page<Match> matchPage = null;
+
+        try {
+            matchPage = port.findPageOfMatch(pageable);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return matchPage;
+    }
+
+
+    @Override
+    public Page<Match> findPageOfMatchFiltered(Pageable pageable, MatchQueryPort.MatchFiltered matchFiltered) {
+        Page<Match> matchPage = null;
+
+        try {
+            matchPage = port.findPageOfMatchFiltered(pageable, matchFiltered);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return matchPage;
     }
 
 }
