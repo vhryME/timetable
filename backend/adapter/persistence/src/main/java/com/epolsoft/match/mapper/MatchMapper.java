@@ -3,6 +3,7 @@ package com.epolsoft.match.mapper;
 
 import com.epolsoft.match.domain.Match;
 import com.epolsoft.match.dto.MatchJpa;
+import com.epolsoft.match.port.out.MatchQueryPort;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -18,5 +19,7 @@ public interface MatchMapper {
     Match matchJpaToMatch(MatchJpa matchJpa);
 
     MatchJpa matchToMatchJpa(Match match);
+
+    MatchJpa matchFilteredToMatchJpa(MatchQueryPort.MatchFiltered matchFiltered);
 
 }
