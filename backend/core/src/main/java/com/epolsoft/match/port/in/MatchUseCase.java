@@ -2,6 +2,7 @@ package com.epolsoft.match.port.in;
 
 
 import com.epolsoft.match.domain.Match;
+import com.epolsoft.match.port.out.MatchQueryPort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -18,9 +19,12 @@ public interface MatchUseCase {
 
     Match saveNewMatch(Match match);
 
-    Match updateMatch(Long id);
+    Match updateMatch(Long id, Match match);
 
     List<Match> findAll();
 
     Page<Match> findPageOfMatch(Pageable pageable);
+
+    Page<Match> findPageOfMatchFiltered(Pageable pageable, MatchQueryPort.MatchFiltered matchFiltered);
+
 }

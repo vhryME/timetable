@@ -4,7 +4,9 @@ package com.epolsoft.match.port.out;
 import com.epolsoft.match.domain.Match;
 import com.epolsoft.match.domain.Region;
 import com.epolsoft.match.domain.TypeOfMatch;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -23,17 +25,17 @@ public interface MatchQueryPort {
 
     Match updateMatch(Long id, Match match) throws Exception;
 
-//    Page<Match> findAllPages(MatchFiltered matchFiltered, Pageable pageable) throws Exception;
+    List<Match> findAllMatches() throws Exception;
 
-    Page<Match> findPageOfMatch(Pageable pageable);
+    Page<Match> findPageOfMatch(Pageable pageable) throws Exception;
 
-    List<Match> findAll() throws Exception;
+    Page<Match> findPageOfMatchFiltered(Pageable pageable, MatchFiltered matchFiltered) throws Exception;
 
 
     @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
     class MatchFiltered {
-
-        private Long id;
 
         private TypeOfMatch type;
 
