@@ -1,11 +1,9 @@
-package com.epolsoft.match.mapper.player;
+package com.epolsoft.match.mapper;
 
 
 import com.epolsoft.match.domain.Player;
-import com.epolsoft.match.dto.player.PlayerJpa;
+import com.epolsoft.match.dto.PlayerJpa;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
 

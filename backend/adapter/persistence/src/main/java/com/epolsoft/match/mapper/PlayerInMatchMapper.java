@@ -1,13 +1,11 @@
-package com.epolsoft.match.mapper.player;
+package com.epolsoft.match.mapper;
 
 
-import com.epolsoft.match.domain.PlayerInMatch;
-import com.epolsoft.match.dto.player.PlayerInMatchJpa;
 import com.epolsoft.hero.mapper.HeroMapper;
 import com.epolsoft.hero.mapper.TalentMapper;
+import com.epolsoft.match.domain.PlayerInMatch;
+import com.epolsoft.match.dto.PlayerInMatchJpa;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
 
