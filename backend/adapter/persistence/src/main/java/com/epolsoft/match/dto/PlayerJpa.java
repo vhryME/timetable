@@ -1,4 +1,4 @@
-package com.epolsoft.match.dto.player;
+package com.epolsoft.match.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.epolsoft.match.dto.player;
+package com.epolsoft.match.dto;
 
 import com.epolsoft.hero.dto.HeroJpa;
 import com.epolsoft.hero.dto.TalentJpa;
