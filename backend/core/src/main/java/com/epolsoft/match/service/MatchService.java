@@ -3,7 +3,7 @@ package com.epolsoft.match.service;
 
 import com.epolsoft.match.domain.Match;
 import com.epolsoft.match.port.in.MatchUseCase;
-import com.epolsoft.match.port.out.MatchQueryPort;
+import com.epolsoft.match.port.out.MatchPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,17 +17,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MatchService implements MatchUseCase {
 
-    private final MatchQueryPort port;
+    private final MatchPort port;
 
 
     @Override
-    public void init() {
-        port.init();
-    }
-
-
-    @Override
-    public Match getMatch(Long id) {
+    public Match getMatch(Integer id) {
         Match match = new Match();
 
         try {
@@ -41,7 +35,7 @@ public class MatchService implements MatchUseCase {
 
 
     @Override
-    public void deleteMatch(Long id) {
+    public void deleteMatch(Integer id) {
         try {
             port.deleteMatch(id);
         } catch (Exception e) {
@@ -65,7 +59,7 @@ public class MatchService implements MatchUseCase {
 
 
     @Override
-    public Match updateMatch(Long id, Match match) {
+    public Match updateMatch(Integer id, Match match) {
         Match matchUpdated = null;
 
         try {
@@ -107,7 +101,7 @@ public class MatchService implements MatchUseCase {
 
 
     @Override
-    public Page<Match> findPageOfMatchFiltered(Pageable pageable, MatchQueryPort.MatchFiltered matchFiltered) {
+    public Page<Match> findPageOfMatchFiltered(Pageable pageable, MatchPort.MatchFiltered matchFiltered) {
         Page<Match> matchPage = null;
 
         try {
