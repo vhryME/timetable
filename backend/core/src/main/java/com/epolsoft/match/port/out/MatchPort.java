@@ -1,6 +1,7 @@
 package com.epolsoft.match.port.out;
 
 
+import com.epolsoft.match.domain.Map;
 import com.epolsoft.match.domain.Match;
 import com.epolsoft.match.domain.Region;
 import com.epolsoft.match.domain.TypeOfMatch;
@@ -10,20 +11,20 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 
-public interface MatchQueryPort {
+public interface MatchPort {
 
-    void init();
+    Match findMatchById(Integer id) throws Exception;
 
-    Match findMatchById(Long id) throws Exception;
-
-    void deleteMatch(Long id) throws Exception;
+    void deleteMatch(Integer id) throws Exception;
 
     Match saveNewMatch(Match match) throws Exception;
 
-    Match updateMatch(Long id, Match match) throws Exception;
+    Match updateMatch(Integer id, Match match) throws Exception;
 
     List<Match> findAllMatches() throws Exception;
 
@@ -39,7 +40,13 @@ public interface MatchQueryPort {
 
         private TypeOfMatch type;
 
+        private LocalDate date;
+
         private Region region;
+
+        private Double duration;
+
+        private Set<Map> maps;
 
     }
 
