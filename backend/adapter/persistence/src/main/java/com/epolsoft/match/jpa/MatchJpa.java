@@ -1,4 +1,4 @@
-package com.epolsoft.match.dto;
+package com.epolsoft.match.jpa;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

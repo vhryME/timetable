@@ -1,7 +1,7 @@
-package com.epolsoft.match.dto;
+package com.epolsoft.match.jpa;
 
-import com.epolsoft.hero.dto.HeroJpa;
-import com.epolsoft.hero.dto.TalentJpa;
+import com.epolsoft.hero.jpa.HeroJpa;
+import com.epolsoft.hero.jpa.TalentJpa;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
