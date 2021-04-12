@@ -2,8 +2,7 @@ package com.epolsoft.match.mapper;
 
 
 import com.epolsoft.match.domain.TypeOfMatch;
-import com.epolsoft.match.dto.TypeOfMatchJpa;
-import org.mapstruct.EnumMapping;
+import com.epolsoft.match.jpa.TypeOfMatchJpa;
 import org.mapstruct.Mapper;
 import org.mapstruct.ValueMapping;
 import org.mapstruct.ValueMappings;

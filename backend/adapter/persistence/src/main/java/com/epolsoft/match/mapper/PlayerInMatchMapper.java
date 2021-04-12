@@ -4,7 +4,7 @@ package com.epolsoft.match.mapper;
 import com.epolsoft.hero.mapper.HeroMapper;
 import com.epolsoft.hero.mapper.TalentMapper;
 import com.epolsoft.match.domain.PlayerInMatch;
-import com.epolsoft.match.dto.PlayerInMatchJpa;
+import com.epolsoft.match.jpa.PlayerInMatchJpa;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

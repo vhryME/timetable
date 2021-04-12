@@ -2,8 +2,7 @@ package com.epolsoft.hero.mapper;
 
 
 import com.epolsoft.hero.domain.Role;
-import com.epolsoft.hero.dto.RoleJpa;
-import org.mapstruct.EnumMapping;
+import com.epolsoft.hero.jpa.RoleJpa;
 import org.mapstruct.Mapper;
 import org.mapstruct.ValueMapping;
 import org.mapstruct.ValueMappings;

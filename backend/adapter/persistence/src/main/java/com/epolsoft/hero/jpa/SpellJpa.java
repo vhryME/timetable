@@ -1,5 +1,4 @@
-package com.epolsoft.hero.dto;
-
+package com.epolsoft.hero.jpa;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,20 +9,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "activeTalent")
-public class ActiveTalentJpa extends TalentJpa {
+@Table(name = "spell")
+public class SpellJpa {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    private Double cost;
+    private String name;
 
-    private Double timeOfRecovery;
+    private String key;
+
+    private String description;
+
+    private String icon;
+
+    private Double cooldown;
+
+    private Double manaCost;
 
 }

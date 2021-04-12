@@ -2,7 +2,7 @@ package com.epolsoft.match.mapper;
 
 
 import com.epolsoft.match.domain.Region;
-import com.epolsoft.match.dto.RegionJpa;
+import com.epolsoft.match.jpa.RegionJpa;
 import org.mapstruct.Mapper;
 import org.mapstruct.ValueMapping;
 import org.mapstruct.ValueMappings;

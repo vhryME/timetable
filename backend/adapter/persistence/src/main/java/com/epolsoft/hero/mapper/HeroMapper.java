@@ -2,10 +2,8 @@ package com.epolsoft.hero.mapper;
 
 
 import com.epolsoft.hero.domain.Hero;
-import com.epolsoft.hero.dto.HeroJpa;
+import com.epolsoft.hero.jpa.HeroJpa;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
 

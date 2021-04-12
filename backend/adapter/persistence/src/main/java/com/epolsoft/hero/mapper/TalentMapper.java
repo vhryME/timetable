@@ -2,10 +2,8 @@ package com.epolsoft.hero.mapper;
 
 
 import com.epolsoft.hero.domain.Talent;
-import com.epolsoft.hero.dto.TalentJpa;
+import com.epolsoft.hero.jpa.TalentJpa;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
 

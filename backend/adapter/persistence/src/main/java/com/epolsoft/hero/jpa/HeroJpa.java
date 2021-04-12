@@ -1,4 +1,4 @@
-package com.epolsoft.hero.dto;
+package com.epolsoft.hero.jpa;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

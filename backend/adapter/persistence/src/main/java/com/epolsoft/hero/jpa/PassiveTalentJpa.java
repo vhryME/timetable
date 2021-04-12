@@ -1,4 +1,4 @@
-package com.epolsoft.hero.dto;
+package com.epolsoft.hero.jpa;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,21 +13,13 @@ import javax.persistence.Table;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "talent")
-public class TalentJpa {
+@Table(name = "passiveTalents")
+public class PassiveTalentJpa extends TalentJpa {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    private String name;
-
-    private String description;
-
-    private String icon;
-
-    private String key;
-
-    private Integer levelOfAccess;
+    private String skill;
 
 }
