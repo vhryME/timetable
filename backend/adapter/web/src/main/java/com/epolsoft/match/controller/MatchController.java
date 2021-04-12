@@ -67,16 +67,16 @@ public class MatchController {
     }
 
 
-    @GetMapping("/get_pages")
-    public Page<MatchDtoIn> getPages(Pageable pageable) {
+    @GetMapping("/get_page")
+    public Page<MatchDtoIn> getHeroPage(Pageable pageable) {
         Page<Match> matchPage = useCase.findPageOfMatch(pageable);
 
         return matchPage.map(mapper::matchToMatchDtoIn);
     }
 
 
-    @GetMapping("/get_filtered_pages")
-    public Page<MatchDtoIn> getFilteredPages(Pageable pageable , MatchPort.MatchFiltered matchFiltered) {
+    @GetMapping("/get_filtered_page")
+    public Page<MatchDtoIn> getHeroPageFiltered(Pageable pageable , MatchPort.MatchFiltered matchFiltered) {
         Page<Match> matchPage = useCase.findPageOfMatchFiltered(pageable, matchFiltered);
 
         return matchPage.map(mapper::matchToMatchDtoIn);
