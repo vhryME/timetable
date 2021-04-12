@@ -1,15 +1,21 @@
 package com.epolsoft.match.controller;
 
+
 import com.epolsoft.match.domain.Match;
+import com.epolsoft.match.dto.in.MatchDtoIn;
+import com.epolsoft.match.dto.out.MatchDtoOut;
+import com.epolsoft.match.mapper.MatchDtoMapper;
 import com.epolsoft.match.port.in.MatchUseCase;
-import com.epolsoft.match.port.out.MatchQueryPort;
+import com.epolsoft.match.port.out.MatchPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/match")
@@ -17,53 +23,61 @@ import java.util.List;
 public class MatchController {
 
     private final MatchUseCase useCase;
-
-
-    @GetMapping("/init")
-    public void init() {
-        useCase.init();
-    }
+    private final MatchDtoMapper mapper;
 
 
     @DeleteMapping("/delete/{id}")
-    public void deleteMatch(@PathVariable("id") Long id) {
+    public void deleteMatch(@PathVariable("id") Integer id) {
         useCase.deleteMatch(id);
     }
 
 
     @GetMapping("/get/{id}")
-    public Match getMatch(@PathVariable("id") Long id) {
-        return useCase.getMatch(id);
+    public MatchDtoIn getMatch(@PathVariable("id") Integer id) {
+        return mapper.matchToMatchDtoIn(useCase.getMatch(id));
     }
 
 
     @PostMapping(value = "/new", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Match saveNewMatch(@RequestBody Match match) {
-        return useCase.saveNewMatch(match);
+    public MatchDtoIn saveNewMatch(@RequestBody MatchDtoOut matchDtoOut) {
+        Match match = mapper.matchDtoOutToMatch(matchDtoOut);
+
+        return mapper.matchToMatchDtoIn(useCase.saveNewMatch(match));
     }
 
 
     @PutMapping(value = "/edit/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Match updateMatch(@PathVariable("id") Long id, @RequestBody Match match) {
+    public Match updateMatch(@PathVariable("id") Integer id, @RequestBody Match match) {
         return useCase.updateMatch(id, match);
     }
 
 
     @GetMapping("/all")
-    public List<Match> getAllMatches() {
-        return useCase.findAll();
+    public List<MatchDtoIn> getAllMatches() {
+        List<Match> matches = useCase.findAll();
+        List<MatchDtoIn> matchesDtoIn = new ArrayList<>();
+
+        for (Match match : matches) {
+            matchesDtoIn.add(mapper.matchToMatchDtoIn(match));
+        }
+
+        return matchesDtoIn;
     }
 
 
     @GetMapping("/get_pages")
-    public Page<Match> getPages(Pageable page) {
-        return useCase.findPageOfMatch(page);
+    public Page<MatchDtoIn> getPages(Pageable pageable) {
+        Page<Match> matchPage = useCase.findPageOfMatch(pageable);
+
+        return matchPage.map(mapper::matchToMatchDtoIn);
     }
 
 
     @GetMapping("/get_filtered_pages")
-    public Page<Match> getFilteredPages(Pageable pageable ,MatchQueryPort.MatchFiltered matchFiltered) {
-        return useCase.findPageOfMatchFiltered(pageable, matchFiltered);
+    public Page<MatchDtoIn> getFilteredPages(Pageable pageable , MatchPort.MatchFiltered matchFiltered) {
+        Page<Match> matchPage = useCase.findPageOfMatchFiltered(pageable, matchFiltered);
+
+        return matchPage.map(mapper::matchToMatchDtoIn);
     }
 
 }
