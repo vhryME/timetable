@@ -36,13 +36,13 @@ public class MatchAdapter implements MatchPort {
     public void init() {
         matches = new ArrayList<>();
 
-        Match match1 = new Match(1L, TypeOfMatch.QuickMatch, LocalDate.now(), 600.0,
+        Match match1 = new Match(1, TypeOfMatch.QuickMatch, LocalDate.now(), 600.0,
                 new HashSet<Map>(Collections.singleton(Map.AlteracPass)), Region.EU, new HashSet<Team>(Collections.singleton(null)));
-        Match match2 = new Match(2L, TypeOfMatch.HeroLeague, LocalDate.now(), 15.364,
+        Match match2 = new Match(2, TypeOfMatch.HeroLeague, LocalDate.now(), 15.364,
                 new HashSet<Map>(Collections.singleton(Map.BraxisOutpost)), Region.CN, new HashSet<Team>(Collections.singleton(null)));
-        Match match3 = new Match(3L, TypeOfMatch.Brawl, LocalDate.now(), 0.3654,
+        Match match3 = new Match(3, TypeOfMatch.Brawl, LocalDate.now(), 0.3654,
                 new HashSet<Map>(Collections.singleton(Map.DragonShire)), Region.NA, new HashSet<Team>(Collections.singleton(null)));
-        Match match4 = new Match(4L, TypeOfMatch.Unknown, LocalDate.now(), 9856.99,
+        Match match4 = new Match(4, TypeOfMatch.Unknown, LocalDate.now(), 9856.99,
                 new HashSet<Map>(Collections.singleton(Map.Unknown)), Region.Unknown, new HashSet<Team>(Collections.singleton(null)));
 
         matches.add(match1);

@@ -1,6 +1,5 @@
 package com.epolsoft.match.jpa;
 
-import com.epolsoft.match.dto.player.PlayerInMatchJpa;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
