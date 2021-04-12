@@ -31,7 +31,4 @@ public class MatchDtoOut {
     @NonNull
     private Region region;
 
-    @NonNull
-    private Set<Team> teams;
-
 }
