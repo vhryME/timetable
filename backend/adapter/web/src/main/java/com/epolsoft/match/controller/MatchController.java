@@ -47,8 +47,10 @@ public class MatchController {
 
 
     @PutMapping(value = "/edit/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Match updateMatch(@PathVariable("id") Integer id, @RequestBody Match match) {
-        return useCase.updateMatch(id, match);
+    public MatchDtoIn updateMatch(@PathVariable("id") Integer id, @RequestBody MatchDtoOut matchDtoOut) {
+        Match match = useCase.updateMatch(id, mapper.matchDtoOutToMatch(matchDtoOut));
+
+        return mapper.matchToMatchDtoIn(match);
     }
 
 
