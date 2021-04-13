@@ -6,14 +6,10 @@ import com.epolsoft.hero.jpa.RoleJpa;
 import org.mapstruct.Mapper;
 import org.mapstruct.ValueMapping;
 import org.mapstruct.ValueMappings;
-import org.mapstruct.factory.Mappers;
 
 
 @Mapper
 public interface RoleMapper {
-
-    RoleMapper INSTANCE = Mappers.getMapper(RoleMapper.class);
-
 
     @ValueMappings({
             @ValueMapping(source = "Specialist", target = "Specialist"),

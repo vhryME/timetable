@@ -10,8 +10,6 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface TalentMapper {
 
-    TalentMapper INSTANCE = Mappers.getMapper(TalentMapper.class);
-
     Talent talentJpaToTalent(TalentJpa talentJpa);
 
     TalentJpa talentToTalentJpa(Talent talent);
