@@ -26,41 +26,41 @@ public class MatchController {
     private final MatchDtoMapper mapper;
 
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("{id}")
     public void deleteMatch(@PathVariable("id") Integer id) {
         useCase.deleteMatch(id);
     }
 
 
-    @GetMapping("/get/{id}")
-    public MatchDtoIn getMatch(@PathVariable("id") Integer id) {
-        return mapper.matchToMatchDtoIn(useCase.getMatch(id));
+    @GetMapping("{id}")
+    public MatchDtoOut getMatch(@PathVariable("id") Integer id) {
+        return mapper.matchToMatchDtoOut(useCase.getMatch(id));
     }
 
 
-    @PostMapping(value = "/new", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public MatchDtoIn saveNewMatch(@RequestBody MatchDtoOut matchDtoOut) {
-        Match match = mapper.matchDtoOutToMatch(matchDtoOut);
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public MatchDtoOut saveNewMatch(@RequestBody MatchDtoIn matchDtoIn) {
+        Match match = mapper.matchDtoInToMatch(matchDtoIn);
 
-        return mapper.matchToMatchDtoIn(useCase.saveNewMatch(match));
+        return mapper.matchToMatchDtoOut(useCase.saveNewMatch(match));
     }
 
 
-    @PutMapping(value = "/edit/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public MatchDtoIn updateMatch(@PathVariable("id") Integer id, @RequestBody MatchDtoOut matchDtoOut) {
-        Match match = useCase.updateMatch(id, mapper.matchDtoOutToMatch(matchDtoOut));
+    @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public MatchDtoOut updateMatch(@PathVariable("id") Integer id, @RequestBody MatchDtoIn matchDtoIn) {
+        Match match = useCase.updateMatch(id, mapper.matchDtoInToMatch(matchDtoIn));
 
-        return mapper.matchToMatchDtoIn(match);
+        return mapper.matchToMatchDtoOut(match);
     }
 
 
     @GetMapping("/all")
-    public List<MatchDtoIn> getAllMatches() {
+    public List<MatchDtoOut> getAllMatches() {
         List<Match> matches = useCase.findAll();
-        List<MatchDtoIn> matchesDtoIn = new ArrayList<>();
+        List<MatchDtoOut> matchesDtoIn = new ArrayList<>();
 
         for (Match match : matches) {
-            matchesDtoIn.add(mapper.matchToMatchDtoIn(match));
+            matchesDtoIn.add(mapper.matchToMatchDtoOut(match));
         }
 
         return matchesDtoIn;
@@ -68,18 +68,18 @@ public class MatchController {
 
 
     @GetMapping("/get_page")
-    public Page<MatchDtoIn> getHeroPage(Pageable pageable) {
+    public Page<MatchDtoOut> getHeroPage(Pageable pageable) {
         Page<Match> matchPage = useCase.findPageOfMatch(pageable);
 
-        return matchPage.map(mapper::matchToMatchDtoIn);
+        return matchPage.map(mapper::matchToMatchDtoOut);
     }
 
 
     @GetMapping("/get_filtered_page")
-    public Page<MatchDtoIn> getHeroPageFiltered(Pageable pageable , MatchPort.MatchFiltered matchFiltered) {
+    public Page<MatchDtoOut> getHeroPageFiltered(Pageable pageable , MatchPort.MatchFiltered matchFiltered) {
         Page<Match> matchPage = useCase.findPageOfMatchFiltered(pageable, matchFiltered);
 
-        return matchPage.map(mapper::matchToMatchDtoIn);
+        return matchPage.map(mapper::matchToMatchDtoOut);
     }
 
 }
