@@ -12,7 +12,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class Match {
 
-    private Long id;
+    private Integer id;
 
     private TypeOfMatch type;
 
