@@ -54,7 +54,7 @@ public class MatchAdapter implements MatchPort {
 
     @Override
     public Match findMatchById(Integer id) throws Exception {
-        return matches.get(Integer.valueOf(id));
+        return matches.get(id);
     }
 
 
@@ -124,98 +124,5 @@ public class MatchAdapter implements MatchPort {
 
         return new PageImpl<>(matchesFiltered.subList(start, end), pageable, matches.size());
     }
-
-    //    @Override
-//    public Match findMatchById(Long id) throws Exception {
-//        Optional<MatchJpa> match = Optional.of(repo.getOne(id));
-//
-//        return mapper.matchJpaToMatch(
-//                match.orElseThrow(
-//                        () -> new Exception(String.format("Match with id = {%s} is not found", id))));
-//    }
-//
-//
-//    @Override
-//    public void deleteMatch(Long id) throws Exception {
-//        Optional<MatchJpa> match = Optional.of(repo.getOne(id));
-//
-//        match.orElseThrow(
-//                () -> new Exception(String.format("Match with id = {%s} is not found", id)));
-//
-//        repo.deleteById(id);
-//    }
-//
-//
-//    @Override
-//    public Match saveNewMatch(Match match) throws Exception {
-//        Optional<MatchJpa> matchJpa = Optional.of(repo.save(mapper.matchToMatchJpa(match)));
-//
-//        matchJpa.orElseThrow(
-//                () -> new Exception("Saving of new match was rejected"));
-//
-//        return mapper.matchJpaToMatch(matchJpa.get());
-//    }
-//
-//
-//    @Override
-//    public Match updateMatch(Long id, Match match) throws Exception {
-//        Optional<MatchJpa> matchToUpdate = Optional.of(repo.getOne(id));
-//
-//        matchToUpdate.orElseThrow(
-//                () -> new Exception(String.format("Match with id = {%s} is not found", id)));
-//
-//        MatchJpa matchFromDB = repo.save(mapper.matchToMatchJpa(match));
-//
-//        return mapper.matchJpaToMatch(matchFromDB);
-//    }
-//
-//
-//    @Override
-//    public List<Match> findAllMatches() throws Exception {
-//        Optional<List<MatchJpa>> matchesJpa = Optional.of(repo.findAll());
-//
-//        matchesJpa.orElseThrow(
-//                () -> new Exception("List of Matches from DB is null"));
-//
-//        List<Match> matches = new ArrayList<>();
-//
-//        for (MatchJpa matchJpa : matchesJpa.get()) {
-//            matches.add(mapper.matchJpaToMatch(matchJpa));
-//        }
-//
-//        return matches;
-//    }
-//
-//
-//    @Override
-//    public Page<Match> findPageOfMatch(Pageable pageable) throws Exception {
-//        Optional<Page<MatchJpa>> optionalMatchesJpa = Optional.of(repo.findAll(pageable));
-//
-//        Page<MatchJpa> matchesJpaPage = optionalMatchesJpa.orElseThrow(
-//                () -> new Exception("List of Matches with pageable from DB is null"));
-//
-//        Page<Match> matchesPage = matchesJpaPage.map(mapper::matchJpaToMatch);
-//
-//        return matchesPage;
-//    }
-//
-//
-//    @Override
-//    public Page<Match> findPageOfMatchFiltered(Pageable pageable, MatchFiltered matchFiltered) throws Exception {
-//        MatchJpa matchJpa = mapper.matchFilteredToMatchJpa(matchFiltered);
-//
-//        Specification<MatchJpa> specification = Specification.
-//                where(MatchSpecification.findByRegion(matchJpa.getRegion())).
-//                and(MatchSpecification.findByType(matchJpa.getType()));
-//
-//        Optional<Page<MatchJpa>> optionalMatchesJpa = Optional.of(repo.findAll(specification, pageable));
-//
-//        Page<MatchJpa> matchesJpaPage = optionalMatchesJpa.orElseThrow(
-//                () -> new Exception("List of Matches with pageable by criteria from DB is null"));
-//
-//        Page<Match> matchesPage = matchesJpaPage.map(mapper::matchJpaToMatch);
-//
-//        return matchesPage;
-//    }
 
 }
