@@ -13,6 +13,9 @@ import java.util.Set;
 public class TeamDtoOut {
 
     @NonNull
+    private Long id;
+
+    @NonNull
     private Set<PlayerInMatchDtoOut> players;
 
     @NonNull

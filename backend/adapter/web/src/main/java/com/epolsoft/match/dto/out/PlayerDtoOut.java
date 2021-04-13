@@ -11,6 +11,9 @@ import lombok.NonNull;
 public class PlayerDtoOut {
 
     @NonNull
+    private Long id;
+
+    @NonNull
     private String login;
 
 }

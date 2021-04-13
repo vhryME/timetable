@@ -3,7 +3,6 @@ package com.epolsoft.match.dto.out;
 
 import com.epolsoft.match.domain.Map;
 import com.epolsoft.match.domain.Region;
-import com.epolsoft.match.domain.Team;
 import com.epolsoft.match.domain.TypeOfMatch;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +17,9 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MatchDtoOut {
+
+    @NonNull
+    private Long id;
 
     @NonNull
     private TypeOfMatch type;

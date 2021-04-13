@@ -11,6 +11,9 @@ import lombok.NonNull;
 public class StatisticDtoOut {
 
     @NonNull
+    private Long id;
+
+    @NonNull
     private Integer level;
 
     @NonNull

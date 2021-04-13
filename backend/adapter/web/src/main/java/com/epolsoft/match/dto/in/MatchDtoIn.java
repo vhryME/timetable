@@ -19,9 +19,6 @@ import java.util.Set;
 public class MatchDtoIn {
 
     @NonNull
-    private Long id;
-
-    @NonNull
     private TypeOfMatch type;
 
     @NonNull

@@ -13,9 +13,6 @@ import java.util.Set;
 public class TeamDtoIn {
 
     @NonNull
-    private Long id;
-
-    @NonNull
     private Set<PlayerInMatchDtoIn> players;
 
     @NonNull

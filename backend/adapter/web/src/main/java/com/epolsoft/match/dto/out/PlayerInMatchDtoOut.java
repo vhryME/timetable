@@ -16,6 +16,9 @@ import java.util.Set;
 public class PlayerInMatchDtoOut {
 
     @NonNull
+    private Long id;
+
+    @NonNull
     private PlayerDtoOut player;
 
     @NonNull
