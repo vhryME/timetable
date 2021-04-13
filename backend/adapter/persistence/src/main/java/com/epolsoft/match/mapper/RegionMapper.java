@@ -6,14 +6,10 @@ import com.epolsoft.match.jpa.RegionJpa;
 import org.mapstruct.Mapper;
 import org.mapstruct.ValueMapping;
 import org.mapstruct.ValueMappings;
-import org.mapstruct.factory.Mappers;
 
 
 @Mapper
 public interface RegionMapper {
-
-    RegionMapper INSTANCE = Mappers.getMapper(RegionMapper.class);
-
 
     @ValueMappings({
             @ValueMapping(source = "NA", target = "NA"),

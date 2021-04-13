@@ -6,14 +6,10 @@ import com.epolsoft.match.jpa.TypeOfMatchJpa;
 import org.mapstruct.Mapper;
 import org.mapstruct.ValueMapping;
 import org.mapstruct.ValueMappings;
-import org.mapstruct.factory.Mappers;
 
 
 @Mapper
 public interface TypeOfMatchMapper {
-
-    TypeOfMatchMapper INSTANCE = Mappers.getMapper(TypeOfMatchMapper.class);
-
 
     @ValueMappings({
             @ValueMapping(source = "QuickMatch", target = "QuickMatch"),

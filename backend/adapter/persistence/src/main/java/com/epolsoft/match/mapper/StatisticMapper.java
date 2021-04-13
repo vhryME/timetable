@@ -10,9 +10,6 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface StatisticMapper {
 
-    StatisticMapper INSTANCE = Mappers.getMapper(StatisticMapper.class);
-
-
     Statistic statisticJpaToStatistic(StatisticJpa statisticJpa);
 
     StatisticJpa statisticToStatisticJpa(Statistic statistic);

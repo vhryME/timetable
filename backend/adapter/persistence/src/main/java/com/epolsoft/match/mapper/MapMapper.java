@@ -6,14 +6,10 @@ import com.epolsoft.match.jpa.MapJpa;
 import org.mapstruct.Mapper;
 import org.mapstruct.ValueMapping;
 import org.mapstruct.ValueMappings;
-import org.mapstruct.factory.Mappers;
 
 
 @Mapper
 public interface MapMapper {
-
-    MapMapper INSTANCE = Mappers.getMapper(MapMapper.class);
-
 
     @ValueMappings({
             @ValueMapping(source = "AlteracPass", target = "AlteracPass"),
