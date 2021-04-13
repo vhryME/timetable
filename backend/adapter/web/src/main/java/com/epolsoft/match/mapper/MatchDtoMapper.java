@@ -5,14 +5,13 @@ import com.epolsoft.match.domain.Match;
 import com.epolsoft.match.dto.in.MatchDtoIn;
 import com.epolsoft.match.dto.out.MatchDtoOut;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 
 @Mapper
 public interface MatchDtoMapper {
 
-    Match matchDtoOutToMatch(MatchDtoOut matchDtoOut);
+    Match matchDtoInToMatch(MatchDtoIn matchDtoIn);
 
-    MatchDtoIn matchToMatchDtoIn(Match match);
+    MatchDtoOut matchToMatchDtoOut(Match match);
 
 }

@@ -7,7 +7,6 @@ import com.epolsoft.match.dto.out.RegionDtoOut;
 import org.mapstruct.Mapper;
 import org.mapstruct.ValueMapping;
 import org.mapstruct.ValueMappings;
-import org.mapstruct.factory.Mappers;
 
 
 @Mapper
@@ -20,7 +19,7 @@ public interface RegionDtoMapper {
             @ValueMapping(source = "CN", target = "CN"),
             @ValueMapping(source = "Unknown", target = "Unknown")
     })
-    Region regionJpaToRegion(RegionDtoOut regionDtoOut);
+    Region regionDtoInToRegion(RegionDtoIn regionDtoIn);
 
 
     @ValueMappings({
@@ -30,6 +29,6 @@ public interface RegionDtoMapper {
             @ValueMapping(source = "CN", target = "CN"),
             @ValueMapping(source = "Unknown", target = "Unknown")
     })
-    RegionDtoIn regionToRegionDtoIn(Region region);
+    RegionDtoOut regionToRegionDtoOut(Region region);
 
 }

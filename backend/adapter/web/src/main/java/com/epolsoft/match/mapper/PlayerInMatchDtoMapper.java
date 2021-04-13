@@ -7,14 +7,13 @@ import com.epolsoft.match.domain.PlayerInMatch;
 import com.epolsoft.match.dto.in.PlayerInMatchDtoIn;
 import com.epolsoft.match.dto.out.PlayerInMatchDtoOut;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 
 @Mapper(uses = {PlayerDtoMapper.class, HeroDtoMapper.class, TalentDtoMapper.class, StatisticDtoMapper.class})
 public interface PlayerInMatchDtoMapper {
 
-    PlayerInMatch playerInMatchDtoOutToPlayerInMatch(PlayerInMatchDtoOut playerInMatchDtoOut);
+    PlayerInMatch playerInMatchDtoInToPlayerInMatch(PlayerInMatchDtoIn playerInMatchDtoIn);
 
-    PlayerInMatchDtoIn playerInMatchToPlayerInMatchDtoIn(PlayerInMatch playerInMatch);
+    PlayerInMatchDtoOut playerInMatchToPlayerInMatchDtoOut(PlayerInMatch playerInMatch);
 
 }

@@ -7,7 +7,6 @@ import com.epolsoft.match.dto.out.MapDtoOut;
 import org.mapstruct.Mapper;
 import org.mapstruct.ValueMapping;
 import org.mapstruct.ValueMappings;
-import org.mapstruct.factory.Mappers;
 
 
 @Mapper
@@ -33,7 +32,7 @@ public interface MapDtoMapper {
             @ValueMapping(source = "WarheadJunction", target = "WarheadJunction"),
             @ValueMapping(source = "Unknown", target = "Unknown"),
     })
-    Map mapDtoOutToMap(MapDtoOut mapDtoOut);
+    Map mapDtoInToMap(MapDtoIn mapDtoIn);
 
     @ValueMappings({
             @ValueMapping(source = "AlteracPass", target = "AlteracPass"),
@@ -55,6 +54,6 @@ public interface MapDtoMapper {
             @ValueMapping(source = "WarheadJunction", target = "WarheadJunction"),
             @ValueMapping(source = "Unknown", target = "Unknown"),
     })
-    MapDtoIn mapToMapDtoIn(Map map);
+    MapDtoOut mapToMapDtoOut(Map map);
 
 }

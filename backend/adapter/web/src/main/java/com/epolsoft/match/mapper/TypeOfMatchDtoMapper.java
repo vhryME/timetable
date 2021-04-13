@@ -7,7 +7,6 @@ import com.epolsoft.match.dto.out.TypeOfMatchDtoOut;
 import org.mapstruct.Mapper;
 import org.mapstruct.ValueMapping;
 import org.mapstruct.ValueMappings;
-import org.mapstruct.factory.Mappers;
 
 
 @Mapper
@@ -21,7 +20,7 @@ public interface TypeOfMatchDtoMapper {
             @ValueMapping(source = "Brawl", target = "Brawl"),
             @ValueMapping(source = "Unknown", target = "Unknown")
     })
-    TypeOfMatch typeToTypeJpa(TypeOfMatchDtoOut typeOfMatchDtoOut);
+    TypeOfMatch typeOfMatchDtoInToTypeOfMatch(TypeOfMatchDtoIn typeOfMatchDtoIn);
 
     @ValueMappings({
             @ValueMapping(source = "QuickMatch", target = "QuickMatch"),
@@ -31,6 +30,6 @@ public interface TypeOfMatchDtoMapper {
             @ValueMapping(source = "Brawl", target = "Brawl"),
             @ValueMapping(source = "Unknown", target = "Unknown")
     })
-    TypeOfMatchDtoIn typeJpaToType(TypeOfMatch typeOfMatch);
+    TypeOfMatchDtoOut typeOfMatchToTypeOfMatchDtoOut(TypeOfMatch typeOfMatch);
 
 }

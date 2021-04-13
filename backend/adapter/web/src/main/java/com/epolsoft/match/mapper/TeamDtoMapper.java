@@ -5,14 +5,13 @@ import com.epolsoft.match.domain.Team;
 import com.epolsoft.match.dto.in.TeamDtoIn;
 import com.epolsoft.match.dto.out.TeamDtoOut;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 
 @Mapper(uses = {PlayerInMatchDtoMapper.class})
 public interface TeamDtoMapper {
 
-    Team teamJpaToTeam(TeamDtoOut teamDtoOut);
+    Team teamDtoInToTeam(TeamDtoIn teamDtoIn);
 
-    TeamDtoIn teamToTeamDtoIn(Team team);
+    TeamDtoOut teamToTeamDtoOut(Team team);
 
 }
