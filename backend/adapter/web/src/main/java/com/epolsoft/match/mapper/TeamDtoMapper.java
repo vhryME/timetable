@@ -11,9 +11,6 @@ import org.mapstruct.factory.Mappers;
 @Mapper(uses = {PlayerInMatchDtoMapper.class})
 public interface TeamDtoMapper {
 
-    TeamDtoMapper INSTANCE = Mappers.getMapper(TeamDtoMapper.class);
-
-
     Team teamJpaToTeam(TeamDtoOut teamDtoOut);
 
     TeamDtoIn teamToTeamDtoIn(Team team);

@@ -13,9 +13,6 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface RegionDtoMapper {
 
-    RegionDtoMapper INSTANCE = Mappers.getMapper(RegionDtoMapper.class);
-
-
     @ValueMappings({
             @ValueMapping(source = "NA", target = "NA"),
             @ValueMapping(source = "EU", target = "EU"),

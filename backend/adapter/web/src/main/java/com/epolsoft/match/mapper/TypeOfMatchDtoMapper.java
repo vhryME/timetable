@@ -13,9 +13,6 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface TypeOfMatchDtoMapper {
 
-    TypeOfMatchDtoMapper INSTANCE = Mappers.getMapper(TypeOfMatchDtoMapper.class);
-
-
     @ValueMappings({
             @ValueMapping(source = "QuickMatch", target = "QuickMatch"),
             @ValueMapping(source = "UnrankedDraft", target = "UnrankedDraft"),

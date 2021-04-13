@@ -11,9 +11,6 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface MatchDtoMapper {
 
-    MatchDtoMapper INSTANCE = Mappers.getMapper(MatchDtoMapper.class);
-
-
     Match matchDtoOutToMatch(MatchDtoOut matchDtoOut);
 
     MatchDtoIn matchToMatchDtoIn(Match match);

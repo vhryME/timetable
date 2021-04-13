@@ -11,9 +11,6 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface PlayerDtoMapper {
 
-    PlayerDtoMapper INSTANCE = Mappers.getMapper(PlayerDtoMapper.class);
-
-
     Player playerDtoOutToPlayer(PlayerDtoOut playerDtoOut);
 
     PlayerDtoIn playerToPlayerDtoIn(Player player);

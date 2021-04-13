@@ -13,9 +13,6 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface MapDtoMapper {
 
-    MapDtoMapper INSTANCE = Mappers.getMapper(MapDtoMapper.class);
-
-
     @ValueMappings({
             @ValueMapping(source = "AlteracPass", target = "AlteracPass"),
             @ValueMapping(source = "BattleFieldOfEternity", target = "BattleFieldOfEternity"),
