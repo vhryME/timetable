@@ -4,8 +4,6 @@ package com.epolsoft.match.domain;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import java.util.Arrays;
-
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,12 +12,26 @@ public enum Map {
     HanamuraTemple, HauntedMines, InfernalShines, LostCavern, SilverCity, SkyTemple, TombOfTheSpiderQueen,
     TowersOfDoom, VolskayaFoundry, WarheadJunction, Unknown;
 
+
     public Integer id;
 
-    public static Map getMapById(Integer stateId) {
-        return Arrays.stream(Map.values())
-                .filter(map -> map.id.equals(stateId))
-                .findFirst()
-                .orElse(null);
+    public static Map getMapById(Integer id) {
+        for (Map map : Map.values()) {
+            if(map.id.equals(id)) {
+                return map;
+            }
+        }
+
+        return null;
+    }
+
+    public static Integer getIdByMap(Map map) {
+        for (Map mapTemp : Map.values()) {
+            if(mapTemp.equals(map)) {
+                return map.id;
+            }
+        }
+
+        return 0;
     }
 }
