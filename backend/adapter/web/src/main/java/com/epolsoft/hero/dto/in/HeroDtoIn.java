@@ -1,5 +1,6 @@
 package com.epolsoft.hero.dto.in;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.NonNull;
 
 import java.time.LocalDate;
 import java.util.Set;
+
 
 @Data
 @NoArgsConstructor
@@ -29,9 +31,9 @@ public class HeroDtoIn {
     private LocalDate dateOfCreation;
 
     @NonNull
-    private Set<SpellDtoIn> spells;
+    private Set<Integer> spellsId;
 
     @NonNull
-    private Set<TalentDtoIn> talents;
+    private Set<Integer> talentsId;
 
 }

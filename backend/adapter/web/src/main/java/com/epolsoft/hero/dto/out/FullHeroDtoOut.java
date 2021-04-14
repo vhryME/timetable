@@ -6,16 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-import java.time.LocalDate;
+import java.util.Set;
 
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class HeroDtoOut {
+public class FullHeroDtoOut {
 
     @NonNull
-    private Integer id;
+    private Long id;
 
     @NonNull
     private String name;
@@ -31,5 +31,11 @@ public class HeroDtoOut {
 
     @NonNull
     private String dateOfCreation;
+
+    @NonNull
+    private Set<Integer> spellsId;
+
+    @NonNull
+    private Set<Integer> talentsId;
 
 }
