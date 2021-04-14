@@ -20,21 +20,21 @@ import java.util.Set;
 public class FullMatchDto {
 
     @NonNull
-    private Long id;
+    private Integer id;
 
     @NonNull
-    private TypeOfMatch type;
+    private String type;
 
     @NonNull
-    private LocalDate date;
+    private String date;
 
     @NonNull
-    private Set<Map> maps;
+    private Set<Integer> mapsId;
 
     @NonNull
-    private Region region;
+    private String region;
 
     @NonNull
-    private Set<Team> teams;
+    private Set<Integer> teamsId;
 
 }

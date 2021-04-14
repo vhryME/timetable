@@ -17,15 +17,15 @@ import java.time.LocalDate;
 public class MatchDtoOut {
 
     @NonNull
-    private Long id;
+    private Integer id;
 
     @NonNull
-    private TypeOfMatch type;
+    private String type;
 
     @NonNull
-    private LocalDate date;
+    private String date;
 
     @NonNull
-    private Region region;
+    private String region;
 
 }

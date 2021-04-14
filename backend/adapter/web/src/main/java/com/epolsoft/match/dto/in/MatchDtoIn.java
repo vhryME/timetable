@@ -19,15 +19,15 @@ import java.util.Set;
 public class MatchDtoIn {
 
     @NonNull
-    private TypeOfMatch type;
+    private String type;
 
     @NonNull
-    private LocalDate date;
+    private String date;
 
     @NonNull
-    private Set<Map> maps;
+    private Set<Integer> mapsId;
 
     @NonNull
-    private Region region;
+    private String region;
 
 }
