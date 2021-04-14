@@ -37,13 +37,13 @@ public class MatchAdapter implements MatchPort {
         matches = new ArrayList<>();
 
         Match match1 = new Match(1, TypeOfMatch.QuickMatch, LocalDate.now(), 600.0,
-                new HashSet<Map>(Collections.singleton(Map.AlteracPass)), Region.EU, new HashSet<Team>(Collections.singleton(null)));
+                new HashSet<>(Collections.singleton(Map.AlteracPass)), Region.EU, new HashSet<>(Collections.singleton(null)));
         Match match2 = new Match(2, TypeOfMatch.HeroLeague, LocalDate.now(), 15.364,
-                new HashSet<Map>(Collections.singleton(Map.BraxisOutpost)), Region.CN, new HashSet<Team>(Collections.singleton(null)));
+                new HashSet<>(Collections.singleton(Map.BraxisOutpost)), Region.CN, new HashSet<>(Collections.singleton(null)));
         Match match3 = new Match(3, TypeOfMatch.Brawl, LocalDate.now(), 0.3654,
-                new HashSet<Map>(Collections.singleton(Map.DragonShire)), Region.NA, new HashSet<Team>(Collections.singleton(null)));
+                new HashSet<>(Collections.singleton(Map.DragonShire)), Region.NA, new HashSet<>(Collections.singleton(null)));
         Match match4 = new Match(4, TypeOfMatch.Unknown, LocalDate.now(), 9856.99,
-                new HashSet<Map>(Collections.singleton(Map.Unknown)), Region.Unknown, new HashSet<Team>(Collections.singleton(null)));
+                new HashSet<>(Collections.singleton(Map.Unknown)), Region.Unknown, new HashSet<>(Collections.singleton(null)));
 
         matches.add(match1);
         matches.add(match2);
@@ -112,17 +112,17 @@ public class MatchAdapter implements MatchPort {
     @Override
     public Page<Match> findPageOfMatchFiltered(Pageable pageable, MatchFiltered matchFiltered) throws Exception {
         List<Match> matchesFiltered = matches.stream().
-                filter(match -> match.getType().equals(matchFiltered.getType())).
-                filter(match -> match.getDate().equals(matchFiltered.getDate())).
-                filter(match -> match.getRegion().equals(matchFiltered.getRegion())).
-                filter(match -> match.getDuration().equals(matchFiltered.getDuration())).
-                filter(match -> match.getMaps().equals(matchFiltered.getMaps())).
+                filter( match -> match.getType().equals(matchFiltered.getType()) ||
+                        match.getDate().equals(matchFiltered.getDate()) ||
+                        match.getRegion().equals(matchFiltered.getRegion()) ||
+                        match.getMaps().equals(matchFiltered.getMaps())).
                 collect(Collectors.toList());
 
-        int start = (int)pageable.getOffset();
-        int end = Math.min((start + pageable.getPageSize()), matches.size());
 
-        return new PageImpl<>(matchesFiltered.subList(start, end), pageable, matches.size());
+        int start = (int) pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), matchesFiltered.size());
+
+        return new PageImpl<>(matchesFiltered.subList(start, end), pageable, matchesFiltered.size());
     }
 
 }
