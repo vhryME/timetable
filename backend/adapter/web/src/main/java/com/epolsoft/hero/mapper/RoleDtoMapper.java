@@ -13,7 +13,15 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface RoleDtoMapper {
 
-    RoleDtoMapper INSTANCE = Mappers.getMapper(RoleDtoMapper.class);
+    @ValueMappings({
+            @ValueMapping(source = "Specialist", target = "Specialist"),
+            @ValueMapping(source = "Assassin", target = "Assassin"),
+            @ValueMapping(source = "Warrior", target = "Warrior"),
+            @ValueMapping(source = "Support", target = "Support"),
+            @ValueMapping(source = "Multiclass", target = "Multiclass"),
+            @ValueMapping(source = "Unknown", target = "Unknown")
+    })
+    Role roleDtoInToRole(RoleDtoIn roleDtoIn);
 
 
     @ValueMappings({
@@ -24,17 +32,6 @@ public interface RoleDtoMapper {
             @ValueMapping(source = "Multiclass", target = "Multiclass"),
             @ValueMapping(source = "Unknown", target = "Unknown")
     })
-    Role roleDtoOutToRole(RoleDtoOut roleDtoOut);
-
-
-    @ValueMappings({
-            @ValueMapping(source = "Specialist", target = "Specialist"),
-            @ValueMapping(source = "Assassin", target = "Assassin"),
-            @ValueMapping(source = "Warrior", target = "Warrior"),
-            @ValueMapping(source = "Support", target = "Support"),
-            @ValueMapping(source = "Multiclass", target = "Multiclass"),
-            @ValueMapping(source = "Unknown", target = "Unknown")
-    })
-    RoleDtoIn roleToRoleDtoIn(Role role);
+    RoleDtoOut roleToRoleDtoOut(Role role);
 
 }

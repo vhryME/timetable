@@ -11,11 +11,8 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface SpellDtoMapper {
 
-    SpellDtoMapper INSTANCE = Mappers.getMapper(SpellDtoMapper.class);
+    Spell spellDtoInToSpell(SpellDtoIn spellDtoIn);
 
-
-    Spell spellDtoOutToSpell(SpellDtoOut spellDtoOut);
-
-    SpellDtoIn spellToSpellDtoIn(Spell spell);
+    SpellDtoIn spellToSpellDtoOut(Spell spell);
 
 }
