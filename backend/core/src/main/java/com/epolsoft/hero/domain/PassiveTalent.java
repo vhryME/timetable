@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 class PassiveTalent extends Talent {
 
-    private String skill;
+    private Spell spell;
 
 }
