@@ -22,18 +22,12 @@ public class HeroDtoIn {
     private String icon;
 
     @NonNull
-    private RoleDtoIn role;
+    private String role;
 
     @NonNull
     private Boolean isMelee;
 
     @NonNull
-    private LocalDate dateOfCreation;
-
-    @NonNull
-    private Set<Integer> spellsId;
-
-    @NonNull
-    private Set<Integer> talentsId;
+    private String dateOfCreation;
 
 }
