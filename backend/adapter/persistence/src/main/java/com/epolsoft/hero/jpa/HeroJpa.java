@@ -16,7 +16,8 @@ import java.util.Set;
 public class HeroJpa {
 
     @Id
-    private Long id;
+    @GeneratedValue
+    private Integer id;
 
     private String name;
 
