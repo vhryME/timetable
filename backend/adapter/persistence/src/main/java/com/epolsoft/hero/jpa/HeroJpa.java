@@ -28,7 +28,7 @@ public class HeroJpa {
 
     private Boolean isMelee;
 
-    private LocalDate dateOfCreated;
+    private LocalDate dateOfCreation;
 
     @OneToMany
     private Set<SpellJpa> spells;

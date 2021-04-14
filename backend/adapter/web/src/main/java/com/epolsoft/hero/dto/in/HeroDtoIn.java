@@ -26,7 +26,7 @@ public class HeroDtoIn {
     private Boolean isMelee;
 
     @NonNull
-    private LocalDate dateOfCreated;
+    private LocalDate dateOfCreation;
 
     @NonNull
     private Set<SpellDtoIn> spells;

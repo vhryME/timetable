@@ -22,7 +22,7 @@ public class Hero {
 
     private Boolean isMelee;
 
-    private LocalDate dateOfCreated;
+    private LocalDate dateOfCreation;
 
     private Set<Spell> spells;
 
