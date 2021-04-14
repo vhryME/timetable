@@ -5,7 +5,7 @@ plugins {
     id 'io.franzbecker.gradle-lombok' version "${lombokPluginVersion}"
 }
 
-group = 'com.eposloft'
+group = 'com.epolsoft'
 version = '0.1.0'
 
 apply plugin: 'java'
