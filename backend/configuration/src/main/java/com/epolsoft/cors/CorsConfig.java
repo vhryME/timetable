@@ -1,4 +1,4 @@
-package com.epolsoft.security;
+package com.epolsoft.cors;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
