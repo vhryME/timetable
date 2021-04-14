@@ -16,7 +16,7 @@ public enum Map {
 
     public Integer id;
 
-    public static Map getStateById(Integer stateId) {
+    public static Map getMapById(Integer stateId) {
         return Arrays.stream(Map.values())
                 .filter(map -> map.id.equals(stateId))
                 .findFirst()
