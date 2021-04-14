@@ -1,16 +1,18 @@
 package com.epolsoft.hero.dto.out;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+
+import com.epolsoft.hero.domain.Spell;
+import com.epolsoft.hero.dto.in.TalentDtoIn;
+import lombok.*;
+
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-class PassiveTalentDtoOut extends TalentDtoOut {
+@EqualsAndHashCode(callSuper = true)
+class PassiveTalentDtoOut extends TalentDtoIn {
 
     @NonNull
-    private String skill;
+    private Spell spell;
 
 }

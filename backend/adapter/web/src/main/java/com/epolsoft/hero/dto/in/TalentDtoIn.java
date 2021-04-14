@@ -12,9 +12,6 @@ public
 class TalentDtoIn {
 
     @NonNull
-    private Long id;
-
-    @NonNull
     private String name;
 
     @NonNull

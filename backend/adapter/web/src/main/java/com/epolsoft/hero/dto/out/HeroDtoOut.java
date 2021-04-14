@@ -1,5 +1,8 @@
 package com.epolsoft.hero.dto.out;
 
+import com.epolsoft.hero.dto.in.RoleDtoIn;
+import com.epolsoft.hero.dto.in.SpellDtoIn;
+import com.epolsoft.hero.dto.in.TalentDtoIn;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,13 +17,16 @@ import java.util.Set;
 public class HeroDtoOut {
 
     @NonNull
+    private Long id;
+
+    @NonNull
     private String name;
 
     @NonNull
     private String icon;
 
     @NonNull
-    private RoleDtoOut role;
+    private RoleDtoIn role;
 
     @NonNull
     private Boolean isMelee;
@@ -29,9 +35,9 @@ public class HeroDtoOut {
     private LocalDate dateOfCreated;
 
     @NonNull
-    private Set<SpellDtoOut> spells;
+    private Set<SpellDtoIn> spells;
 
     @NonNull
-    private Set<TalentDtoOut> talents;
+    private Set<TalentDtoIn> talents;
 
 }

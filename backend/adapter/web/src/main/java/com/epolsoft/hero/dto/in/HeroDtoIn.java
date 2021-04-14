@@ -14,9 +14,6 @@ import java.util.Set;
 public class HeroDtoIn {
 
     @NonNull
-    private Long id;
-
-    @NonNull
     private String name;
 
     @NonNull

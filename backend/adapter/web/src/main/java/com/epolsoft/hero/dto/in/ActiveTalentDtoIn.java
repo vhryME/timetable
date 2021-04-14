@@ -11,9 +11,6 @@ import lombok.*;
 class ActiveTalentDtoIn extends TalentDtoIn {
 
     @NonNull
-    private Long id;
-
-    @NonNull
     private Double cost;
 
     @NonNull

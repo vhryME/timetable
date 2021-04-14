@@ -1,6 +1,7 @@
 package com.epolsoft.hero.dto.out;
 
 
+import com.epolsoft.hero.dto.in.TalentDtoIn;
 import lombok.*;
 
 
@@ -8,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-class ActiveTalentDtoOut extends TalentDtoOut {
+class ActiveTalentDtoIn extends TalentDtoIn {
 
     @NonNull
     private Double cost;
