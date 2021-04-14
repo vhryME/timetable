@@ -5,6 +5,7 @@ import com.epolsoft.match.domain.Match;
 import com.epolsoft.match.port.in.MatchUseCase;
 import com.epolsoft.match.port.out.MatchPort;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,96 +22,51 @@ public class MatchService implements MatchUseCase {
 
 
     @Override
+    @SneakyThrows
     public Match getMatch(Integer id) {
-        Match match = new Match();
-
-        try {
-            match = port.findMatchById(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return match;
+        return port.findMatchById(id);
     }
 
 
     @Override
+    @SneakyThrows
     public void deleteMatch(Integer id) {
-        try {
-            port.deleteMatch(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        port.deleteMatch(id);
     }
 
 
     @Override
+    @SneakyThrows
     public Match saveNewMatch(Match match) {
-        Match matchFromDB = new Match();
-
-        try {
-            matchFromDB = port.saveNewMatch(match);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return matchFromDB;
+        return port.saveNewMatch(match);
     }
 
 
     @Override
+    @SneakyThrows
     public Match updateMatch(Integer id, Match match) {
-        Match matchUpdated = null;
-
-        try {
-            matchUpdated = port.updateMatch(id, match);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return matchUpdated;
+        return port.updateMatch(id, match);
     }
 
 
     @Override
+    @SneakyThrows
     public List<Match> findAll() {
-        List<Match> matches = new ArrayList<>();
-
-        try {
-            matches = port.findAllMatches();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return matches;
+        return port.findAllMatches();
     }
 
 
     @Override
+    @SneakyThrows
     public Page<Match> findPageOfMatch(Pageable pageable) {
-        Page<Match> matchPage = null;
-
-        try {
-            matchPage = port.findPageOfMatch(pageable);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return matchPage;
+        return port.findPageOfMatch(pageable);
     }
 
 
     @Override
+    @SneakyThrows
     public Page<Match> findPageOfMatchFiltered(Pageable pageable, MatchPort.MatchFiltered matchFiltered) {
-        Page<Match> matchPage = null;
-
-        try {
-            matchPage = port.findPageOfMatchFiltered(pageable, matchFiltered);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return matchPage;
+        return port.findPageOfMatchFiltered(pageable, matchFiltered);
     }
 
 }
