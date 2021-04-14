@@ -19,10 +19,10 @@ public interface MatchUseCase {
 
     Match updateMatch(Integer id, Match match);
 
-    List<Match> findAll();
+    List<Match> findAllMatches();
 
-    Page<Match> findPageOfMatch(Pageable pageable);
+    Object findPageOfMatch(Pageable pageable, MatchPort.MatchFiltered matchFiltered);
 
-    Page<Match> findPageOfMatchFiltered(Pageable pageable, MatchPort.MatchFiltered matchFiltered);
+//    Page<Match> findPageOfMatchFiltered(Pageable pageable, MatchPort.MatchFiltered matchFiltered);
 
 }

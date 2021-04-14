@@ -2,14 +2,17 @@ package com.epolsoft.match.service;
 
 
 import com.epolsoft.match.domain.Match;
+import com.epolsoft.match.domain.Region;
 import com.epolsoft.match.port.in.MatchUseCase;
 import com.epolsoft.match.port.out.MatchPort;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,22 +54,27 @@ public class MatchService implements MatchUseCase {
 
     @Override
     @SneakyThrows
-    public List<Match> findAll() {
+    public List<Match> findAllMatches() {
         return port.findAllMatches();
     }
 
 
     @Override
     @SneakyThrows
-    public Page<Match> findPageOfMatch(Pageable pageable) {
-        return port.findPageOfMatch(pageable);
-    }
+    public Object findPageOfMatch(Pageable pageable, MatchPort.MatchFiltered matchFiltered) {
+        if(!pageable.isUnpaged()) {
+            Page<Match> matchPage;
 
+            if(matchFiltered != null) {
+                matchPage = port.findPageOfMatchFiltered(pageable, matchFiltered);
+            } else {
+                matchPage = port.findPageOfMatch(pageable);
+            }
 
-    @Override
-    @SneakyThrows
-    public Page<Match> findPageOfMatchFiltered(Pageable pageable, MatchPort.MatchFiltered matchFiltered) {
-        return port.findPageOfMatchFiltered(pageable, matchFiltered);
+            return matchPage;
+        }
+
+        return port.findAllMatches();
     }
 
 }
