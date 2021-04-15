@@ -5,12 +5,9 @@ import com.epolsoft.match.domain.Match;
 import com.epolsoft.match.dto.in.MatchDtoIn;
 import com.epolsoft.match.dto.in.MatchDtoInFiltered;
 import com.epolsoft.match.dto.out.MatchDtoOut;
-import com.epolsoft.match.dto.out.TeamDtoOut;
 import com.epolsoft.match.port.out.MatchPort;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-
-import java.time.LocalDate;
 
 
 @Mapper(uses = {MapDtoMapper.class, TeamDtoMapper.class})

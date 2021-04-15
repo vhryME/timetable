@@ -11,8 +11,8 @@ import org.mapstruct.Mapping;
 @Mapper(uses = {SpellDtoMapper.class, TalentDtoMapper.class})
 public interface HeroDtoMapper {
 
-    @Mapping(target = "role", expression = "java(Role.valueOf(hero.getRole()))")
-    @Mapping(target = "dateOfCreation", expression = "java(LocalDate.parse(hero.getDateOfCreation()))")
+    @Mapping(target = "role", expression = "java(RoleDtoIn.valueOf(heroDtoIn.getRole()))")
+    @Mapping(target = "dateOfCreation", expression = "java(LocalDate.parse(heroDtoIn.getDateOfCreation()))")
     Hero heroDtoInToHero(HeroDtoIn heroDtoIn);
 
     @Mapping(target = "role", expression = "java(hero.getRole().name())")
