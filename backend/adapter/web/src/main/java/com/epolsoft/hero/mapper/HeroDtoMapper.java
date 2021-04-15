@@ -23,8 +23,8 @@ public interface HeroDtoMapper {
     HeroDtoOut heroToHeroDtoOut(Hero hero);
 
 
-    @Mapping(target = "role", expression = "java(com.epolsoft.hero.domain.Role.valueOf(heroDtoIn.getRole()))")
-    @Mapping(target = "dateOfCreation", expression = "java(java.time.LocalDate.parse(heroDtoIn.getDateOfCreation()))")
+    @Mapping(target = "role", expression = "java(com.epolsoft.hero.domain.Role.valueOf(heroDtoInFiltered.getRole()))")
+    @Mapping(target = "dateOfCreation", expression = "java(java.time.LocalDate.parse(heroDtoInFiltered.getDateOfCreation()))")
     HeroPort.HeroFiltered heroDtoInFilteredToHeroFiltered(HeroDtoInFiltered heroDtoInFiltered);
 
 }

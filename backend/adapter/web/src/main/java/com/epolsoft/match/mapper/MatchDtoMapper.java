@@ -14,10 +14,10 @@ import org.mapstruct.Mapping;
 public interface MatchDtoMapper {
 
 
-    @Mapping(target = "type", expression = "java(TypeOfMatch.valueOf(matchDtoIn.getType()))")
-    @Mapping(target = "date", expression = "java(LocalDate.parse(matchDtoIn.getDate()))")
+    @Mapping(target = "type", expression = "java(com.epolsoft.match.domain.TypeOfMatch.valueOf(matchDtoIn.getType()))")
+    @Mapping(target = "date", expression = "java(java.time.LocalDate.parse(matchDtoIn.getDate()))")
     @Mapping(source = "matchDtoIn.mapsId", target = "maps")
-    @Mapping(target = "region", expression = "java(Region.valueOf(matchDtoIn.getRegion()))")
+    @Mapping(target = "region", expression = "java(com.epolsoft.match.domain.Region.valueOf(matchDtoIn.getRegion()))")
     Match matchDtoInToMatch(MatchDtoIn matchDtoIn);
 
 
@@ -28,10 +28,10 @@ public interface MatchDtoMapper {
     MatchDtoOut matchToMatchDtoOut(Match match);
 
 
-    @Mapping(target = "type", expression = "java(TypeOfMatch.valueOf(matchDtoInFiltered.getType()))")
-    @Mapping(target = "date", expression = "java(LocalDate.parse(matchDtoInFiltered.getDate()))")
+    @Mapping(target = "type", expression = "java(com.epolsoft.match.domain.TypeOfMatch.valueOf(matchDtoInFiltered.getType()))")
+    @Mapping(target = "date", expression = "java(java.time.LocalDate.parse(matchDtoInFiltered.getDate()))")
     @Mapping(source = "matchDtoInFiltered.mapsId", target = "maps")
-    @Mapping(target = "region", expression = "java(Region.valueOf(matchDtoInFiltered.getRegion()))")
+    @Mapping(target = "region", expression = "java(com.epolsoft.match.domain.Region.valueOf(matchDtoInFiltered.getRegion()))")
     MatchPort.MatchFiltered matchDtoInFilteredToMatchFiltered(MatchDtoInFiltered matchDtoInFiltered);
 
 }
