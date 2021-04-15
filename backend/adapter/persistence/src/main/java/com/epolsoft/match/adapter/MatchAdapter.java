@@ -71,6 +71,7 @@ public class MatchAdapter implements MatchPort {
         int index = matches.indexOf(match);
 
         if(index >= 0) {
+            match.setId(index);
             return matches.get(index);
         }
 
@@ -81,6 +82,7 @@ public class MatchAdapter implements MatchPort {
     @Override
     public Match updateMatch(Integer id, Match match) throws Exception {
         if(matches.get(id) != null) {
+            match.setId(id);
             matches.set(id, match);
         }
 

@@ -64,6 +64,7 @@ public class HeroAdapter implements HeroPort {
         int index = heroes.indexOf(hero);
 
         if(index >= 0) {
+            hero.setId(index);
             return heroes.get(index);
         }
 
@@ -74,6 +75,7 @@ public class HeroAdapter implements HeroPort {
     @Override
     public Hero updateHero(Integer id, Hero hero) throws Exception {
         if(heroes.get(id) != null) {
+            hero.setId(id);
             heroes.set(id, hero);
         }
 
