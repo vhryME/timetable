@@ -28,6 +28,10 @@ public interface MatchDtoMapper {
     MatchDtoOut matchToMatchDtoOut(Match match);
 
 
+    @Mapping(target = "type", expression = "java(TypeOfMatch.valueOf(matchDtoInFiltered.getType()))")
+    @Mapping(target = "date", expression = "java(LocalDate.parse(matchDtoInFiltered.getDate()))")
+    @Mapping(source = "matchDtoInFiltered.mapsId", target = "maps")
+    @Mapping(target = "region", expression = "java(Region.valueOf(matchDtoInFiltered.getRegion()))")
     MatchPort.MatchFiltered matchDtoInFilteredToMatchFiltered(MatchDtoInFiltered matchDtoInFiltered);
 
 }

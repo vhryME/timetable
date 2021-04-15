@@ -10,7 +10,6 @@ import org.mapstruct.Mapper;
 @Mapper(uses = {TypeOfMatchMapper.class, MapMapper.class, RegionMapper.class, TeamMapper.class})
 public interface MatchMapper {
 
-
     Match matchJpaToMatch(MatchJpa matchJpa);
 
     MatchJpa matchToMatchJpa(Match match);
