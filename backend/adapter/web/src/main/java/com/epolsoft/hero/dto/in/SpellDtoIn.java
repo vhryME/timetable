@@ -10,10 +10,13 @@ import lombok.NonNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TalentDtoIn {
+public class SpellDtoIn {
 
     @NonNull
     private String name;
+
+    @NonNull
+    private String key;
 
     @NonNull
     private String description;
@@ -22,9 +25,9 @@ public class TalentDtoIn {
     private String icon;
 
     @NonNull
-    private String key;
+    private Double cooldown;
 
     @NonNull
-    private Integer levelOfAccess;
+    private Double manaCost;
 
 }

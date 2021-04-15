@@ -7,9 +7,6 @@ import com.epolsoft.hero.dto.in.HeroDtoInFiltered;
 import com.epolsoft.hero.dto.out.HeroDtoOut;
 import com.epolsoft.hero.mapper.HeroDtoMapper;
 import com.epolsoft.hero.port.in.HeroUseCase;
-import com.epolsoft.match.domain.Match;
-import com.epolsoft.match.dto.in.MatchDtoIn;
-import com.epolsoft.match.dto.in.MatchDtoInFiltered;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
@@ -54,7 +51,7 @@ public class HeroController {
 
 
     @GetMapping
-    public Object getMatchPage(Pageable pageable, @RequestBody(required = false) HeroDtoInFiltered heroDtoInFiltered) {
+    public Object getMatchPage(Pageable pageable, @RequestParam(required = false) HeroDtoInFiltered heroDtoInFiltered) {
         return useCase.findPageOfHero(pageable, mapper.heroDtoInFilteredToHeroFiltered(heroDtoInFiltered));
     }
 

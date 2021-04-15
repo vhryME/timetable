@@ -1,6 +1,8 @@
 package com.epolsoft.hero.dto.out;
 
 
+import com.epolsoft.hero.domain.Spell;
+import com.epolsoft.hero.domain.Talent;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,9 +35,9 @@ public class FullHeroDtoOut {
     private String dateOfCreation;
 
     @NonNull
-    private Set<Integer> spellsId;
+    private Set<Spell> spells;
 
     @NonNull
-    private Set<Integer> talentsId;
+    private Set<Talent> talent;
 
 }

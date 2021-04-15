@@ -51,7 +51,7 @@ public class MatchController {
 
 
     @GetMapping
-    public Object getMatchPage(Pageable pageable, @RequestBody(required = false) MatchDtoInFiltered matchFiltered) {
+    public Object getMatchPage(Pageable pageable, @RequestParam(required = false) MatchDtoInFiltered matchFiltered) {
         return useCase.findPageOfMatch(pageable, mapper.matchDtoInFilteredToMatchFiltered(matchFiltered));
     }
 
