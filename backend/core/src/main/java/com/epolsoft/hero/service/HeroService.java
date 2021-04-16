@@ -4,7 +4,6 @@ package com.epolsoft.hero.service;
 import com.epolsoft.hero.domain.Hero;
 import com.epolsoft.hero.port.in.HeroUseCase;
 import com.epolsoft.hero.port.out.HeroPort;
-import com.epolsoft.match.domain.Match;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.data.domain.Page;
@@ -54,19 +53,18 @@ public class HeroService implements HeroUseCase {
     @Override
     @SneakyThrows
     public Object findPageOfHero(Pageable pageable, HeroPort.HeroFiltered heroFiltered) {
-        if(!pageable.isUnpaged()) {
-            Page<Hero> heroPage;
+        if(!pageable.isPaged()) {
+            return port.findAllHeroes();
+        }
+        Page<Hero> heroPage;
 
-            if(heroFiltered != null) {
-                heroPage = port.findPageOfHeroFiltered(pageable, heroFiltered);
-            } else {
-                heroPage = port.findPageOfHero(pageable);
-            }
-
-            return heroPage;
+        if(heroFiltered != null) {
+            heroPage = port.findPageOfHeroFiltered(pageable, heroFiltered);
+        } else {
+            heroPage = port.findPageOfHero(pageable);
         }
 
-        return port.findAllHeroes();
+        return heroPage;
     }
 
 }

@@ -62,19 +62,19 @@ public class MatchService implements MatchUseCase {
     @Override
     @SneakyThrows
     public Object findPageOfMatch(Pageable pageable, MatchPort.MatchFiltered matchFiltered) {
-        if(!pageable.isUnpaged()) {
-            Page<Match> matchPage;
-
-            if(matchFiltered != null) {
-                matchPage = port.findPageOfMatchFiltered(pageable, matchFiltered);
-            } else {
-                matchPage = port.findPageOfMatch(pageable);
-            }
-
-            return matchPage;
+        if(!pageable.isPaged()) {
+            return port.findAllMatches();
         }
 
-        return port.findAllMatches();
+        Page<Match> matchPage;
+
+        if(matchFiltered != null) {
+            matchPage = port.findPageOfMatchFiltered(pageable, matchFiltered);
+        } else {
+            matchPage = port.findPageOfMatch(pageable);
+        }
+
+        return matchPage;
     }
 
 }
