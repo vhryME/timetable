@@ -1,6 +1,6 @@
 dependencies {
     implementation project(':common')
 
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    compile 'org.springframework.boot:spring-boot-starter-validation'
     compile group: 'org.springframework.data', name: 'spring-data-commons', version: "$springBootVersion"
 }
