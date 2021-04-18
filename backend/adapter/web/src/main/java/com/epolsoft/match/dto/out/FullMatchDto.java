@@ -1,16 +1,12 @@
 package com.epolsoft.match.dto.out;
 
 
-import com.epolsoft.match.domain.Map;
-import com.epolsoft.match.domain.Region;
-import com.epolsoft.match.domain.Team;
-import com.epolsoft.match.domain.TypeOfMatch;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-import java.time.LocalDate;
+import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 
@@ -29,12 +25,13 @@ public class FullMatchDto {
     private String date;
 
     @NonNull
+    @NotEmpty
     private Set<Integer> mapsId;
 
     @NonNull
     private String region;
 
     @NonNull
-    private Set<Integer> teamsId;
+    private Set<TeamDtoOut> teams;
 
 }

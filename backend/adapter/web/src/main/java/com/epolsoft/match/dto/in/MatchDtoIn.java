@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import javax.validation.constraints.NotNull;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -14,16 +17,16 @@ import java.util.Set;
 @AllArgsConstructor
 public class MatchDtoIn {
 
-    @NonNull
-    private String type;
+    private String type = "Unknown";
 
     @NonNull
     private String date;
 
-    @NonNull
-    private Set<Integer> mapsId;
+    private Set<Integer> mapsId = new HashSet<>(Collections.singleton(0));
 
-    @NonNull
-    private String region;
+    private String region = "Unknown";
+
+    @NotNull
+    private Set<TeamDtoIn> teams;
 
 }

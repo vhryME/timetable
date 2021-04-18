@@ -15,13 +15,10 @@ public class TalentDtoIn {
     @NonNull
     private String name;
 
-    @NonNull
     private String description;
 
-    @NonNull
     private String icon;
 
-    @NonNull
     private String key;
 
     @NonNull

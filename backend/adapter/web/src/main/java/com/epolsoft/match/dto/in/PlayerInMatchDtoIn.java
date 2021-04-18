@@ -1,7 +1,8 @@
 package com.epolsoft.match.dto.in;
 
-import com.epolsoft.hero.domain.Hero;
-import com.epolsoft.hero.domain.Talent;
+
+import com.epolsoft.hero.dto.in.HeroDtoIn;
+import com.epolsoft.hero.dto.in.TalentDtoIn;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,12 +20,11 @@ public class PlayerInMatchDtoIn {
     private PlayerDtoIn player;
 
     @NonNull
-    private Hero hero;
+    private HeroDtoIn hero;
 
     @NonNull
-    private Set<Talent> talents;
+    private Set<TalentDtoIn> talents;
 
-    @NonNull
     private StatisticDtoIn statistic;
 
 }

@@ -10,7 +10,6 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 class PassiveTalentDtoIn extends TalentDtoIn {
 
-    @NonNull
-    private String skill;
+    private SpellDtoIn spell;
 
 }

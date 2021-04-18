@@ -1,4 +1,4 @@
-package com.epolsoft.hero.dto.in;
+package com.epolsoft.hero.dto.out;
 
 
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SpellDtoIn {
+public class SpellDtoOut {
 
     @NonNull
     private String name;

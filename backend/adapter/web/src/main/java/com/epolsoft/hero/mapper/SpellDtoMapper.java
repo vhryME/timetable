@@ -8,5 +8,7 @@ import org.mapstruct.Mapper;
 
 @Mapper
 public interface SpellDtoMapper {
+
     Spell SpellDtoInToSpell(SpellDtoIn spellDtoIn);
+
 }

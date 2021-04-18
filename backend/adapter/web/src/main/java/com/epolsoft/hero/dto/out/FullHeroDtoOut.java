@@ -1,13 +1,12 @@
 package com.epolsoft.hero.dto.out;
 
 
-import com.epolsoft.hero.domain.Spell;
-import com.epolsoft.hero.domain.Talent;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import javax.validation.constraints.Min;
 import java.util.Set;
 
 
@@ -22,7 +21,6 @@ public class FullHeroDtoOut {
     @NonNull
     private String name;
 
-    @NonNull
     private String icon;
 
     @NonNull
@@ -35,9 +33,10 @@ public class FullHeroDtoOut {
     private String dateOfCreation;
 
     @NonNull
-    private Set<Spell> spells;
+    @Min(5)
+    private Set<SpellDtoOut> spells;
 
     @NonNull
-    private Set<Talent> talent;
+    private Set<TalentDtoOut> talent;
 
 }
