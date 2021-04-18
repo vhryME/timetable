@@ -19,8 +19,8 @@ public class HeroDtoInFiltered {
 
     private String dateOfCreation;
 
-    private Set<Integer> spellsId;
+    private Set<SpellDtoIn> spells;
 
-    private Set<Integer> talentsId;
+    private Set<TalentDtoIn> talents;
 
 }
