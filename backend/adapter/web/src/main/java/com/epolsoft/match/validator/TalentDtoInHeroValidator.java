@@ -24,9 +24,15 @@ public class TalentDtoInHeroValidator implements ConstraintValidator<TalentDtoIn
     private boolean areTalentsConsistently(Set<TalentDtoIn> talents) {
         boolean isIncrease = false;
 
-        ListIterator<TalentDtoIn> iterator = (ListIterator<TalentDtoIn>) talents.iterator();
+        List<TalentDtoIn> talentList = new ArrayList<>(talents);
+        ListIterator<TalentDtoIn> iterator = talentList.listIterator();
 
         while (iterator.hasNext()) {
+            if(!iterator.hasPrevious()) {
+                iterator.next();
+                continue;
+            }
+
             isIncrease = iterator.previous().getLevelOfAccess() > iterator.next().getLevelOfAccess();
         }
 

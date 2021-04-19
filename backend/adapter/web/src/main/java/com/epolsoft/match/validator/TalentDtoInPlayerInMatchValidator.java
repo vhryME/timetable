@@ -3,12 +3,14 @@ package com.epolsoft.match.validator;
 
 import com.epolsoft.hero.dto.in.TalentDtoIn;
 import com.epolsoft.match.dto.in.PlayerInMatchDtoIn;
+import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.*;
 
 
+@Component
 public class TalentDtoInPlayerInMatchValidator implements ConstraintValidator<TalentDtoInConstraint, PlayerInMatchDtoIn> {
 
     @Override
@@ -25,9 +27,15 @@ public class TalentDtoInPlayerInMatchValidator implements ConstraintValidator<Ta
     private boolean areTalentsConsistently(Set<TalentDtoIn> talents) {
         boolean isIncrease = false;
 
-        ListIterator<TalentDtoIn> iterator = (ListIterator<TalentDtoIn>) talents.iterator();
+        List<TalentDtoIn> talentList = new ArrayList<>(talents);
+        ListIterator<TalentDtoIn> iterator = talentList.listIterator();
 
         while (iterator.hasNext()) {
+            if(!iterator.hasPrevious()) {
+                iterator.next();
+                continue;
+            }
+
             isIncrease = iterator.previous().getLevelOfAccess() > iterator.next().getLevelOfAccess();
         }
 
