@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Set;
@@ -34,10 +35,12 @@ public class FullHeroDtoOut {
     private String dateOfCreation;
 
     @NotNull
+    @Valid
     @Size(min = 5)
     private Set<SpellDtoOut> spells;
 
     @NotNull
+    @Valid
     private Set<TalentDtoOut> talent;
 
 }

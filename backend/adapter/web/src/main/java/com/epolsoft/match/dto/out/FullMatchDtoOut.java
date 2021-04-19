@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
@@ -32,6 +33,7 @@ public class FullMatchDtoOut {
     private String region;
 
     @NotNull
+    @Valid
     private Set<TeamDtoOut> teams;
 
 }

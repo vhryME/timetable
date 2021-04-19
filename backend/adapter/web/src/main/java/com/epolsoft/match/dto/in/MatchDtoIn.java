@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.HashSet;
@@ -27,6 +28,7 @@ public class MatchDtoIn {
     private String region = "Unknown";
 
     @NotNull
+    @Valid
     private Set<TeamDtoIn> teams;
 
 }

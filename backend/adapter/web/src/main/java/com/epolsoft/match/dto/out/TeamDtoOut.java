@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -22,6 +23,7 @@ public class TeamDtoOut {
     private Long id;
 
     @NotNull
+    @Valid
     @Size(min = 5, max = 5)
     private Set<PlayerInMatchDtoOut> players;
 
