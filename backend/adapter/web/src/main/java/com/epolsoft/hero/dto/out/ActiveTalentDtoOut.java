@@ -4,6 +4,8 @@ package com.epolsoft.hero.dto.out;
 import com.epolsoft.hero.dto.in.TalentDtoIn;
 import lombok.*;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 
@@ -14,11 +16,13 @@ import javax.validation.constraints.Size;
 class ActiveTalentDtoOut extends TalentDtoIn {
 
     @NonNull
-    @Size(min = 1, max = 300)
+    @Min(1)
+    @Max(300)
     private Double cost;
 
     @NonNull
-    @Size(min = 1, max = 300)
+    @Min(1)
+    @Max(300)
     private Double timeOfRecovery;
 
 }

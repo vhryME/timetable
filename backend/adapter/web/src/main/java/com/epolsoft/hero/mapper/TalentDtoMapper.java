@@ -12,6 +12,7 @@ public interface TalentDtoMapper {
 
     Talent talentDtoInToTalent(TalentDtoIn talentDtoIn);
 
+
     TalentDtoOut talentToTalentDtoOut(Talent talent);
 
 }

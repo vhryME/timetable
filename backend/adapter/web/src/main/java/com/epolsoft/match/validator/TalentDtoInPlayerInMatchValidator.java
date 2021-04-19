@@ -9,7 +9,7 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.*;
 
 
-public class TalentDtoInValidator implements ConstraintValidator<TalentDtoInConstraint, PlayerInMatchDtoIn> {
+public class TalentDtoInPlayerInMatchValidator implements ConstraintValidator<TalentDtoInConstraint, PlayerInMatchDtoIn> {
 
     @Override
     public void initialize(TalentDtoInConstraint constraintAnnotation) {}

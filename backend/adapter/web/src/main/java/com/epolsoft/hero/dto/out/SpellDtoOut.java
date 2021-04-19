@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 
@@ -24,10 +26,12 @@ public class SpellDtoOut {
 
     private String icon;
 
-    @Size(min = 1, max = 300)
+    @Min(1)
+    @Max(300)
     private Double cooldown;
 
-    @Size(min = 1, max = 300)
+    @Min(1)
+    @Max(300)
     private Double manaCost;
 
 }

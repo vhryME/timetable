@@ -3,7 +3,8 @@ package com.epolsoft.hero.dto.in;
 
 import lombok.*;
 
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 
 @Data
@@ -13,11 +14,13 @@ import javax.validation.constraints.Size;
 class ActiveTalentDtoIn extends TalentDtoIn {
 
     @NonNull
-    @Size(min = 1, max = 300)
+    @Min(1)
+    @Max(300)
     private Double cost;
 
     @NonNull
-    @Size(min = 1, max = 300)
+    @Min(1)
+    @Max(300)
     private Double timeOfRecovery;
 
 }

@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api/hero")
@@ -35,7 +37,7 @@ public class HeroController {
 
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public HeroDtoOut saveNewMatch(@RequestBody HeroDtoIn heroDtoIn) {
+    public HeroDtoOut saveNewMatch(@RequestBody @Valid HeroDtoIn heroDtoIn) {
         Hero hero = mapper.heroDtoInToHero(heroDtoIn);
 
         return mapper.heroToHeroDtoOut(useCase.saveNewHero(hero));
@@ -43,7 +45,7 @@ public class HeroController {
 
 
     @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public HeroDtoOut updateMatch(@PathVariable("id") Integer id, @RequestBody HeroDtoIn heroDtoIn) {
+    public HeroDtoOut updateMatch(@PathVariable("id") Integer id, @RequestBody @Valid HeroDtoIn heroDtoIn) {
         Hero hero = useCase.updateHero(id, mapper.heroDtoInToHero(heroDtoIn));
 
         return mapper.heroToHeroDtoOut(hero);

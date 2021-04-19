@@ -1,8 +1,6 @@
 package com.epolsoft.hero.dto.in;
 
 
-import com.epolsoft.hero.dto.out.SpellDtoOut;
-import com.epolsoft.hero.dto.out.TalentDtoOut;
 import com.epolsoft.match.validator.TalentDtoInConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 
@@ -33,10 +32,10 @@ public class HeroDtoIn {
     private String dateOfCreation;
 
     @NonNull
-    @Min(5)
-    private Set<SpellDtoOut> spells;
+    @Size(min = 5)
+    private Set<SpellDtoIn> spells;
 
     @NonNull
-    private Set<TalentDtoOut> talent;
+    private Set<TalentDtoIn> talents;
 
 }

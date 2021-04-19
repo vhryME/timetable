@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api/match")
@@ -35,7 +37,9 @@ public class MatchController {
 
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public MatchDtoOut saveNewMatch(@RequestBody MatchDtoIn matchDtoIn) {
+    public MatchDtoOut saveNewMatch(@RequestBody @Valid MatchDtoIn matchDtoIn) {
+        System.out.println(matchDtoIn);
+
         Match match = mapper.matchDtoInToMatch(matchDtoIn);
 
         return mapper.matchToMatchDtoOut(useCase.saveNewMatch(match));
@@ -43,7 +47,7 @@ public class MatchController {
 
 
     @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public MatchDtoOut updateMatch(@PathVariable("id") Integer id, @RequestBody MatchDtoIn matchDtoIn) {
+    public MatchDtoOut updateMatch(@PathVariable("id") Integer id, @RequestBody @Valid MatchDtoIn matchDtoIn) {
         Match match = useCase.updateMatch(id, mapper.matchDtoInToMatch(matchDtoIn));
 
         return mapper.matchToMatchDtoOut(match);

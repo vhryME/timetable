@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 
@@ -33,7 +34,7 @@ public class FullHeroDtoOut {
     private String dateOfCreation;
 
     @NonNull
-    @Min(5)
+    @Size(min = 5)
     private Set<SpellDtoOut> spells;
 
     @NonNull

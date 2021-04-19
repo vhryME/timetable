@@ -13,7 +13,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FullMatchDto {
+public class FullMatchDtoOut {
 
     @NonNull
     private Integer id;
@@ -25,7 +25,6 @@ public class FullMatchDto {
     private String date;
 
     @NonNull
-    @NotEmpty
     private Set<Integer> mapsId;
 
     @NonNull
