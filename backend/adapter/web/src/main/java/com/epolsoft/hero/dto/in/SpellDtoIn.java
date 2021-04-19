@@ -4,11 +4,10 @@ package com.epolsoft.hero.dto.in;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 
 
 @Data
@@ -16,10 +15,10 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class SpellDtoIn {
 
-    @NonNull
+    @NotNull
     private String name;
 
-    @NonNull
+    @NotNull
     private String key;
 
     private String description;

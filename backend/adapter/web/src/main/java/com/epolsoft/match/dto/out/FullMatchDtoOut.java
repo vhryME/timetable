@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 
@@ -15,22 +16,22 @@ import java.util.Set;
 @AllArgsConstructor
 public class FullMatchDtoOut {
 
-    @NonNull
+    @NotNull
     private Integer id;
 
-    @NonNull
+    @NotNull
     private String type;
 
-    @NonNull
+    @NotNull
     private String date;
 
-    @NonNull
+    @NotNull
     private Set<Integer> mapsId;
 
-    @NonNull
+    @NotNull
     private String region;
 
-    @NonNull
+    @NotNull
     private Set<TeamDtoOut> teams;
 
 }

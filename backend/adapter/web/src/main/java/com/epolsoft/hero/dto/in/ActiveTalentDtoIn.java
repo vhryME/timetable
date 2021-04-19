@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 
 @Data
@@ -13,12 +14,12 @@ import javax.validation.constraints.Min;
 @EqualsAndHashCode(callSuper = true)
 class ActiveTalentDtoIn extends TalentDtoIn {
 
-    @NonNull
+    @NotNull
     @Min(1)
     @Max(300)
     private Double cost;
 
-    @NonNull
+    @NotNull
     @Min(1)
     @Max(300)
     private Double timeOfRecovery;

@@ -8,6 +8,7 @@ import lombok.NonNull;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
@@ -17,22 +18,22 @@ import java.util.Set;
 @AllArgsConstructor
 public class TeamDtoOut {
 
-    @NonNull
+    @NotNull
     private Long id;
 
-    @NonNull
+    @NotNull
     @Size(min = 5, max = 5)
     private Set<PlayerInMatchDtoOut> players;
 
-    @NonNull
+    @NotNull
     private Boolean isWinner;
 
-    @NonNull
+    @NotNull
     @Min(1)
     @Max(30)
     private Integer levelOfTeam;
 
-    @NonNull
+    @NotNull
     @Min(0)
     @Max(245000)
     private Double experienceOfTeam;

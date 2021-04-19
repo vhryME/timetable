@@ -5,8 +5,8 @@ import com.epolsoft.hero.dto.out.TalentDtoOut;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 
@@ -15,16 +15,16 @@ import java.util.Set;
 @AllArgsConstructor
 public class PlayerInMatchDtoOut {
 
-    @NonNull
+    @NotNull
     private Long id;
 
-    @NonNull
+    @NotNull
     private PlayerDtoOut player;
 
-    @NonNull
+    @NotNull
     private Hero hero;
 
-    @NonNull
+    @NotNull
     private Set<TalentDtoOut> talents;
 
     private StatisticDtoOut statistic;

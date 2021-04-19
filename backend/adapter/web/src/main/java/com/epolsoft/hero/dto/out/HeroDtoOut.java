@@ -6,27 +6,29 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import javax.validation.constraints.NotNull;
+
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class HeroDtoOut {
 
-    @NonNull
+    @NotNull
     private Integer id;
 
-    @NonNull
+    @NotNull
     private String name;
 
     private String icon;
 
-    @NonNull
+    @NotNull
     private String role;
 
-    @NonNull
+    @NotNull
     private Boolean isMelee;
 
-    @NonNull
+    @NotNull
     private String dateOfCreation;
 
 }

@@ -19,7 +19,7 @@ public class MatchDtoIn {
 
     private String type = "Unknown";
 
-    @NonNull
+    @NotNull
     private String date;
 
     private Set<Integer> mapsId = new HashSet<>(Collections.singleton(0));

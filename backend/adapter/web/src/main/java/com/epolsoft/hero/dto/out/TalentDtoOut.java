@@ -4,7 +4,8 @@ package com.epolsoft.hero.dto.out;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+
+import javax.validation.constraints.NotNull;
 
 
 @Data
@@ -13,22 +14,22 @@ import lombok.NonNull;
 public
 class TalentDtoOut {
 
-    @NonNull
+    @NotNull
     private Long id;
 
-    @NonNull
+    @NotNull
     private String name;
 
-    @NonNull
+    @NotNull
     private String description;
 
-    @NonNull
+    @NotNull
     private String icon;
 
-    @NonNull
+    @NotNull
     private String key;
 
-    @NonNull
+    @NotNull
     private Integer levelOfAccess;
 
 }

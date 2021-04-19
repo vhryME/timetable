@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 
@@ -18,13 +19,13 @@ import java.util.Set;
 @TalentDtoInConstraint
 public class PlayerInMatchDtoIn {
 
-    @NonNull
+    @NotNull
     private PlayerDtoIn player;
 
-    @NonNull
+    @NotNull
     private HeroDtoIn hero;
 
-    @NonNull
+    @NotNull
     private Set<TalentDtoIn> talents;
 
     private StatisticDtoIn statistic;

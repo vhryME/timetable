@@ -5,48 +5,50 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import javax.validation.constraints.NotNull;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class StatisticDtoIn {
 
-    @NonNull
+    @NotNull
     private Integer level;
 
-    @NonNull
+    @NotNull
     private Integer kills;
 
-    @NonNull
+    @NotNull
     private Integer assist;
 
-    @NonNull
+    @NotNull
     private Integer killStreak;
 
-    @NonNull
+    @NotNull
     private Integer deaths;
 
-    @NonNull
+    @NotNull
     private Double damageToEnemies;
 
-    @NonNull
+    @NotNull
     private Double damageToNPC;
 
-    @NonNull
+    @NotNull
     private Double healToTeammate;
 
-    @NonNull
+    @NotNull
     private Double heaToYourself;
 
-    @NonNull
+    @NotNull
     private Double damageToYourself;
 
-    @NonNull
+    @NotNull
     private Double experience;
 
-    @NonNull
+    @NotNull
     private Double timeInRevive; //seconds, mill. seconds
 
-    @NonNull
+    @NotNull
     private Integer takeCamps;
 
 }

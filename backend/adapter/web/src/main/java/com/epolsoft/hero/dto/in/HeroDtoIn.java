@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
@@ -18,24 +19,24 @@ import java.util.Set;
 @TalentDtoInConstraint
 public class HeroDtoIn {
 
-    @NonNull
+    @NotNull
     private String name;
 
     private String icon;
 
     private String role = "Unknown";
 
-    @NonNull
+    @NotNull
     private Boolean isMelee;
 
-    @NonNull
+    @NotNull
     private String dateOfCreation;
 
-    @NonNull
+    @NotNull
     @Size(min = 5)
     private Set<SpellDtoIn> spells;
 
-    @NonNull
+    @NotNull
     private Set<TalentDtoIn> talents;
 
 }

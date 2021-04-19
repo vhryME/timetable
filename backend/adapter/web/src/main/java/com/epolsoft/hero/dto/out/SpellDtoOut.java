@@ -8,7 +8,7 @@ import lombok.NonNull;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 
 
 @Data
@@ -16,10 +16,10 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class SpellDtoOut {
 
-    @NonNull
+    @NotNull
     private String name;
 
-    @NonNull
+    @NotNull
     private String key;
 
     private String description;
