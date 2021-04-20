@@ -39,8 +39,7 @@ const data = {
 
 class MainLayout extends React.Component {
     render() {
-        return <UniversalForm schema={DemoSchema} actions={actions} readonly data={data} layout={"horizontal"}>
-        );
+        return (<UniversalForm schema={DemoSchema} actions={actions} readonly data={data} layout={"horizontal"}/>);
     }
 }
 ```
@@ -48,19 +47,19 @@ class MainLayout extends React.Component {
 #### Readonly usage
 
 ```js
-{<UniversalForm schema={DemoSchema} readonly data={data}>}
+<UniversalForm schema={DemoSchema} readonly data={data}>
 ```
 
 #### Edit usage
 
 ```js
-{<UniversalForm schema={DemoSchema} actions={actions} data={data}>}
+<UniversalForm schema={DemoSchema} actions={actions} data={data}>
 ```
 
 #### Create usage
 
 ```js
-{<UniversalForm schema={DemoSchema} actions={actions}>}
+<UniversalForm schema={DemoSchema} actions={actions}>
 ```
 
 ### `Schema` structure

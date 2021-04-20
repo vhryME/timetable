@@ -1,0 +1,3 @@
+.ant-picker-input > input[disabled], .ant-picker.ant-picker-disabled .ant-picker-suffix {
+    color: black;
+}
