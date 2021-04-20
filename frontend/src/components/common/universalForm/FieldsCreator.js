@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Checkbox, Select } from "antd";
+import {Input, Checkbox, Select, DatePicker} from "antd";
 
 const { Option } = Select;
 
@@ -13,12 +13,23 @@ export default {
       />
     );
   },
+
+  date: (readonly) => {
+    return (
+      <DatePicker
+        disabled={readonly}
+        bordered={!readonly}
+        style={readonly ? { color: "black" } : undefined}
+      />
+    )
+  },
+
   password: () => {
     return <Input.Password />;
   },
 
   checkbox: (readonly) => {
-    return <Checkbox disabled={readonly} />;
+    return <Checkbox disabled={readonly} style={readonly ? {marginLeft: "10px"} : undefined} checked={false}/>;
   },
 
   number: (readonly) => {

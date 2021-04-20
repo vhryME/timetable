@@ -1,5 +1,4 @@
 ## Universal table usage
-
 To use this component you should add it in your markup with `data` and `columns` props. `actions` and `schema` props are **optional**.
 
 Example:
@@ -7,6 +6,7 @@ Example:
 ```js
 import UniversalTable from "../../components/universalTable/UniversalTable";
 import schema from "./config";
+import filterSchema from "./filterConfig";
 
 const tableData = [
   {

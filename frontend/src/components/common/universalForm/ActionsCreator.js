@@ -1,30 +1,40 @@
 import React from "react";
-import { Button } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import {Button} from "antd";
+import {PlusOutlined, ClearOutlined} from "@ant-design/icons";
 
 export default {
+  onError: () => {},
   onSubmit: () => {
     return (
       <Button
         key={"submitButton"}
         type="primary"
-        style={{ marginRight: 8 }}
+        style={{marginRight: 8}}
         htmlType="submit"
       >
         Submit
       </Button>
     );
   },
-  onError: () => {},
+  onCancel: (ref, handler) => {
+    return (
+      <Button
+        key={"cancelButton"}
+        style={{marginRight: 8}}
+        onClick={() => handler(ref.current)}
+      >
+        Cancel
+      </Button>)
+  },
   onAdd: (ref, handler) => {
     return (
       <Button
         key={"addButton"}
         type="primary"
-        style={{ marginRight: 8 }}
+        style={{marginRight: 8}}
         onClick={() => handler(ref.current)}
       >
-        <PlusOutlined />
+        <PlusOutlined/>
       </Button>
     );
   },
@@ -32,10 +42,10 @@ export default {
     return (
       <Button
         key={"clearButton"}
-        style={{ marginRight: 8 }}
+        style={{marginRight: 8}}
         onClick={() => handler(ref.current)}
       >
-        Clear
+        <ClearOutlined/>
       </Button>
     );
   },

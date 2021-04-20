@@ -1,0 +1,79 @@
+import React from "react";
+import {withRouter} from "react-router-dom";
+import {Table, Collapse} from "antd";
+import {SearchOutlined} from "@ant-design/icons";
+
+import ActionsCreator from "./ActionsCreator";
+import FieldsCreator from "./FieldsCreator";
+import {UniversalForm} from "../universalForm";
+
+class UniversalTable extends React.Component {
+  getFields = () => {
+    let columnsArr = Object.keys(this.props.columns).map((column) => {
+      const colInfo = this.props.columns[column];
+      return {
+        title: colInfo.label || colInfo,
+        dataIndex: column,
+        key: column,
+        sorter: colInfo.sorter
+          ? colInfo.sorter
+          : false,
+        render: colInfo.customRender
+          ? colInfo.customRender
+          : colInfo.type
+            ? FieldsCreator[colInfo.type]()
+            : FieldsCreator["string"](),
+      };
+    });
+
+    if (this.props.actions && !this.props.readonly) {
+      columnsArr.push({
+        title: "Actions",
+        dataIndex: "actions",
+        render: (_, record) =>
+          this.props.data && this.props.data.length >= 1 ? (
+            <div>
+              {this.props.actions.onDelete
+                ? ActionsCreator.onDelete(this, record)
+                : null}
+              {this.props.actions.onEdit
+                ? ActionsCreator.onEdit(this, record)
+                : null}
+            </div>
+          ) : null,
+      });
+    }
+
+    return columnsArr;
+  };
+
+  render() {
+    return (
+      <div>
+        {this.props.filter ?
+          <Collapse>
+            <Collapse.Panel header={<div><SearchOutlined/> Filter </div>}> {/*todo: add description of filter to doc*/}
+              <UniversalForm schema={this.props.filter.schema}
+                             cols={this.props.filter.cols}
+                             labelsSpan={this.props.filter.labelsSpan ? this.props.filter.labelsSpan : 12}
+                             wrappersSpan={this.props.filter.wrappersSpan ? this.props.filter.wrappersSpan : 12}
+                             layout={this.props.filter.layout}
+                             actions={this.props.filter.actions}/>
+            </Collapse.Panel>
+          </Collapse> : null
+        }
+        {this.props.actions.onAdd && !this.props.readonly ? ActionsCreator.onAdd(this) : null}
+        <Table
+          bordered={true}
+          key={this.props.data}
+          columns={this.getFields()}
+          dataSource={this.props.data}
+          pagination={false}
+        />
+      </div>
+    );
+  }
+
+}
+
+export default withRouter(UniversalTable);
