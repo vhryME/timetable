@@ -75,9 +75,7 @@ export default {
 
   phone: (message) => {
     return {
-      pattern: new RegExp(
-        "^[+]{0,1}[1-9]{1,4}[(]{0,1}[0-9]{1,4}[)]{0,1}[0-9]{6,8}$"
-      ),
+      pattern: new RegExp("^[+]{0,1}[1-9]{1,4}[(]{0,1}[0-9]{1,4}[)]{0,1}[0-9]{6,8}$"),
       message: message ? message : "Incorrect format",
     };
   },

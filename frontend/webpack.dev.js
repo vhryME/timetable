@@ -13,7 +13,6 @@ module.exports = merge(common, {
         target: "http://localhost:9090",
         secure: false,
         changeOrigin: true,
-        pathRewrite: { "^/api": "" },
       },
     },
   },
