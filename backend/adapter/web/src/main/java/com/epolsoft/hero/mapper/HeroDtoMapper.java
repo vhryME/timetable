@@ -11,7 +11,7 @@ import com.epolsoft.match.mapper.MatchDtoMapper;
 import org.mapstruct.Mapper;
 
 
-@Mapper(uses = {SpellDtoMapper.class, TalentDtoMapper.class, MatchDtoMapper.DateMapper.class, HeroDtoMapper.RoleMapper.class})
+@Mapper(uses = {SpellDtoMapper.class, TalentDtoMapper.class, MatchDtoMapper.DateMapper.class, HeroDtoMapper.RoleDtoMapper.class})
 public interface HeroDtoMapper {
 
     Hero heroDtoInToHero(HeroDtoIn heroDtoIn);
@@ -24,7 +24,7 @@ public interface HeroDtoMapper {
 
 
     @Mapper
-    interface RoleMapper {
+    interface RoleDtoMapper {
 
         default String asString(Role role) {
             return role != null ? role.name() : null;

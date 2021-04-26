@@ -2,16 +2,15 @@ package com.epolsoft.match.validator;
 
 import com.epolsoft.hero.dto.in.HeroDtoIn;
 import com.epolsoft.hero.dto.in.TalentDtoIn;
-import com.epolsoft.match.dto.in.PlayerInMatchDtoIn;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.*;
 
-public class TalentDtoInHeroValidator implements ConstraintValidator<TalentDtoInConstraint, HeroDtoIn> {
+public class TalentDtoInHeroValidator implements ConstraintValidator<TalentConstraint, HeroDtoIn> {
 
     @Override
-    public void initialize(TalentDtoInConstraint constraintAnnotation) {}
+    public void initialize(TalentConstraint constraintAnnotation) {}
 
 
     @Override

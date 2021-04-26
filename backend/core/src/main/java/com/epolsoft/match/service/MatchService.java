@@ -19,7 +19,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class MatchService implements MatchUseCase {
+class MatchService implements MatchUseCase {
 
     private final MatchPort port;
 

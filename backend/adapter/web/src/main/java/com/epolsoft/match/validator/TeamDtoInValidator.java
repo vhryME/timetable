@@ -16,10 +16,10 @@ import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
-public class TeamDtoInValidator implements ConstraintValidator<TeamDtoInConstraint, TeamDtoIn> {
+public class TeamDtoInValidator implements ConstraintValidator<TeamConstraint, TeamDtoIn> {
 
     @Override
-    public void initialize(TeamDtoInConstraint constraint) {}
+    public void initialize(TeamConstraint constraint) {}
 
 
     @Override

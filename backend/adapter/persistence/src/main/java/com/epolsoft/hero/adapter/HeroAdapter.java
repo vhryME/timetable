@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class HeroAdapter implements HeroPort {
+class HeroAdapter implements HeroPort {
 
     private List<Hero> heroes;
 
@@ -114,7 +114,7 @@ public class HeroAdapter implements HeroPort {
                         hero.getTalents().equals(heroFiltered.getTalents())).
                 collect(Collectors.toList());
 
-        int start = (int)pageable.getOffset();
+        int start = (int) pageable.getOffset();
         int end = Math.min((start + pageable.getPageSize()), heroesFiltered.size());
 
         return new PageImpl<>(heroesFiltered.subList(start, end), pageable, heroesFiltered.size());

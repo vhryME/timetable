@@ -1,30 +1,31 @@
 package com.epolsoft.match.adapter;
 
 
-import com.epolsoft.match.domain.*;
 import com.epolsoft.match.domain.Map;
-import com.epolsoft.match.jpa.*;
+import com.epolsoft.match.domain.Match;
+import com.epolsoft.match.domain.Region;
+import com.epolsoft.match.domain.TypeOfMatch;
 import com.epolsoft.match.mapper.MatchMapper;
 import com.epolsoft.match.port.out.MatchPort;
 import com.epolsoft.match.repo.MatchRepo;
-import com.epolsoft.match.specification.MatchSpecification;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
 @Component
 @RequiredArgsConstructor
-public class MatchAdapter implements MatchPort {
+class MatchAdapter implements MatchPort {
 
     private final MatchMapper mapper;
     private final MatchRepo repo;

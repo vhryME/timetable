@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = {TalentDtoInPlayerInMatchValidator.class, TalentDtoInHeroValidator.class})
-public @interface TalentDtoInConstraint {
+public @interface TalentConstraint {
 
     String message() default "Invalid talent";
     Class<?>[] groups() default {};

@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class HeroService implements HeroUseCase {
+class HeroService implements HeroUseCase {
 
     private final HeroPort port;
 

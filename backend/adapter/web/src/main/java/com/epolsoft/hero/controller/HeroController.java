@@ -18,7 +18,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/hero")
 @RequiredArgsConstructor
-public class HeroController {
+class HeroController {
 
     private final HeroUseCase useCase;
     private final HeroDtoMapper mapper;
@@ -37,7 +37,7 @@ public class HeroController {
 
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public HeroDtoOut saveNewMatch(@RequestBody @Valid HeroDtoIn heroDtoIn) {
+    public HeroDtoOut saveNewHero(@RequestBody @Valid HeroDtoIn heroDtoIn) {
         Hero hero = mapper.heroDtoInToHero(heroDtoIn);
 
         return mapper.heroToHeroDtoOut(useCase.saveNewHero(hero));
@@ -45,7 +45,7 @@ public class HeroController {
 
 
     @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public HeroDtoOut updateMatch(@PathVariable("id") Integer id, @RequestBody @Valid HeroDtoIn heroDtoIn) {
+    public HeroDtoOut updateHero(@PathVariable("id") Integer id, @RequestBody @Valid HeroDtoIn heroDtoIn) {
         Hero hero = useCase.updateHero(id, mapper.heroDtoInToHero(heroDtoIn));
 
         return mapper.heroToHeroDtoOut(hero);
@@ -53,7 +53,7 @@ public class HeroController {
 
 
     @GetMapping
-    public Object getMatchPage(Pageable pageable, @RequestParam(required = false) HeroDtoInFiltered heroDtoInFiltered) {
+    public Object getHeroPage(Pageable pageable, @RequestParam(required = false) HeroDtoInFiltered heroDtoInFiltered) {
         return useCase.findPageOfHero(pageable, mapper.heroDtoInFilteredToHeroFiltered(heroDtoInFiltered));
     }
 
