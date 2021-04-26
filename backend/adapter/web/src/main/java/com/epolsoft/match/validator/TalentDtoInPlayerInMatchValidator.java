@@ -11,10 +11,10 @@ import java.util.*;
 
 
 @Component
-public class TalentDtoInPlayerInMatchValidator implements ConstraintValidator<TalentDtoInConstraint, PlayerInMatchDtoIn> {
+public class TalentDtoInPlayerInMatchValidator implements ConstraintValidator<TalentConstraint, PlayerInMatchDtoIn> {
 
     @Override
-    public void initialize(TalentDtoInConstraint constraintAnnotation) {}
+    public void initialize(TalentConstraint constraintAnnotation) {}
 
 
     @Override

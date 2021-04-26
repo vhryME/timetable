@@ -18,7 +18,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/match")
 @RequiredArgsConstructor
-public class MatchController {
+class MatchController {
 
     private final MatchUseCase useCase;
     private final MatchDtoMapper mapper;

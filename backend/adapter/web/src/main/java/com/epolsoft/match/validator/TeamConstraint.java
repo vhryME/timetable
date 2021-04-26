@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = TeamDtoInValidator.class)
-public @interface TeamDtoInConstraint {
+public @interface TeamConstraint {
 
     String message() default "Invalid team";
     Class<?>[] groups() default {};

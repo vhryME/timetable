@@ -1,11 +1,10 @@
 package com.epolsoft.match.dto.in;
 
 
-import com.epolsoft.match.validator.TeamDtoInConstraint;
+import com.epolsoft.match.validator.TeamConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
@@ -18,7 +17,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TeamDtoInConstraint
+@TeamConstraint
 public class TeamDtoIn {
 
     @NotNull

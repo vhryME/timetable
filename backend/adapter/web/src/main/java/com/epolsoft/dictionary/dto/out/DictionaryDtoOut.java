@@ -1,20 +1,21 @@
-package com.epolsoft.match.dto.in;
+package com.epolsoft.dictionary.dto.out;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import javax.validation.constraints.NotNull;
+import java.util.Map;
+import java.util.Set;
 
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PlayerDtoIn {
+public class DictionaryDtoOut {
 
     @NotNull
-    private String login;
+    private Map<String, Map<Integer, String>> dictionaries;
 
 }
