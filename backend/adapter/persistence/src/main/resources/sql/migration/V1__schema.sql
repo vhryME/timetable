@@ -161,3 +161,9 @@ ALTER TABLE active_talent ALTER COLUMN id SET DEFAULT nextval('active_talent_seq
 
 CREATE SEQUENCE passive_talent_seq START 1;
 ALTER TABLE passive_talent ALTER COLUMN id SET DEFAULT nextval('passive_talent_seq');
+
+CREATE SEQUENCE active_talent_seq START 1;
+ALTER TABLE active_talent ALTER COLUMN id SET DEFAULT nextval('active_talent_seq');
+
+CREATE SEQUENCE passive_talent_seq START 1;
+ALTER TABLE passive_talent ALTER COLUMN id SET DEFAULT nextval('passive_talent_seq');
