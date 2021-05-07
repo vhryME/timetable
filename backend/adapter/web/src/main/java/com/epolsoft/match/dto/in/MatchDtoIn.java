@@ -23,9 +23,9 @@ public class MatchDtoIn {
     @NotNull
     private String date;
 
-    private Set<Integer> mapsId = new HashSet<>(Collections.singleton(0));
+    private Integer mapId = 0;
 
-    private String region = "Unknown";
+    private Integer regionId = 0;
 
     @NotNull
     @Valid

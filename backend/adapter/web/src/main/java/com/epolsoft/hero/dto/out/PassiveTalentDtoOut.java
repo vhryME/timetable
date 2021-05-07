@@ -1,19 +1,25 @@
 package com.epolsoft.hero.dto.out;
 
 
-import com.epolsoft.hero.dto.in.TalentDtoIn;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import javax.validation.constraints.NotNull;
 
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-class PassiveTalentDtoOut extends TalentDtoIn {
+public class PassiveTalentDtoOut extends TalentDtoOut {
 
-    private SpellDtoOut spell;
+    @NotNull
+    private String spell;
+
+
+    @Builder
+    public PassiveTalentDtoOut(String type, Long id, String name, String description, String icon, String key, Integer levelOfAccess, String spell) {
+        super(type, id, name, description, icon, key, levelOfAccess);
+        this.spell = spell;
+    }
 
 }

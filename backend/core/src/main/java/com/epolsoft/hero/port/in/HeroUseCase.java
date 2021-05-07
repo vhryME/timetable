@@ -21,6 +21,6 @@ public interface HeroUseCase {
 
     List<Hero> findAllHeroes();
 
-    Object findPageOfHero(Pageable pageable,  HeroPort.HeroFiltered heroFiltered);
+    Page<Hero> findPageOfHero(Pageable pageable,  HeroPort.HeroFiltered heroFiltered);
 
 }

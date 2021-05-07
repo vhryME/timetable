@@ -1,14 +1,17 @@
 package com.epolsoft.hero.domain;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public
-class Talent {
+public class Talent {
+
+    private String type;
 
     private Long id;
 

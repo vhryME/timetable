@@ -24,14 +24,22 @@ public class TypeOfMatchDictionaryService implements DictionaryUseCase<TypeOfMat
 
 
     @Override
-    public TypeOfMatch getDictionaryById(Integer id) {
-        return TypeOfMatch.getTypeOfMatchById(id);
+    public Map<Integer, String> getDictionaryById(Integer id) {
+        TypeOfMatch type = TypeOfMatch.getTypeOfMatchById(id);
+        Map<Integer, String> dictionary = new HashMap<>();
+
+        if(type != null) {
+            dictionary.put(type.id, type.name());
+        }
+
+        return dictionary;
     }
 
 
     @Override
-    public List<TypeOfMatch> getDictionariesByName(String name, Long count) {
+    public Map<Integer, String> getDictionariesByName(String name, Long count) {
         int counter = 0;
+        Map<Integer, String> dictionary = new HashMap<>();
         List<TypeOfMatch> types = new ArrayList<>();
 
         Iterator<TypeOfMatch> iterator = Arrays.asList(TypeOfMatch.values()).iterator();
@@ -45,7 +53,9 @@ public class TypeOfMatchDictionaryService implements DictionaryUseCase<TypeOfMat
             }
         }
 
-        return types;
+        types.forEach(type -> dictionary.put(type.id, type.name()));
+
+        return dictionary;
     }
 
     @Override

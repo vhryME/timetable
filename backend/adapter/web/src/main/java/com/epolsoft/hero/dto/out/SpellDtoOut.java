@@ -25,6 +25,9 @@ public class SpellDtoOut {
 
     private String icon;
 
+    @NotNull
+    private String uuid;
+
     @Min(1)
     @Max(300)
     private Double cooldown;

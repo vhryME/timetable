@@ -2,7 +2,6 @@ package com.epolsoft.hero.port.out;
 
 
 import com.epolsoft.hero.domain.Hero;
-import com.epolsoft.hero.domain.Role;
 import com.epolsoft.hero.domain.Spell;
 import com.epolsoft.hero.domain.Talent;
 import lombok.AllArgsConstructor;
@@ -11,7 +10,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -37,11 +35,15 @@ public interface HeroPort {
     @AllArgsConstructor
     class HeroFiltered {
 
-        private Role role;
+        private String name;
+
+        private String role;
+
+        private Integer roleId;
 
         private Boolean isMelee;
 
-        private LocalDate dateOfCreation;
+        private String dateOfCreation;
 
         private Set<Spell> spells;
 

@@ -26,11 +26,13 @@ class HeroService implements HeroUseCase {
         return port.findHeroById(id);
     }
 
+
     @Override
     @SneakyThrows
     public void deleteHero(Integer id) {
         port.deleteHero(id);
     }
+
 
     @Override
     @SneakyThrows
@@ -38,11 +40,13 @@ class HeroService implements HeroUseCase {
         return port.saveNewHero(hero);
     }
 
+
     @Override
     @SneakyThrows
     public Hero updateHero(Integer id, Hero hero) {
         return port.updateHero(id, hero);
     }
+
 
     @Override
     @SneakyThrows
@@ -50,12 +54,10 @@ class HeroService implements HeroUseCase {
         return port.findAllHeroes();
     }
 
+
     @Override
     @SneakyThrows
-    public Object findPageOfHero(Pageable pageable, HeroPort.HeroFiltered heroFiltered) {
-        if(!pageable.isPaged()) {
-            return port.findAllHeroes();
-        }
+    public Page<Hero> findPageOfHero(Pageable pageable, HeroPort.HeroFiltered heroFiltered) {
         Page<Hero> heroPage;
 
         if(heroFiltered != null) {

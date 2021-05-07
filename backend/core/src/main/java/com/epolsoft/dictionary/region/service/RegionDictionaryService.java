@@ -23,14 +23,22 @@ public class RegionDictionaryService implements DictionaryUseCase<Region> {
     }
 
     @Override
-    public Region getDictionaryById(Integer id) {
-        return Region.getRegionById(id);
+    public Map<Integer, String> getDictionaryById(Integer id) {
+        Region region = Region.getRegionById(id);
+        Map<Integer, String> dictionary = new HashMap<>();
+
+        if (region != null) {
+            dictionary.put(region.id, region.name());
+        }
+
+        return dictionary;
     }
 
 
     @Override
-    public List<Region> getDictionariesByName(String name, Long count) {
+    public Map<Integer, String> getDictionariesByName(String name, Long count) {
         int counter = 0;
+        Map<Integer, String> dictionary = new HashMap<>();
         List<Region> regions = new ArrayList<>();
 
         Iterator<Region> iterator = Arrays.asList(Region.values()).iterator();
@@ -44,7 +52,9 @@ public class RegionDictionaryService implements DictionaryUseCase<Region> {
             }
         }
 
-        return regions;
+        regions.forEach(region -> dictionary.put(region.id, region.name()));
+
+        return dictionary;
     }
 
     @Override

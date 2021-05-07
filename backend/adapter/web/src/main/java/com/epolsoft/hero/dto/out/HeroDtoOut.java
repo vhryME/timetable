@@ -23,7 +23,7 @@ public class HeroDtoOut {
     private String icon;
 
     @NotNull
-    private String role;
+    private Integer roleId;
 
     @NotNull
     private Boolean isMelee;

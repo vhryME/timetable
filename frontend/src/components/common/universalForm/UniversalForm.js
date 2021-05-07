@@ -7,8 +7,22 @@ import fieldsCreator from "./FieldsCreator";
 import "./styles.css";
 
 import moment from "moment";
+import PropTypes from "prop-types";
 
 class UniversalForm extends React.Component {
+  constructor(props) {
+    super(props);
+    if (this.props.observer) {
+      if (this.props.observer.submit) {
+        this.props.observer.submit(() => this.formRef.current.validateFields());
+      }
+    }
+  }
+
+  state = {
+    dictionaries: this.props.dictionaries.data
+  }
+
   formRef = React.createRef();
 
   renderButtons() {
@@ -19,7 +33,7 @@ class UniversalForm extends React.Component {
           return actionsCreator[action](this.formRef, actions[action]);
         })}
       </Row>
-      : <Form.Item>
+      : <Form.Item noStyle>
         {Object.keys(actions).map((action) => {
           if (action === "onSubmit" && this.props.id) {
             return undefined;
@@ -29,26 +43,19 @@ class UniversalForm extends React.Component {
       </Form.Item>;
   }
 
-  formDependsOnStyling = (field) => {
-    if (field.dependsOnField && this.formRef.current) {
-      return this.formRef.current.getFieldValue(field.dependsOnField) !== field.dependsOnValue;
-    }
-    return false;
-  }
-
   nestedWrapper = (fields, current) => {
     if (fields[current].dependsOnField && this.formRef.current) {
       return (
         <Form.Item shouldUpdate noStyle>
           {() =>
-            this.formRef.current.getFieldValue(fields[current].dependsOnField) == fields[current].dependsOnValue &&
-              this.getFieldItem(fields, current)
+            this.formRef.current.getFieldValue(fields[current].dependsOnField) === fields[current].dependsOnValue &&
+            this.getFieldItem(fields, current)
           }
         </Form.Item>
       )
     }
     return this.getFieldItem(fields, current);
-  }
+  };
 
   getFieldItem = (fields, current) => {
     return (
@@ -64,21 +71,18 @@ class UniversalForm extends React.Component {
         name={current}
         rules={fields[current].rules}
         valuePropName={
-          fields[current].type === "checkbox" ? "checked" : undefined
+          fields[current].type === "checkbox" || fields[current].type === "switch" ? "checked" : undefined
         }
         colon={fields[current].type !== "checkbox"}
       >
-        {fieldsCreator[fields[current].type](
-          this.props.readonly,
-          fields[current].options
-        )}
+        {fieldsCreator[fields[current].type](this, fields[current])}
       </Form.Item>
     )
   }
 
   getFields = (fields) => {
     if (!this.props.cols) {
-      return Object.keys(fields).map((field, index) => {
+      return Object.keys(fields).map((field) => {
         return this.nestedWrapper(fields, field);
       });
     } else {
@@ -105,26 +109,43 @@ class UniversalForm extends React.Component {
     this.forceUpdate();
   }
 
-  rebuildDataIfDates() {
-    let data = this.props.data;
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.dictionaries !== this.props.dictionaries) {
+      this.setState({dictionaries: this.props.dictionaries.data});
+    }
+  }
+
+  dataPreprocess() {
+    let data = {...this.props.data};
+
     let hasDate = false;
     let dateFieldKeys = [];
+    let hasDict = false;
+    let dictFieldKeys = [];
+
     Object.keys(this.props.schema.fields).map(field => {
-      if (this.props.schema.fields[field].type === "date") {
+      if (this.props.schema.fields[field].type === "date" || this.props.schema.fields[field].type === "time") {
         hasDate = true;
         dateFieldKeys.push(field);
       }
+      if (this.props.schema.fields[field].type === "dict") {
+        hasDict = true;
+        dictFieldKeys.push(field);
+      }
     });
-    if (hasDate) {
+
+    if (hasDate || hasDict) {
       dateFieldKeys.forEach(field => data[field] = moment(data[field]))
+      dictFieldKeys.forEach(field => data[field] = data[field].toString())
     }
+
     return data;
   }
 
   buildForm() {
     const {fields, name} = this.props.schema;
     let initialValues = Object.keys(fields).reduce(
-      (prev, curr) => ({...prev, [curr]: fields[curr]["initial"]}),
+      (prev, curr) => ({...prev, [curr]: fields[curr]["initial"] ?? ""}),
       {}
     );
 
@@ -136,7 +157,8 @@ class UniversalForm extends React.Component {
         layout={this.props.layout}
         id={this.props.id}
         name={name}
-        initialValues={this.props.data ? this.rebuildDataIfDates() : initialValues}
+        requiredMark={!this.props.readonly}
+        initialValues={this.props.data ? this.dataPreprocess() : initialValues}
         onFinish={this.props.readonly ? undefined : this.props.actions.onSubmit}
         onFinishFailed={this.props.readonly ? undefined : this.props.actions.onError}
       >
@@ -147,9 +169,26 @@ class UniversalForm extends React.Component {
   }
 
   render() {
-    const Form = this.buildForm();
-    return Form;
+    return this.buildForm();
   }
+}
+
+UniversalForm.propTypes = {
+  actions: PropTypes.objectOf(PropTypes.func),
+  schema: PropTypes.object.isRequired,
+  readonly: PropTypes.bool,
+  data: PropTypes.object,
+  labelsSpan: PropTypes.number,
+  wrappersSpan: PropTypes.number,
+  id: PropTypes.string,
+}
+
+UniversalForm.defaultProps = {
+  actions: {},
+  readonly: false,
+  // data: {},
+  labelsSpan: 12,
+  wrappersSpan: 12,
 }
 
 export default UniversalForm;

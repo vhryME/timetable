@@ -14,7 +14,7 @@ export default (base, state, action, shouldBeChangedOnSuccess = "data", shouldBe
         [shouldBeChangedOnSuccess]: "",
         [shouldBeChangedOnFailed]: "",
         loading: true,
-      }
+      };
 
     case base + basicActions.GET_ONE + basicStates.FAILED:
     case base + basicActions.GET_ALL + basicStates.FAILED:
@@ -27,7 +27,7 @@ export default (base, state, action, shouldBeChangedOnSuccess = "data", shouldBe
         [shouldBeChangedOnFailed]: action.payload.response.status,
         [shouldBeChangedOnSuccess]: "",
         loading: false,
-      }
+      };
 
     case base + basicActions.GET_ONE + basicStates.SUCCESS:
     case base + basicActions.GET_ALL + basicStates.SUCCESS:
@@ -40,7 +40,7 @@ export default (base, state, action, shouldBeChangedOnSuccess = "data", shouldBe
         [shouldBeChangedOnFailed]: "",
         [shouldBeChangedOnSuccess]: action.payload,
         loading: false,
-      }
+      };
 
     default:
       return state;

@@ -6,8 +6,13 @@ import {SearchOutlined} from "@ant-design/icons";
 import ActionsCreator from "./ActionsCreator";
 import FieldsCreator from "./FieldsCreator";
 import {UniversalForm} from "../universalForm";
+import PropTypes from "prop-types";
 
 class UniversalTable extends React.Component {
+  state = {
+    dictionaries: this.props.dictionaries.data
+  }
+
   getFields = () => {
     let columnsArr = Object.keys(this.props.columns).map((column) => {
       const colInfo = this.props.columns[column];
@@ -21,7 +26,7 @@ class UniversalTable extends React.Component {
         render: colInfo.customRender
           ? colInfo.customRender
           : colInfo.type
-            ? FieldsCreator[colInfo.type]()
+            ? FieldsCreator[colInfo.type](this, colInfo)
             : FieldsCreator["string"](),
       };
     });
@@ -47,12 +52,18 @@ class UniversalTable extends React.Component {
     return columnsArr;
   };
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.dictionaries !== this.props.dictionaries) {
+      this.setState({dictionaries: this.props.dictionaries.data});
+    }
+  }
+
   render() {
     return (
       <div>
         {this.props.filter ?
           <Collapse>
-            <Collapse.Panel header={<div><SearchOutlined/> Filter </div>}> {/*todo: add description of filter to doc*/}
+            <Collapse.Panel key={"filter"} header={<div><SearchOutlined/> Filter </div>}> {/*todo: add description of filter to doc*/}
               <UniversalForm schema={this.props.filter.schema}
                              cols={this.props.filter.cols}
                              labelsSpan={this.props.filter.labelsSpan ? this.props.filter.labelsSpan : 12}
@@ -62,18 +73,33 @@ class UniversalTable extends React.Component {
             </Collapse.Panel>
           </Collapse> : null
         }
-        {this.props.actions.onAdd && !this.props.readonly ? ActionsCreator.onAdd(this) : null}
+        {this.props.actions && this.props.actions.onAdd && !this.props.readonly ? ActionsCreator.onAdd(this) : null}
         <Table
           bordered={true}
           key={this.props.data}
           columns={this.getFields()}
           dataSource={this.props.data}
+          rowClassName={this.props.rowClassName}
+          components={this.props.components}
+          expandable={this.props.expandable}
           pagination={false}
         />
       </div>
     );
   }
+}
 
+UniversalTable.propTypes = {
+  readonly: PropTypes.bool,
+  actions: PropTypes.objectOf(PropTypes.func),
+  data: PropTypes.array,
+  columns: PropTypes.object.isRequired,
+}
+
+UniversalTable.defaultProps = {
+  readonly: false,
+  actions: {},
+  data: [],
 }
 
 export default withRouter(UniversalTable);

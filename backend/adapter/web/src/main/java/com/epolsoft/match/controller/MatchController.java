@@ -4,15 +4,20 @@ package com.epolsoft.match.controller;
 import com.epolsoft.match.domain.Match;
 import com.epolsoft.match.dto.in.MatchDtoIn;
 import com.epolsoft.match.dto.in.MatchDtoInFiltered;
+import com.epolsoft.match.dto.out.FullMatchDtoOut;
 import com.epolsoft.match.dto.out.MatchDtoOut;
 import com.epolsoft.match.mapper.MatchDtoMapper;
 import com.epolsoft.match.port.in.MatchUseCase;
+import com.epolsoft.match.port.out.MatchPort;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
@@ -31,15 +36,13 @@ class MatchController {
 
 
     @GetMapping("{id}")
-    public MatchDtoOut getMatch(@PathVariable("id") Integer id) {
-        return mapper.matchToMatchDtoOut(useCase.getMatch(id));
+    public FullMatchDtoOut getMatch(@PathVariable("id") Integer id) {
+        return mapper.matchToFullMatchDtoOut(useCase.getMatch(id));
     }
 
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public MatchDtoOut saveNewMatch(@RequestBody @Valid MatchDtoIn matchDtoIn) {
-        System.out.println(matchDtoIn);
-
         Match match = mapper.matchDtoInToMatch(matchDtoIn);
 
         return mapper.matchToMatchDtoOut(useCase.saveNewMatch(match));
@@ -55,8 +58,20 @@ class MatchController {
 
 
     @GetMapping
-    public Object getMatchPage(Pageable pageable, @RequestParam(required = false) MatchDtoInFiltered matchFiltered) {
-        return useCase.findPageOfMatch(pageable, mapper.matchDtoInFilteredToMatchFiltered(matchFiltered));
+    public List<MatchDtoOut> getAllMatches() {
+        List<MatchDtoOut> matches = new ArrayList<>();
+
+        useCase.findAllMatches().forEach(match -> matches.add(mapper.matchToMatchDtoOut(match)));
+
+        return matches;
+    }
+
+
+    @PostMapping("/search")
+    public Page<MatchDtoOut> getMatchPage(Pageable pageable, @RequestBody(required = false) MatchDtoInFiltered matchFilteredIn) {
+        MatchPort.MatchFiltered matchFiltered = mapper.matchDtoInFilteredToMatchFiltered(matchFilteredIn);
+
+        return mapper.pageToPageOut(useCase.findPageOfMatch(pageable, matchFiltered));
     }
 
 }

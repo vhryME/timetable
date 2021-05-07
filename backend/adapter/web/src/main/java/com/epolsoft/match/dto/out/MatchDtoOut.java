@@ -25,9 +25,9 @@ public class MatchDtoOut {
     private String date;
 
     @NotNull
-    private Set<Integer> mapsId;
+    private Integer mapId;
 
     @NotNull
-    private String region;
+    private Integer regionId;
 
 }

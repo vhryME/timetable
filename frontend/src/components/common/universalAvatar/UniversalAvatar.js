@@ -1,14 +1,18 @@
 import React from "react";
 
 import {Upload} from 'antd';
-import {LoadingOutlined, PlusOutlined} from '@ant-design/icons';
+import {LoadingOutlined, PlusOutlined, UserOutlined} from '@ant-design/icons';
+
+import isBase64 from "is-base64";
+
+import PropTypes from "prop-types";
 
 import "./styles.css";
 
 class UniversalAvatar extends React.Component {
   state = {
     loading: false,
-    imageUrl: this.props.src,
+    imageUrl: isBase64(this.props.src, {allowMime: true, allowEmpty: false}) ? this.props.src : null,
   };
 
   handleChange = info => {
@@ -32,23 +36,28 @@ class UniversalAvatar extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.src !== this.props.src) {
+    if (isBase64(this.props.src, {allowMime: true, allowEmpty: false}) && prevProps.src !== this.props.src) {
       this.setState({imageUrl: this.props.src});
     }
   }
 
   buildAvatar() {
-    const uploadButton = this.state.loading ? <LoadingOutlined/> : <PlusOutlined/>;
+    let uploadButton = this.state.loading ? <LoadingOutlined/> : <PlusOutlined/>;
+
+    if (this.props.disabled && !isBase64(this.props.src, {allowMime: true, allowEmpty: false})) {
+      uploadButton = <UserOutlined/>;
+    }
 
     const {size} = this.props;
 
     return (
       <div style={{
         borderRadius: "50%",
-        width: size ? size : 104,
-        height: size ? size : 104,
+        width: size,
+        height: size,
         overflow: "hidden",
-        border: this.state.imageUrl ? undefined : "1px solid"
+        border: this.state.imageUrl ? undefined : "1px solid",
+        ...this.props.style
       }}>
         <Upload
           name="avatar"
@@ -68,6 +77,21 @@ class UniversalAvatar extends React.Component {
   render() {
     return this.buildAvatar();
   }
+}
+
+UniversalAvatar.propTypes = {
+  onChange: PropTypes.func,
+  src: PropTypes.string,
+  disabled: PropTypes.bool,
+  size: PropTypes.number,
+}
+
+UniversalAvatar.defaultProps = {
+  onChange: () => {
+  },
+  src: null,
+  disabled: false,
+  size: 104,
 }
 
 export default UniversalAvatar;

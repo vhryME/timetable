@@ -1,5 +1,5 @@
 import React from "react";
-import {Input, Checkbox, Select, DatePicker} from "antd";
+import {Input, Checkbox, Select, DatePicker, TimePicker} from "antd";
 import {CheckOutlined, CloseOutlined} from "@ant-design/icons";
 import moment from "moment";
 
@@ -23,6 +23,15 @@ export default {
     )
   },
 
+  time: () => (text) => {
+    return (
+        <TimePicker
+            defaultValue={moment(text)}
+            disabled={true}
+        />
+    )
+  },
+
   boolean: () => (text) => {
     switch (String(text)) {
       case "true":
@@ -39,4 +48,10 @@ export default {
   number: () => (text) => {
     return (text);
   },
+
+  dict: (context, config) => (text) => {
+    if (context.state.dictionaries) {
+      return (context.state.dictionaries[config.dictName][text]);
+    }
+  }
 };
