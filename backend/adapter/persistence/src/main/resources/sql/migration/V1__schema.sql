@@ -24,13 +24,23 @@ CREATE TABLE hero(
     icon VARCHAR(255) NOT NULL,
     role BIGINT REFERENCES role(id),
     is_melee BOOLEAN NOT NULL,
-    date_of_creation TIMESTAMP
+    date_of_creation TIMESTAMP WITHOUT TIME ZONE
 );
 
+CREATE TABLE spell(
+    id BIGINT PRIMARY KEY,
+    uuid VARCHAR(255) UNIQUE,
+    name VARCHAR(255) NOT NULL,
+    description VARCHAR(2555) NOT NULL,
+    icon VARCHAR(255) NOT NULL,
+    key VARCHAR(255) NOT NULL,
+    level_of_access INT NOT NULL,
+    hero_id BIGINT REFERENCES hero(id)
+);
 CREATE TABLE talent(
     id BIGINT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    description VARCHAR(255) NOT NULL,
+    description VARCHAR(2555) NOT NULL,
     icon VARCHAR(255) NOT NULL,
     key VARCHAR(255) NOT NULL,
     level_of_access INT NOT NULL
@@ -38,8 +48,8 @@ CREATE TABLE talent(
 
 CREATE TABLE active_talent(
     id BIGINT PRIMARY KEY,
-    mana_cost INT NOT NULL,
-    cooldown FLOAT NOT NULL,
+    mana_cost INT,
+    cooldown FLOAT,
     FOREIGN KEY (id) REFERENCES talent(id)
 );
 
@@ -53,17 +63,6 @@ CREATE TABLE hero_talent(
     hero_id   BIGINT REFERENCES hero(id),
     talent_id BIGINT REFERENCES talent(id),
     PRIMARY KEY (hero_id, talent_id)
-);
-
-CREATE TABLE spell(
-    id BIGINT PRIMARY KEY,
-    uuid VARCHAR(255) UNIQUE,
-    name VARCHAR(255) NOT NULL,
-    description VARCHAR(255) NOT NULL,
-    icon VARCHAR(255) NOT NULL,
-    key VARCHAR(255) NOT NULL,
-    level_of_access INT NOT NULL,
-    hero_id BIGINT REFERENCES hero(id)
 );
 
 CREATE TABLE player(
@@ -155,12 +154,6 @@ ALTER TABLE player_in_match ALTER COLUMN id SET DEFAULT nextval('player_in_match
 
 CREATE SEQUENCE match_id_seq START 1;
 ALTER TABLE match ALTER COLUMN id SET DEFAULT nextval('match_id_seq');
-
-CREATE SEQUENCE active_talent_seq START 1;
-ALTER TABLE active_talent ALTER COLUMN id SET DEFAULT nextval('active_talent_seq');
-
-CREATE SEQUENCE passive_talent_seq START 1;
-ALTER TABLE passive_talent ALTER COLUMN id SET DEFAULT nextval('passive_talent_seq');
 
 CREATE SEQUENCE active_talent_seq START 1;
 ALTER TABLE active_talent ALTER COLUMN id SET DEFAULT nextval('active_talent_seq');
