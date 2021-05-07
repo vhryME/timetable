@@ -1,7 +1,6 @@
 package com.epolsoft.hero.dto.in;
 
 
-import com.epolsoft.match.validator.TalentConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +14,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TalentConstraint
+//@TalentConstraint
 public class HeroDtoIn {
 
     @NotNull
@@ -23,7 +22,7 @@ public class HeroDtoIn {
 
     private String icon;
 
-    private String role = "Unknown";
+    private Integer roleId = 0;
 
     @NotNull
     private Boolean isMelee;
@@ -37,7 +36,9 @@ public class HeroDtoIn {
     private Set<SpellDtoIn> spells;
 
     @NotNull
-    @Valid
+//    @Valid
     private Set<TalentDtoIn> talents;
+
+    private TalentDtoIn[] talents_;
 
 }

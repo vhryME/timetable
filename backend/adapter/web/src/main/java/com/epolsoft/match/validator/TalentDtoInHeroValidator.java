@@ -1,11 +1,15 @@
 package com.epolsoft.match.validator;
 
+
 import com.epolsoft.hero.dto.in.HeroDtoIn;
 import com.epolsoft.hero.dto.in.TalentDtoIn;
+import com.google.common.collect.Ordering;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.*;
+import java.util.stream.Collectors;
+
 
 public class TalentDtoInHeroValidator implements ConstraintValidator<TalentConstraint, HeroDtoIn> {
 
@@ -21,21 +25,10 @@ public class TalentDtoInHeroValidator implements ConstraintValidator<TalentConst
 
 
     private boolean areTalentsConsistently(Set<TalentDtoIn> talents) {
-        boolean isIncrease = false;
+        List<Integer> talentsLevelsSorted = talents.stream().map(TalentDtoIn::getLevelOfAccess).sorted().
+                collect(Collectors.toList());
 
-        List<TalentDtoIn> talentList = new ArrayList<>(talents);
-        ListIterator<TalentDtoIn> iterator = talentList.listIterator();
-
-        while (iterator.hasNext()) {
-            if(!iterator.hasPrevious()) {
-                iterator.next();
-                continue;
-            }
-
-            isIncrease = iterator.previous().getLevelOfAccess() > iterator.next().getLevelOfAccess();
-        }
-
-        return isIncrease;
+        return Ordering.natural().isOrdered(talentsLevelsSorted);
     }
 
 

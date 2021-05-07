@@ -38,15 +38,15 @@ public interface MatchPort {
     @AllArgsConstructor
     class MatchFiltered {
 
-        private TypeOfMatch type;
+        private String type;
 
         private LocalDate date;
 
-        private Region region;
+        private String region;
 
         private Double duration;
 
-        private Set<Map> maps;
+        private Map map;
 
     }
 

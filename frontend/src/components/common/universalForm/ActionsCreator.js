@@ -1,6 +1,6 @@
 import React from "react";
 import {Button} from "antd";
-import {PlusOutlined, ClearOutlined} from "@ant-design/icons";
+import {PlusOutlined} from "@ant-design/icons";
 
 export default {
   onError: () => {},
@@ -45,7 +45,7 @@ export default {
         style={{marginRight: 8}}
         onClick={() => handler(ref.current)}
       >
-        <ClearOutlined/>
+        Clear
       </Button>
     );
   },

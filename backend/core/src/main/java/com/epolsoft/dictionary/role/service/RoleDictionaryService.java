@@ -24,14 +24,22 @@ public class RoleDictionaryService implements DictionaryUseCase<Role> {
 
 
     @Override
-    public Role getDictionaryById(Integer id) {
-        return Role.getRoleById(id);
+    public Map<Integer, String> getDictionaryById(Integer id) {
+        Role role = Role.getRoleById(id);
+        Map<Integer, String> dictionary = new HashMap<>();
+
+        if(role != null) {
+            dictionary.put(role.id, role.name());
+        }
+
+        return dictionary;
     }
 
 
     @Override
-    public List<Role> getDictionariesByName(String name, Long count) {
+    public Map<Integer, String> getDictionariesByName(String name, Long count) {
         int counter = 0;
+        Map<Integer, String> dictionary = new HashMap<>();
         List<Role> roles = new ArrayList<>();
 
         Iterator<Role> iterator = Arrays.asList(Role.values()).iterator();
@@ -45,7 +53,9 @@ public class RoleDictionaryService implements DictionaryUseCase<Role> {
             }
         }
 
-        return roles;
+        roles.forEach(role -> dictionary.put(role.id, role.name()));
+
+        return dictionary;
     }
 
     @Override

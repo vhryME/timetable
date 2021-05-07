@@ -21,7 +21,7 @@ public interface MatchUseCase {
 
     List<Match> findAllMatches();
 
-    Object findPageOfMatch(Pageable pageable, MatchPort.MatchFiltered matchFiltered);
+    Page<Match> findPageOfMatch(Pageable pageable, MatchPort.MatchFiltered matchFiltered);
 
 //    Page<Match> findPageOfMatchFiltered(Pageable pageable, MatchPort.MatchFiltered matchFiltered);
 

@@ -25,14 +25,22 @@ public class MapDictionaryService implements DictionaryUseCase<Map> {
 
 
     @Override
-    public Map getDictionaryById(Integer id) {
-        return Map.getMapById(id);
+    public java.util.Map<Integer, String> getDictionaryById(Integer id) {
+        Map map = Map.getMapById(id);
+        java.util.Map<Integer, String> dictionary = new HashMap<>();
+
+        if (map != null) {
+            dictionary.put(map.id, map.name());
+        }
+
+        return dictionary;
     }
 
 
     @Override
-    public List<Map> getDictionariesByName(String name, Long count) {
+    public java.util.Map<Integer, String> getDictionariesByName(String name, Long count) {
         int counter = 0;
+        java.util.Map<Integer, String> dictionary = new HashMap<>();
         List<Map> maps = new ArrayList<>();
 
         Iterator<Map> iterator = Arrays.asList(Map.values()).iterator();
@@ -46,7 +54,9 @@ public class MapDictionaryService implements DictionaryUseCase<Map> {
             }
         }
 
-        return maps;
+        maps.forEach(map -> dictionary.put(map.id, map.name()));
+
+        return dictionary;
     }
 
     @Override

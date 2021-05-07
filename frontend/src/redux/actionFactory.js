@@ -1,30 +1,35 @@
 import states from "./basicActionStates";
 import api from "../helpers/api";
 
-export default (config) => {
+const ActionFactory = (config) => {
+  const {entity, action, func, url, method = "GET", values, toPayload = true, postProc = data => data} = config;
   return async function (dispatch) {
-    dispatch({type: config.entity + config.action + states["LOADING"]});
+    dispatch({type: entity + action + states["LOADING"]});
 
-    if (config.func) {
-      config.func().then((data) => {
+    function builder(asyncFunc) {
+      asyncFunc().then((data) => {
+        let payload = postProc(data);
+
         dispatch({
-          type: config.entity + config.action + states["SUCCESS"],
-          payload: config.toPayload ? data : undefined
+          type: entity + action + states["SUCCESS"],
+          payload: toPayload ? payload : undefined
         })
       }).catch((err) => {
-        dispatch({type: config.entity + config.action + states["FAILED"], payload: err})
+        dispatch({
+          type: entity + action + states["FAILED"],
+          payload: err
+        })
       })
-    } else if (config.url) {
-      api(config.url, config.method, config.values).then((data) => {
-        dispatch({
-          type: config.entity + config.action + states["SUCCESS"],
-          payload: config.toPayload ? data : undefined
-        })
-      }).catch((err) => {
-        dispatch({type: config.entity + config.action + states["FAILED"], payload: err})
-      });
+    }
+
+    if (func) {
+      builder(func)
+    } else if (url) {
+      builder(() => api(url, method, values))
     } else {
       console.warn("CHECK ACTION CONFIG: ", config);
     }
   }
 }
+
+export default ActionFactory;

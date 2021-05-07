@@ -1,19 +1,21 @@
 import React from "react";
 import {withRouter} from "react-router-dom";
 
-import {Tabs, Modal, Button, message} from 'antd';
+import {Tabs, Modal, Button} from 'antd';
 
 import "./heroStyles.css";
 
-import hash from "object-hash";
-
-import schema from "./heroFormConfig";
-import talentSchema from "./talentFormConfig";
-import skillSchema from "./skillFormConfig";
+import {schema as mainSchema, actions as mainActions} from "./config/oneHero/heroFormConfig";
+import {schemaGen as talentSchema, actions as talentActions} from "./config/oneHero/talentFormConfig";
+import {schema as skillSchema, actions as skillActions} from "./config/oneHero/skillFormConfig";
+import {actions as talentsTableActions, columns as talentsColumns} from "./config/oneHero/talentsTableConfig";
+import {actions as skillsTableActions, columns as skillsColumns} from "./config/oneHero/skillsTableConfig";
 
 import {UniversalForm} from "../../components/common/universalForm";
 import {UniversalTable} from "../../components/common/universalTable";
 import UniversalAvatar from "../../components/common/universalAvatar/UniversalAvatar";
+
+import {LeftOutlined, SaveOutlined} from "@ant-design/icons";
 
 class HeroLayout extends React.Component {
   state = {
@@ -29,180 +31,12 @@ class HeroLayout extends React.Component {
     talents: [],
     skills: [],
 
-    newTalentIcon: null,
-    newSkillIcon: null,
-    newHeroIcon: null,
+    newTalentIcon: "",
+    newSkillIcon: "",
+    newHeroIcon: "",
   };
 
   mainFormId = "heroFormId";
-
-  mainFormActions = {
-    onSubmit: (values) => {
-      let tableInvalid = false;
-      if (this.state.talents.length === 0) {
-        message.error("Talents required!");
-        tableInvalid = true;
-      }
-      if (this.state.skills.length < 5) {
-        message.error("Must be at least 5 skills!");
-        tableInvalid = true;
-      }
-      if (!tableInvalid) {
-        values.skills = this.state.skills;
-        values.talents = this.state.talents;
-        values.icon = this.state.newHeroIcon;
-        values.id = this.props.match.params.id ? this.props.match.params.id : hash(values);
-        if (this.props.match.params.id) {
-          this.props.editHero(values, values.id);
-        } else {
-          this.props.newHero(values);
-        }
-        this.props.getAllHeroes();
-        console.log(values, ` hero ${this.props.match.params.id ? "edited" : "created"}!`);
-        this.props.history.push("/heroes");
-      }
-    },
-    onError: (e) => {
-      console.log("onError: ", e);
-    },
-  };
-
-  skillFormActions = {
-    onSubmit: (values) => {
-      let {skills} = this.state;
-      if (this.state.skillAdding) {
-        values.icon = this.state.newSkillIcon;
-        values.key = hash(values);
-        skills.push(values);
-        this.setState({
-          skillAdding: false,
-          currentSkill: null,
-          newSkillIcon: null,
-          skills
-        });
-      } else if (this.state.skillEditing) {
-        values.icon = this.state.newSkillIcon ? this.state.newSkillIcon : this.state.currentSkill.icon;
-        values.key = this.state.currentSkill.key;
-        this.setState({
-          skillEditing: false,
-          currentSkill: null,
-          newSkillIcon: null,
-          skills: skills.map(item => {
-            if (item.key === values.key) {
-              return {...item, ...values}
-            }
-            return item;
-          })
-        });
-      }
-    },
-
-    onCancel: () => {
-      this.setState({skillAdding: false, skillEditing: false, currentSkill: null, currentSkillIcon: null,});
-    },
-
-    onError: (e) => {
-      console.log("onError: ", e);
-    },
-  };
-
-  talentFormActions = {
-    onSubmit: (values) => {
-      let {talents} = this.state;
-      if (this.state.talentAdding) {
-        values.icon = this.state.newTalentIcon;
-        values.key = hash(values);
-        talents.push(values);
-        this.setState({
-          talentAdding: false,
-          currentTalent: null,
-          newTalentIcon: null,
-          talents
-        });
-      } else if (this.state.talentEditing) {
-        values.icon = this.state.newTalentIcon ? this.state.newTalentIcon : this.state.currentTalent.icon;
-        values.key = this.state.currentTalent.key;
-        this.setState({
-          talentEditing: false,
-          currentTalent: null,
-          newTalentIcon: null,
-          talents: talents.map(item => {
-            if (item.key === values.key) {
-              return {...item, ...values}
-            }
-            return item;
-          })
-        });
-      }
-    },
-
-    onCancel: () => {
-      this.setState({talentAdding: false, talentEditing: false, currentTalent: null, currentTalentIcon: null,});
-    },
-
-    onError: (e) => {
-      console.log("onError: ", e);
-    },
-  };
-
-  skillsTableActions = {
-    onAdd: () => {
-      this.setState({skillAdding: true});
-    },
-    onEdit: (values) => {
-      this.setState({skillEditing: true, currentSkill: values})
-    },
-    onDelete: (value) => {
-      this.setState({skills: this.state.skills.filter(skill => skill !== value)})
-    }
-  };
-
-  talentsTableActions = {
-    onAdd: () => {
-      this.setState({talentAdding: true});
-    },
-    onEdit: (values) => {
-      this.setState({talentEditing: true, currentTalent: values})
-    },
-    onDelete: (value) => {
-      this.setState({talents: this.state.talents.filter(talent => talent !== value)})
-    }
-  };
-
-  skillsColumns = {
-    icon: {
-      label: "Icon",
-      customRender: (_, record) => <UniversalAvatar disabled src={record.icon} size={30}/>,
-    },
-    name: {
-      label: "Name",
-      customRender: this.props.readonly
-        ? (text, record) => <a onClick={() => this.setState({currentSkill: record, skillEditing: true})}>{text}</a>
-        : undefined,
-    },
-    description: "Description",
-    cooldown: "Cooldown",
-    cost: "Cost"
-  };
-
-  talentsColumns = {
-    icon: {
-      label: "Icon",
-      customRender: (_, record) => <UniversalAvatar disabled src={record.icon} size={30}/>,
-    },
-    name: {
-      label: "Name",
-      customRender: this.props.readonly
-        ? (text, record) => <a onClick={() => this.setState({currentTalent: record, talentEditing: true})}>{text}</a>
-        : undefined,
-    },
-    description: "Description",
-    requiredLvl: "Required LVL",
-    type: "Type",
-    cooldown: "Cooldown",
-    cost: "Cost",
-    ability: "Ability",
-  };
 
   componentDidMount() {
     if (this.props.match.params.id) {
@@ -212,8 +46,9 @@ class HeroLayout extends React.Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     const {current} = this.props.heroes;
-    if (prevProps.heroes.current !== current) {
-      this.setState({skills: current.data.skills, talents: current.data.talents, newHeroIcon: current.data.icon});
+
+    if (prevProps.heroes.current !== current && current.loading !== true) {
+      this.setState({skills: current.data.spells, talents: current.data.talents, newHeroIcon: current.data.icon});
     }
   }
 
@@ -240,7 +75,7 @@ class HeroLayout extends React.Component {
                              data={this.state.currentSkill ? this.state.currentSkill : undefined}
                              labelsSpan={12}
                              wrappersSpan={12}
-                             actions={this.skillFormActions}/>
+                             actions={skillActions(this)}/>
             </div>
           </div>
         </Modal>
@@ -259,12 +94,12 @@ class HeroLayout extends React.Component {
                                size={104}/>
             </div>
             <div className={"form"}>
-              <UniversalForm schema={talentSchema}
+              <UniversalForm schema={talentSchema(this)}
                              readonly={this.props.readonly}
                              data={this.state.currentTalent ? this.state.currentTalent : undefined}
                              labelsSpan={12}
                              wrappersSpan={12}
-                             actions={this.talentFormActions}/>
+                             actions={talentActions(this)}/>
             </div>
           </div>
         </Modal>
@@ -278,18 +113,18 @@ class HeroLayout extends React.Component {
           </div>
           <div className={"form"}>
             {this.props.match.params.id
-              ? <UniversalForm schema={schema}
+              ? <UniversalForm schema={mainSchema}
                                data={this.props.heroes.current.data}
                                readonly={this.props.readonly}
                                id={this.mainFormId}
                                labelsSpan={12}
                                wrappersSpan={12}
-                               actions={this.mainFormActions}/>
-              : <UniversalForm schema={schema}
+                               actions={mainActions(this)}/>
+              : <UniversalForm schema={mainSchema}
                                id={this.mainFormId}
                                labelsSpan={12}
                                wrappersSpan={12}
-                               actions={this.mainFormActions}/>}
+                               actions={mainActions(this)}/>}
           </div>
         </div>
 
@@ -298,31 +133,31 @@ class HeroLayout extends React.Component {
             <Tabs.TabPane tab="Skills" key="1">
               <UniversalTable key={1}
                               readonly={this.props.readonly}
-                              actions={this.skillsTableActions}
+                              actions={skillsTableActions(this)}
                               data={this.state.skills}
-                              columns={this.skillsColumns}/>
+                              columns={skillsColumns(this)}/>
             </Tabs.TabPane>
             <Tabs.TabPane tab="Talents" key="2">
               <UniversalTable key={2}
                               readonly={this.props.readonly}
-                              actions={this.talentsTableActions}
+                              actions={talentsTableActions(this)}
                               data={this.state.talents}
-                              columns={this.talentsColumns}/>
+                              columns={talentsColumns(this)}/>
             </Tabs.TabPane>
           </Tabs>
         </div>
 
-        <div className={"footer-buttons"}>
-          {!this.props.readonly
-            ? <Button form={this.mainFormId} className={"button"} htmlType={"submit"}>
-                Save
-              </Button>
-            : undefined
-          }
-          <Button className={"button"} onClick={() => this.props.history.push("/heroes")}>
-            Cancel
-          </Button>
-        </div>
+        {!this.props.readonly
+          ? <div className={"footer-buttons"}>
+            <Button shape={"circle"} className={"button"} onClick={() => this.props.history.push("/heroes")}>
+              <LeftOutlined/>
+            </Button>
+            <Button shape={"circle"} type={"primary"} form={this.mainFormId} className={"button"} htmlType={"submit"}>
+              <SaveOutlined/>
+            </Button>
+          </div>
+          : undefined
+        }
 
       </div>
     )

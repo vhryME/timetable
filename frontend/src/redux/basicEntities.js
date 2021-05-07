@@ -1,4 +1,8 @@
 export default {
   HERO: "HERO_",
   HEROES: "HEROES_",
+  DICTIONARIES: "DICTIONARIES_",
+
+  MATCH: "MATCH_",
+  MATCHES: "MATCHES_",
 };

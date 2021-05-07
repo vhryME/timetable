@@ -7,6 +7,16 @@ export default {
     required: true,
   }),
 
+  size: (pattern, message) => {
+    return {
+      min: pattern,
+      max: pattern,
+      message: message
+          ? message
+          : `Size must be ${pattern} `,
+    };
+  },
+
   shorterThan: (pattern, message) => {
     return {
       max: pattern,

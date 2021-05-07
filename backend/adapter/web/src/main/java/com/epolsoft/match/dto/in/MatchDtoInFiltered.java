@@ -21,6 +21,6 @@ public class MatchDtoInFiltered {
 
     private Double duration;
 
-    private Set<Integer> mapsId;
+    private Integer mapId;
 
 }

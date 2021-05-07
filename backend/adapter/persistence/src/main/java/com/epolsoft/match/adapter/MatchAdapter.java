@@ -5,9 +5,7 @@ import com.epolsoft.match.domain.Map;
 import com.epolsoft.match.domain.Match;
 import com.epolsoft.match.domain.Region;
 import com.epolsoft.match.domain.TypeOfMatch;
-import com.epolsoft.match.mapper.MatchMapper;
 import com.epolsoft.match.port.out.MatchPort;
-import com.epolsoft.match.repo.MatchRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -16,19 +14,13 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
 @Component
 @RequiredArgsConstructor
 class MatchAdapter implements MatchPort {
-
-    private final MatchMapper mapper;
-    private final MatchRepo repo;
 
     private List<Match> matches;
 
@@ -38,13 +30,13 @@ class MatchAdapter implements MatchPort {
         matches = new ArrayList<>();
 
         Match match1 = new Match(1, TypeOfMatch.QuickMatch, LocalDate.now(), 600.0,
-                new HashSet<>(Collections.singleton(Map.AlteracPass)), Region.EU, new HashSet<>(Collections.singleton(null)));
+                Map.AlteracPass, Region.EU, new HashSet<>(Collections.singleton(null)));
         Match match2 = new Match(2, TypeOfMatch.HeroLeague, LocalDate.now(), 15.364,
-                new HashSet<>(Collections.singleton(Map.BraxisOutpost)), Region.CN, new HashSet<>(Collections.singleton(null)));
-        Match match3 = new Match(3, TypeOfMatch.Brawl, LocalDate.now(), 0.3654,
-                new HashSet<>(Collections.singleton(Map.DragonShire)), Region.NA, new HashSet<>(Collections.singleton(null)));
-        Match match4 = new Match(4, TypeOfMatch.Unknown, LocalDate.now(), 9856.99,
-                new HashSet<>(Collections.singleton(Map.Unknown)), Region.Unknown, new HashSet<>(Collections.singleton(null)));
+                Map.BraxisOutpost, Region.CN, new HashSet<>(Collections.singleton(null)));
+        Match match3 = new Match(3, TypeOfMatch.Brawl, LocalDate.now(), 0.3654, Map.DragonShire, Region.NA,
+                new HashSet<>(Collections.singleton(null)));
+        Match match4 = new Match(4, TypeOfMatch.Unknown, LocalDate.now(), 9856.99, Map.Unknown, Region.Unknown,
+                new HashSet<>(Collections.singleton(null)));
 
         matches.add(match1);
         matches.add(match2);
@@ -114,13 +106,27 @@ class MatchAdapter implements MatchPort {
 
     @Override
     public Page<Match> findPageOfMatchFiltered(Pageable pageable, MatchFiltered matchFiltered) throws Exception {
-        List<Match> matchesFiltered = matches.stream().
-                filter( match -> match.getType().equals(matchFiltered.getType()) ||
-                        match.getDate().equals(matchFiltered.getDate()) ||
-                        match.getRegion().equals(matchFiltered.getRegion()) ||
-                        match.getMaps().equals(matchFiltered.getMaps())).
-                collect(Collectors.toList());
+        List<Match> matchesFiltered = matches;
 
+        if(matchFiltered.getType() != null && !matchFiltered.getType().equals("")) {
+            matchesFiltered = matchesFiltered.stream().filter(match -> match.getType().name().contains(matchFiltered.getType())).
+                    collect(Collectors.toList());
+        }
+
+        if(matchFiltered.getDate() != null) {
+            matchesFiltered = matchesFiltered.stream().filter(match -> match.getDate().equals(matchFiltered.getDate())).
+                    collect(Collectors.toList());
+        }
+
+        if(matchFiltered.getDuration() != null) {
+            matchesFiltered = matchesFiltered.stream().filter(match -> match.getDuration().equals(matchFiltered.getDuration())).
+                    collect(Collectors.toList());
+        }
+
+        if(matchFiltered.getMap() != null) {
+            matchesFiltered = matchesFiltered.stream().filter(match -> match.getMap().name().contains(matchFiltered.getMap().name()))
+                    .collect(Collectors.toList());
+        }
 
         int start = (int) pageable.getOffset();
         int end = Math.min((start + pageable.getPageSize()), matchesFiltered.size());

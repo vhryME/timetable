@@ -18,6 +18,8 @@ class Spell {
 
     private String description;
 
+    private String uuid;
+
     private String icon;
 
     private Double cooldown;

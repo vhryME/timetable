@@ -17,11 +17,17 @@
 
 .footer-buttons {
     display: flex;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
     justify-content: center;
 }
 
 .button {
     margin: 10px;
+    width: 70px;
+    height: 70px;
+    font-size: 20px;
 }
 
 .tabs {
@@ -30,3 +36,16 @@
     justify-content: center;
     align-items: center;
 }
+
+.option-main {
+    display: flex;
+    align-items: center;
+}
+
+.option-text {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+

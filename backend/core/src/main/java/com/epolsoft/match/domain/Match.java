@@ -22,7 +22,7 @@ public class Match {
 
     private Double duration;
 
-    private Set<Map> maps;
+    private Map map;
 
     private Region region;
 

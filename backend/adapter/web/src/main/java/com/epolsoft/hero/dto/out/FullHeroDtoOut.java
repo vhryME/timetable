@@ -4,7 +4,6 @@ package com.epolsoft.hero.dto.out;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -26,7 +25,7 @@ public class FullHeroDtoOut {
     private String icon;
 
     @NotNull
-    private String role;
+    private Integer roleId;
 
     @NotNull
     private Boolean isMelee;
@@ -41,6 +40,6 @@ public class FullHeroDtoOut {
 
     @NotNull
     @Valid
-    private Set<TalentDtoOut> talent;
+    private Set<TalentDtoOut> talents;
 
 }

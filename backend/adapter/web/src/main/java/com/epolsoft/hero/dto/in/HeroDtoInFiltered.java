@@ -13,7 +13,11 @@ import java.util.Set;
 @AllArgsConstructor
 public class HeroDtoInFiltered {
 
+    private String name;
+
     private String role;
+
+    private Integer roleId;
 
     private Boolean isMelee;
 
