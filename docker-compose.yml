@@ -18,3 +18,12 @@ services:
       - backend
     ports:
     - "3000:3000"
+
+  postgres:
+    build: ./backend/adapter/persistence
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: testdb
+    ports:
+    - "5432:5432"
