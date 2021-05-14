@@ -11,18 +11,18 @@ spring:
 #DB
 spring.datasource:
   platform: postgres
-  driverClassName: org.h2.Driver
-  url: jdbc:h2:mem:testdb
-  username: sa
-  password:
+  driverClassName: org.postgresql.Driver
+  url: jdbc:postgresql://localhost:5432/postgres
+  username: postgres
+  password: admin
 
 #JPA
 spring.jpa:
   show-sql: true
   hibernate:
-    ddl-auto: update
+    ddl-auto: none
   properties:
-    hibernate.dialect: org.hibernate.dialect.H2Dialect
+    hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
 
 
 spring.data.web:
