@@ -13,13 +13,18 @@ public interface HeroUseCase {
 
     Hero getHero(Integer id);
 
+
     void deleteHero(Integer id);
+
 
     Hero saveNewHero(Hero hero);
 
+
     Hero updateHero(Integer id, Hero hero);
 
+
     List<Hero> findAllHeroes();
+
 
     Page<Hero> findPageOfHero(Pageable pageable,  HeroPort.HeroFiltered heroFiltered);
 

@@ -1,19 +1,23 @@
 package com.epolsoft.match.mapper;
 
 
+import com.epolsoft.mapper.SingleMapper;
 import com.epolsoft.match.domain.Map;
 import org.mapstruct.Mapper;
 
 
 @Mapper
-public interface MapDtoMapper {
+public interface MapDtoMapper extends SingleMapper<Map, Integer> {
 
-    default Map map(int id) {
-        return Map.getMapById(id);
+    @Override
+    default Integer inToOut(Map map) {
+        return Map.getIdByMap(map);
     }
 
-    default Integer map(Map map) {
-        return Map.getIdByMap(map);
+
+    @Override
+    default Map outToIn(Integer id) {
+        return Map.getMapById(id);
     }
 
 }

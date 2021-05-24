@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public enum Role {
-    Specialist(1), Assassin(2), Warrior(3), Support(4), Multiclass(3), Unknown(0);
+    Specialist(1), Assassin(2), Warrior(3), Support(4), Multiclass(5), Unknown(0);
 
 
     public Integer id;

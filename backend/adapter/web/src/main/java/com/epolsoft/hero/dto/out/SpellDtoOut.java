@@ -28,12 +28,11 @@ public class SpellDtoOut {
     @NotNull
     private String uuid;
 
-    @Min(1)
-    @Max(300)
-    private Double cooldown;
+    @NotNull
+    @Min(1) @Max(300)
+    private Integer manaCost;
 
-    @Min(1)
-    @Max(300)
-    private Double manaCost;
+    @Min(1) @Max(300)
+    private Double cooldown;
 
 }

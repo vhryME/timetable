@@ -1,4 +1,4 @@
-package com.epolsoft.hero.dto.in;
+package com.epolsoft.hero.dto.out;
 
 
 import lombok.AllArgsConstructor;
@@ -13,26 +13,30 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SpellDtoIn {
+public class SpellAuditDtoOut {
 
-    @NotNull
+    private Long id;
+
+    private Long spellId;
+
     private String name;
 
-    @NotNull
     private String key;
 
     private String description;
 
-    private String icon;
-
-    @NotNull
     private String uuid;
 
-    @NotNull
-    @Min(1) @Max(300)
+    private String icon;
+
     private Integer manaCost;
 
-    @Min(1) @Max(300)
     private Double cooldown;
+
+    private String revisionBy;
+
+    private String revisionDate;
+
+    private String revisionAction;
 
 }

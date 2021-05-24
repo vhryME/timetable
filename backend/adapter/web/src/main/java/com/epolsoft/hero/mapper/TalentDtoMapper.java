@@ -13,36 +13,41 @@ import com.epolsoft.hero.dto.out.TalentDtoOut;
 import com.epolsoft.match.mapper.PlayerInMatchDtoMapper;
 import org.mapstruct.Mapper;
 
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Mapper(uses = {PlayerInMatchDtoMapper.class})
 public interface TalentDtoMapper {
 
-//    default Talent talentDtoInToTalentWithInheritance(TalentDtoIn talentDtoIn) {
-//        if(talentDtoIn instanceof ActiveTalentDtoIn) {
-//            return activeTalentDtoInToActiveTalent((ActiveTalentDtoIn) talentDtoIn);
-//        } else if(talentDtoIn instanceof PassiveTalentDtoIn) {
-//            return passiveTalentDtoInToPassiveTalent((PassiveTalentDtoIn) talentDtoIn);
-//        }
-//
-//        return talentDtoInToTalent(talentDtoIn);
-//    };
-//
-//
-//    default TalentDtoOut talentToTalentDtoOutWithInheritance(Talent talent) {
-//        if(talent instanceof ActiveTalent) {
-//            return activeTalentToActiveTalentDtoOut((ActiveTalent) talent);
-//        } else if(talent instanceof PassiveTalent) {
-//            return passiveTalentToPassiveTalentDtoOut((PassiveTalent) talent);
-//        }
-//
-//        return talentToTalentDtoOut(talent);
-//    };
+    default Set<Talent> talentDtoInToTalentWithInheritance(Set<TalentDtoIn> talents) {
+        Set<Talent> talentsWithInheritance = new HashSet<>();
 
-//
-//    Talent talentDtoInToTalent(TalentDtoIn talentDtoIn);
-//
-//
-//    TalentDtoOut talentToTalentDtoOut(Talent talent);
+        talents.forEach(talentDtoIn ->{
+            if(talentDtoIn instanceof ActiveTalentDtoIn){
+                talentsWithInheritance.add(activeTalentDtoInToActiveTalent((ActiveTalentDtoIn) talentDtoIn));
+            } else if (talentDtoIn instanceof PassiveTalentDtoIn) {
+                talentsWithInheritance.add(passiveTalentDtoInToPassiveTalent((PassiveTalentDtoIn) talentDtoIn));
+            }
+        });
+
+        return talentsWithInheritance;
+    }
+
+
+    default Set<TalentDtoOut> talentToTalentDtoOutWithInheritance(Set<Talent> talents) {
+        Set<TalentDtoOut> talentsWithInheritance = new HashSet<>();
+
+        talents.forEach(talent ->{
+            if(talent instanceof ActiveTalent){
+                talentsWithInheritance.add(activeTalentToActiveTalentDtoOut((ActiveTalent) talent));
+            } else if (talent instanceof PassiveTalent) {
+                talentsWithInheritance.add(passiveTalentToPassiveTalentDtoOut((PassiveTalent) talent));
+            }
+        });
+
+        return talentsWithInheritance;
+    }
 
 
     ActiveTalent activeTalentDtoInToActiveTalent(ActiveTalentDtoIn activeTalentDtoIn);
@@ -55,4 +60,5 @@ public interface TalentDtoMapper {
 
 
     PassiveTalentDtoOut passiveTalentToPassiveTalentDtoOut(PassiveTalent activeTalentDtoOut);
+
 }

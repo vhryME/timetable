@@ -5,11 +5,11 @@ DO $$
         UPDATE public.version SET version_number = '1.1' WHERE version_number = '1.0';
 
         CREATE TABLE hero_history (
-            id BIGINT PRIMARY KEY NOT NULL,
-            hero json NOT NULL,
-            revision_by TEXT NOT NULL,
-            revision_timestamp TIMESTAMP NOT NULL,
-            revision_action VARCHAR(6) NOT NULL
+                                      id BIGINT PRIMARY KEY NOT NULL,
+                                      hero json NOT NULL,
+                                      revision_by TEXT NOT NULL,
+                                      revision_timestamp TIMESTAMP NOT NULL,
+                                      revision_action VARCHAR(6) NOT NULL
         );
 
         CREATE SEQUENCE hero_history_id_seq START 1;
@@ -56,7 +56,7 @@ DO $$
             RETURN NULL;
         END;
         $hero_trigger$
-        LANGUAGE plpgsql;
+            LANGUAGE plpgsql;
 
         CREATE TRIGGER hero_history_trigger
             AFTER INSERT OR UPDATE OR DELETE ON hero
