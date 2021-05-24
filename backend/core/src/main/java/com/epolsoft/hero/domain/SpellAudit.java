@@ -5,14 +5,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public
-class Spell {
+public class SpellAudit {
 
     private Long id;
+
+    private Long spellId;
 
     private String name;
 
@@ -24,8 +27,14 @@ class Spell {
 
     private String icon;
 
+    private Double cooldown;
+
     private Integer manaCost;
 
-    private Double cooldown;
+    private String revisionBy;
+
+    private LocalDate revisionDate;
+
+    private String revisionAction;
 
 }

@@ -155,7 +155,7 @@ class HeroAdapter implements HeroPort {
     private List<Hero> getHeroesFilteredBySpells(List<Hero> heroesForFilter, Set<Spell> spells) {
         List<Hero> heroesFilteredWithSpells = new ArrayList<>();
 
-        heroesForFilter.stream().forEach(hero ->
+        heroesForFilter.forEach(hero ->
                 hero.getSpells().forEach(spell ->
                         spells.forEach(spellPattern -> {
                                     if(spell.equals(spellPattern)) heroesFilteredWithSpells.add(hero);
@@ -169,7 +169,7 @@ class HeroAdapter implements HeroPort {
     private List<Hero> getHeroesFilteredByTalents(List<Hero> heroesForFilter, Set<Talent> talents) {
         List<Hero> heroesFilteredWithSpells = new ArrayList<>();
 
-        heroesForFilter.stream().forEach(hero ->
+        heroesForFilter.forEach(hero ->
                 hero.getTalents().forEach(talent ->
                         talents.forEach(talentPattern -> {
                                     if(talent.equals(talentPattern)) heroesFilteredWithSpells.add(hero);

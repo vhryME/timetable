@@ -13,19 +13,26 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Set;
 
+
 public interface HeroPort {
 
     Hero findHeroById(Integer id) throws Exception;
 
+
     void deleteHero(Integer id) throws Exception;
+
 
     Hero saveNewHero(Hero hero) throws Exception;
 
+
     Hero updateHero(Integer id, Hero hero) throws Exception;
+
 
     List<Hero> findAllHeroes() throws Exception;
 
+
     Page<Hero> findPageOfHero(Pageable pageable) throws Exception;
+
 
     Page<Hero> findPageOfHeroFiltered(Pageable pageable, HeroFiltered heroFiltered) throws Exception;
 

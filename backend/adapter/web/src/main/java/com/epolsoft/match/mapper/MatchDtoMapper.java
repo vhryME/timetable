@@ -1,6 +1,7 @@
 package com.epolsoft.match.mapper;
 
 
+import com.epolsoft.mapper.DateMapper;
 import com.epolsoft.match.domain.Match;
 import com.epolsoft.match.domain.Region;
 import com.epolsoft.match.domain.TypeOfMatch;
@@ -17,7 +18,7 @@ import java.time.LocalDate;
 import java.util.function.Function;
 
 
-@Mapper(uses = {MapDtoMapper.class, TeamDtoMapper.class, MatchDtoMapper.DateMapper.class,
+@Mapper(uses = {MapDtoMapper.class, TeamDtoMapper.class, DateMapper.class,
         MatchDtoMapper.TypeOfMatchMapper.class, MatchDtoMapper.RegionMapper.class})
 public interface MatchDtoMapper {
 
@@ -40,26 +41,7 @@ public interface MatchDtoMapper {
 
 
     default Page<MatchDtoOut> pageToPageOut(Page<Match> page) {
-        return page.map(new Function<Match, MatchDtoOut>() {
-            @Override
-            public MatchDtoOut apply(Match match) {
-                return matchToMatchDtoOut(match);
-            }
-        });
-    }
-
-
-    @Mapper
-    interface DateMapper {
-
-        default String asString(LocalDate date) {
-            return date != null ? date.toString() : null;
-        }
-
-        default LocalDate asLocalDate(String date) {
-            return date != null ? LocalDate.parse(date) : null;
-        }
-
+        return page.map(this::matchToMatchDtoOut);
     }
 
 
@@ -79,10 +61,6 @@ public interface MatchDtoMapper {
 
     @Mapper
     interface RegionMapper {
-
-//        default String asString(Region region) { return region != null ? region.name() : null; }
-
-//        default Region asType(String region) { return region != null ? Region.valueOf(region) : null; }
 
         default Region map(int id) {
             return Region.getRegionById(id);
