@@ -4,11 +4,15 @@ server:
 
 #DB
 spring.datasource:
+  db_ip: ${DB_IP:localhost}
+  db_port: ${DB_PORT:5432}
+  db_name: ${DB_NAME:postgres}
   platform: postgres
   driverClassName: org.postgresql.Driver
-  url: jdbc:postgresql://localhost:5432/postgres
-  username: postgres
-  password: admin
+  url: jdbc:postgresql://${spring.datasource.db_ip}:${spring.datasource.db_port}/${spring.datasource.db_name}
+  username: ${POSTGRES_USERNAME}
+  password: ${POSTGRES_PASSWORD}
+
 
 #JPA
 spring.jpa:
@@ -19,6 +23,7 @@ spring.jpa:
     hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
 
 
+#PAGEABLE
 spring.data.web:
   pageable:
     default-page-size: 10
@@ -28,3 +33,19 @@ spring.data.web:
     qualifier-delimiter:
     size-parameter: size
     page-parameter: page
+
+
+#MULTIPART
+spring:
+  servlet:
+    multipart:
+      max-file-size: ${MAX_FILE_SIZE:5MB}
+      max-request-size: ${MAX_REQUEST_SIZE:20MB}
+  main:
+    allow-bean-definition-overriding: true
+
+
+#FILE
+com.epolsoft:
+  file:
+    path: ${FILE_PATH}

@@ -7,13 +7,12 @@ import java.time.LocalDate;
 
 
 @Mapper
-public interface DateMapper extends SingleMapper<String, LocalDate> {
+public interface DateMapper {
 
-    @Override
-    default LocalDate inToOut(String date) { return date != null ? LocalDate.parse(date) : null; }
+    default LocalDate map(String date) { return date != null ? LocalDate.parse(date) : null; }
 
-    @Override
-    default String outToIn(LocalDate date) {
+
+    default String map(LocalDate date) {
         return date != null ? date.toString() : null;
     }
 

@@ -16,7 +16,7 @@ import java.util.Set;
 public class HeroJpa {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -31,17 +31,17 @@ public class HeroJpa {
 
     private LocalDate dateOfCreation;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "hero_id")
-    private Set<SpellJpa> spell;
+    private Set<SpellJpa> spells;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "hero_talent",
             joinColumns = @JoinColumn(name = "hero_id"),
             inverseJoinColumns = @JoinColumn(name = "talent_id")
     )
-    private Set<TalentJpa> talent;
+    private Set<TalentJpa> talents;
 
 
 }

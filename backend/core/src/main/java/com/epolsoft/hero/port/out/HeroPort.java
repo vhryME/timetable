@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -44,13 +45,11 @@ public interface HeroPort {
 
         private String name;
 
-        private String role;
-
         private Integer roleId;
 
         private Boolean isMelee;
 
-        private String dateOfCreation;
+        private LocalDate dateOfCreation;
 
         private Set<Spell> spells;
 

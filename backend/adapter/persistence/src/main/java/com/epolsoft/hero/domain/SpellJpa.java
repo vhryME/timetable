@@ -1,7 +1,6 @@
 package com.epolsoft.hero.domain;
 
 
-import com.epolsoft.hero.audit.spell.SpellAuditJpaListener;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +12,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@EntityListeners(SpellAuditJpaListener.class)
 @Table(name = "spell")
 public class SpellJpa {
 

@@ -12,23 +12,23 @@ import java.util.*;
 public class RegionDictionaryService implements DictionaryUseCase<Region> {
 
     @Override
-    public Map<Integer, String> getAllDictionaries() {
-        java.util.Map<Integer, String> dictionary = new HashMap<>();
+    public Map<Long, String> getAllDictionaries() {
+        java.util.Map<Long, String> dictionary = new HashMap<>();
 
         for (Region region : Region.values()) {
-            dictionary.put(region.id, region.name());
+            dictionary.put(region.getId(), region.getRegion());
         }
 
         return dictionary;
     }
 
     @Override
-    public Map<Integer, String> getDictionaryById(Integer id) {
+    public Map<Long, String> getDictionaryById(Long id) {
         Region region = Region.getRegionById(id);
-        Map<Integer, String> dictionary = new HashMap<>();
+        Map<Long, String> dictionary = new HashMap<>();
 
         if (region != null) {
-            dictionary.put(region.id, region.name());
+            dictionary.put(region.getId(), region.getRegion());
         }
 
         return dictionary;
@@ -36,26 +36,27 @@ public class RegionDictionaryService implements DictionaryUseCase<Region> {
 
 
     @Override
-    public Map<Integer, String> getDictionariesByName(String name, Long count) {
+    public Map<Long, String> getDictionariesByName(String name, Long count) {
         int counter = 0;
-        Map<Integer, String> dictionary = new HashMap<>();
+        Map<Long, String> dictionary = new HashMap<>();
         List<Region> regions = new ArrayList<>();
 
-        Iterator<Region> iterator = Arrays.asList(Region.values()).iterator();
+        Iterator<Region> iterator = Region.values().iterator();
 
         while(iterator.hasNext() && counter != count) {
             Region region = iterator.next();
 
-            if(region.name().contains(name)) {
+            if(region.getRegion().contains(name)) {
                 counter++;
                 regions.add(region);
             }
         }
 
-        regions.forEach(region -> dictionary.put(region.id, region.name()));
+        regions.forEach(region -> dictionary.put(region.getId(), region.getRegion()));
 
         return dictionary;
     }
+
 
     @Override
     public String getNameOfDictionary() {

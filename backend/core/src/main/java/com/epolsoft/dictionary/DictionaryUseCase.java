@@ -6,13 +6,13 @@ import java.util.Map;
 
 public interface DictionaryUseCase<T> {
 
-    Map<Integer, String> getAllDictionaries();
+    Map<Long, String> getAllDictionaries();
 
 
-    Map<Integer, String> getDictionaryById(Integer id);
+    Map<Long, String> getDictionaryById(Long id);
 
 
-    Map<Integer, String> getDictionariesByName(String name, Long count);
+    Map<Long, String> getDictionariesByName(String name, Long count);
 
 
     String getNameOfDictionary();

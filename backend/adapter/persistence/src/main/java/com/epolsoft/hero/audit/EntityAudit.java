@@ -12,7 +12,6 @@ import java.time.LocalDate;
 
 @Data
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
 public abstract class EntityAudit {
 
     @CreatedBy
@@ -24,6 +23,7 @@ public abstract class EntityAudit {
     protected LocalDate revisionDate;
 
     @Column(columnDefinition = "VARCHAR(6)")
-    protected String revisionAction;
+    @Enumerated(EnumType.STRING)
+    protected Action revisionAction;
 
 }

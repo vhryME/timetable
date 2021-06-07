@@ -12,11 +12,11 @@ import java.util.*;
 public class TypeOfMatchDictionaryService implements DictionaryUseCase<TypeOfMatch> {
 
     @Override
-    public Map<Integer, String> getAllDictionaries() {
-        java.util.Map<Integer, String> dictionary = new HashMap<>();
+    public Map<Long, String> getAllDictionaries() {
+        java.util.Map<Long, String> dictionary = new HashMap<>();
 
         for (TypeOfMatch typeOfMatch : TypeOfMatch.values()) {
-            dictionary.put(typeOfMatch.id, typeOfMatch.name());
+            dictionary.put(typeOfMatch.getId(), typeOfMatch.getTypeOfMatch());
         }
 
         return dictionary;
@@ -24,12 +24,12 @@ public class TypeOfMatchDictionaryService implements DictionaryUseCase<TypeOfMat
 
 
     @Override
-    public Map<Integer, String> getDictionaryById(Integer id) {
+    public Map<Long, String> getDictionaryById(Long id) {
         TypeOfMatch type = TypeOfMatch.getTypeOfMatchById(id);
-        Map<Integer, String> dictionary = new HashMap<>();
+        Map<Long, String> dictionary = new HashMap<>();
 
         if(type != null) {
-            dictionary.put(type.id, type.name());
+            dictionary.put(type.getId(), type.getTypeOfMatch());
         }
 
         return dictionary;
@@ -37,26 +37,27 @@ public class TypeOfMatchDictionaryService implements DictionaryUseCase<TypeOfMat
 
 
     @Override
-    public Map<Integer, String> getDictionariesByName(String name, Long count) {
+    public Map<Long, String> getDictionariesByName(String name, Long count) {
         int counter = 0;
-        Map<Integer, String> dictionary = new HashMap<>();
+        Map<Long, String> dictionary = new HashMap<>();
         List<TypeOfMatch> types = new ArrayList<>();
 
-        Iterator<TypeOfMatch> iterator = Arrays.asList(TypeOfMatch.values()).iterator();
+        Iterator<TypeOfMatch> iterator = TypeOfMatch.values().iterator();
 
         while(iterator.hasNext() && counter != count) {
             TypeOfMatch type = iterator.next();
 
-            if(type.name().contains(name)) {
+            if(type.getTypeOfMatch().contains(name)) {
                 counter++;
                 types.add(type);
             }
         }
 
-        types.forEach(type -> dictionary.put(type.id, type.name()));
+        types.forEach(type -> dictionary.put(type.getId(), type.getTypeOfMatch()));
 
         return dictionary;
     }
+
 
     @Override
     public String getNameOfDictionary() {

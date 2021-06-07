@@ -31,28 +31,25 @@ public class SpellController {
 
     @GetMapping("history/{id}")
     public Page<SpellAuditDtoOut> getSpellHistory(Pageable pageable, @PathVariable Long id) {
-        return auditUseCase.getSpellHistory(id, pageable).map(mapper::spellAuditToSpellAuditDtoOut);
+        return mapper.spellAuditPageToSpellAuditDtoOutPage(auditUseCase.getSpellHistory(id, pageable));
     }
 
 
     @GetMapping("history")
     public List<SpellAuditDtoOut> getAllSpellsHistory() {
-        return auditUseCase.getAllSpellsAudit().stream().map(mapper::spellAuditToSpellAuditDtoOut).
-                collect(Collectors.toList());
+        return mapper.spellsAuditToSpellsAuditDtpOut(auditUseCase.getAllSpellsAudit());
     }
 
 
     @GetMapping("history/date/{date}")
     public List<SpellAuditDtoOut> getSpellsHistoryByDate(@PathVariable String date) {
-        return auditUseCase.getSpellsAuditByDate(dateMapper.inToOut(date)).stream().map(mapper::spellAuditToSpellAuditDtoOut).
-                collect(Collectors.toList());
+        return mapper.spellsAuditToSpellsAuditDtpOut(auditUseCase.getSpellsAuditByDate(dateMapper.map(date)));
     }
 
 
     @GetMapping("history/name/{name}")
     public List<SpellAuditDtoOut> getSpellsHistoryByName(@PathVariable String name) {
-        return auditUseCase.getSpellsAuditByName(name).stream().map(mapper::spellAuditToSpellAuditDtoOut).
-                collect(Collectors.toList());
+        return mapper.spellsAuditToSpellsAuditDtpOut(auditUseCase.getSpellsAuditByName(name));
     }
 
 }

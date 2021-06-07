@@ -37,7 +37,7 @@ public class StatisticDtoIn {
     private Double healToTeammate;
 
     @NotNull
-    private Double heaToYourself;
+    private Double healToYourself;
 
     @NotNull
     private Double damageToYourself;

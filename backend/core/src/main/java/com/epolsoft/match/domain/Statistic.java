@@ -27,7 +27,7 @@ public class Statistic {
 
     private Double healToTeammate;
 
-    private Double heaToYourself;
+    private Double healToYourself;
 
     private Double damageToYourself;
 

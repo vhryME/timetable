@@ -2,19 +2,44 @@ package com.epolsoft.match.domain;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
 
+
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public enum TypeOfMatch {
-    QuickMatch(1), UnrankedDraft(2), HeroLeague(3), TeamLeague(4), Brawl(5), Unknown(0);
+public class TypeOfMatch {
+
+    private Long id;
+
+    private String typeOfMatch;
 
 
-    public Integer id;
+    private static final List<TypeOfMatch> types;
 
-    public static TypeOfMatch getTypeOfMatchById(Integer id) {
-        for (TypeOfMatch type : TypeOfMatch.values()) {
+    static {
+        types = new ArrayList<>();
+
+        types.add(new TypeOfMatch(0L,"Unknown"));
+        types.add(new TypeOfMatch(1L,"QuickMatch"));
+        types.add(new TypeOfMatch(2L, "UnrankedDraft"));
+        types.add(new TypeOfMatch(3L, "HeroLeague"));
+        types.add(new TypeOfMatch(4L, "TeamLeague"));
+        types.add(new TypeOfMatch(5L, "Brawl"));
+    }
+
+
+    public static List<TypeOfMatch> values() {
+        return types;
+    }
+
+
+    public static TypeOfMatch getTypeOfMatchById(Long id) {
+        for (TypeOfMatch type : types) {
             if(type.id.equals(id)) {
                 return type;
             }
@@ -23,14 +48,14 @@ public enum TypeOfMatch {
         return null;
     }
 
-    public static Integer getIdByTypeOfMatch(TypeOfMatch typeOfMatch) {
-        for (TypeOfMatch typeOfMatchTemp : TypeOfMatch.values()) {
+    public static Long getIdByTypeOfMatch(TypeOfMatch typeOfMatch) {
+        for (TypeOfMatch typeOfMatchTemp : types) {
             if(typeOfMatchTemp.equals(typeOfMatch)) {
                 return typeOfMatchTemp.id;
             }
         }
 
-        return 0;
+        return 0L;
     }
 
 }

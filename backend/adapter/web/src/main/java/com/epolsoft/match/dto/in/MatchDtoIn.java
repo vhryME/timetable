@@ -29,6 +29,10 @@ public class MatchDtoIn {
 
     @NotNull
     @Valid
-    private Set<TeamDtoIn> teams;
+    private TeamDtoIn teamDtoIn1;
+
+    @NotNull
+    @Valid
+    private TeamDtoIn teamDtoIn2;
 
 }

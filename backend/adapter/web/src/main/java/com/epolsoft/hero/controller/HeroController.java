@@ -51,27 +51,27 @@ class HeroController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public HeroDtoOut saveNewHero(@RequestBody @Valid HeroDtoIn heroDtoIn) {
-        Hero hero = mapper.heroDtoInToHero(heroDtoIn);
+        Hero hero = mapper.inToEntity(heroDtoIn);
         hero.setTalents(talentDtoMapper.talentDtoInToTalentWithInheritance(heroDtoIn.getTalents()));
 
-        return mapper.heroToHeroDtoOut(useCase.saveNewHero(hero));
+        return mapper.entityToOut(useCase.saveNewHero(hero));
     }
 
 
     @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public HeroDtoOut updateHero(@PathVariable("id") Integer id, @RequestBody @Valid HeroDtoIn heroDtoIn) {
-        Hero heroForUpdate = mapper.heroDtoInToHero(heroDtoIn);
+        Hero heroForUpdate = mapper.inToEntity(heroDtoIn);
         heroForUpdate.setTalents(talentDtoMapper.talentDtoInToTalentWithInheritance(heroDtoIn.getTalents()));
 
         Hero hero = useCase.updateHero(id, heroForUpdate);
 
-        return mapper.heroToHeroDtoOut(hero);
+        return mapper.entityToOut(hero);
     }
 
 
     @GetMapping
     public List<HeroDtoOut> getAllHeroes() {
-        return useCase.findAllHeroes().stream().map(mapper::heroToHeroDtoOut).collect(Collectors.toList());
+        return mapper.entitiesToOutList(useCase.findAllHeroes());
     }
 
 

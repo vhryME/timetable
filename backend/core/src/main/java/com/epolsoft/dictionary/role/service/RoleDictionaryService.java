@@ -12,11 +12,11 @@ import java.util.*;
 public class RoleDictionaryService implements DictionaryUseCase<Role> {
 
     @Override
-    public Map<Integer, String> getAllDictionaries() {
-        java.util.Map<Integer, String> dictionary = new HashMap<>();
+    public Map<Long, String> getAllDictionaries() {
+        java.util.Map<Long, String> dictionary = new HashMap<>();
 
         for (Role role : Role.values()) {
-            dictionary.put(role.id, role.name());
+            dictionary.put(role.getId(), role.getRole());
         }
 
         return dictionary;
@@ -24,12 +24,12 @@ public class RoleDictionaryService implements DictionaryUseCase<Role> {
 
 
     @Override
-    public Map<Integer, String> getDictionaryById(Integer id) {
+    public Map<Long, String> getDictionaryById(Long id) {
         Role role = Role.getRoleById(id);
-        Map<Integer, String> dictionary = new HashMap<>();
+        Map<Long, String> dictionary = new HashMap<>();
 
         if(role != null) {
-            dictionary.put(role.id, role.name());
+            dictionary.put(role.getId(), role.getRole());
         }
 
         return dictionary;
@@ -37,26 +37,27 @@ public class RoleDictionaryService implements DictionaryUseCase<Role> {
 
 
     @Override
-    public Map<Integer, String> getDictionariesByName(String name, Long count) {
+    public Map<Long, String> getDictionariesByName(String name, Long count) {
         int counter = 0;
-        Map<Integer, String> dictionary = new HashMap<>();
+        Map<Long, String> dictionary = new HashMap<>();
         List<Role> roles = new ArrayList<>();
 
-        Iterator<Role> iterator = Arrays.asList(Role.values()).iterator();
+        Iterator<Role> iterator = Role.values().iterator();
 
         while(iterator.hasNext() && counter != count) {
             Role role = iterator.next();
 
-            if(role.name().contains(name)) {
+            if(role.getRole().contains(name)) {
                 counter++;
                 roles.add(role);
             }
         }
 
-        roles.forEach(role -> dictionary.put(role.id, role.name()));
+        roles.forEach(role -> dictionary.put(role.getId(), role.getRole()));
 
         return dictionary;
     }
+
 
     @Override
     public String getNameOfDictionary() {

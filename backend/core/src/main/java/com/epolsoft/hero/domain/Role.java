@@ -2,34 +2,64 @@ package com.epolsoft.hero.domain;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
+
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public enum Role {
-    Specialist(1), Assassin(2), Warrior(3), Support(4), Multiclass(5), Unknown(0);
+public class Role {
+
+    private Long id;
+
+    private String role;
 
 
-    public Integer id;
+    private static List<Role> roles;
 
-    public static Role getRoleById(Integer id) {
-        for (Role role : Role.values()) {
-            if(role.id.equals(id)) {
+
+    static {
+        roles = new ArrayList<>();
+
+        roles.add(new Role(0L, "Unknown"));
+        roles.add(new Role(1L, "Specialist"));
+        roles.add(new Role(2L, "Assassin"));
+        roles.add(new Role(3L, "Warrior"));
+        roles.add(new Role(4L, "Support"));
+        roles.add(new Role(5L, "Multiclass"));
+    }
+
+
+    public static List<Role> values() {
+        return roles;
+    }
+
+
+    public static Role getRoleById(Long id) {
+        for (Role role : roles) {
+            if(role.getId().equals(id)) {
                 return role;
             }
         }
 
-        return null;
+        return roles.get(0);
     }
 
-    public static Integer getIdByRole(Role role) {
-        for (Role roleTemp : Role.values()) {
-            if(roleTemp.equals(role)) {
-                return role.id;
+
+    public static Long getIdByRole(String roleValue) {
+        for (Role role : roles) {
+            if(role.getRole().equals(roleValue)) {
+                return role.getId();
             }
         }
 
-        return 0;
+        return 0L;
     }
+
 }

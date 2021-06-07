@@ -7,16 +7,16 @@ import org.mapstruct.Mapper;
 
 
 @Mapper
-public interface MapDtoMapper extends SingleMapper<Map, Integer> {
+public interface MapDtoMapper extends SingleMapper<Map, Long> {
 
     @Override
-    default Integer inToOut(Map map) {
+    default Long inToOut(Map map) {
         return Map.getIdByMap(map);
     }
 
 
     @Override
-    default Map outToIn(Integer id) {
+    default Map outToIn(Long id) {
         return Map.getMapById(id);
     }
 

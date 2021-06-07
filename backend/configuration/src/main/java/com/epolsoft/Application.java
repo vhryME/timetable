@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.TimeZone;
 
 
-@SpringBootApplication(scanBasePackages = "com.epolsoft")
+@SpringBootApplication(scanBasePackages = {"com.epolsoft"})
 public class Application extends SpringBootServletInitializer {
 
     @PostConstruct

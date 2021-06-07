@@ -13,6 +13,6 @@ import java.util.Map;
 @AllArgsConstructor
 public class Dictionary {
 
-    private Map<String, Map<Integer, String>> dictionaries;
+    private Map<String, Map<Long, String>> dictionaries;
 
 }
