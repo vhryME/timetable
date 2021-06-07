@@ -1,10 +1,8 @@
 package com.epolsoft.match.adapter;
 
 
+import com.epolsoft.match.domain.*;
 import com.epolsoft.match.domain.Map;
-import com.epolsoft.match.domain.Match;
-import com.epolsoft.match.domain.Region;
-import com.epolsoft.match.domain.TypeOfMatch;
 import com.epolsoft.match.port.out.MatchPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -29,14 +27,14 @@ class MatchAdapter implements MatchPort {
     public void init() {
         matches = new ArrayList<>();
 
-        Match match1 = new Match(1, TypeOfMatch.QuickMatch, LocalDate.now(), 600.0,
-                Map.AlteracPass, Region.EU, new HashSet<>(Collections.singleton(null)));
-        Match match2 = new Match(2, TypeOfMatch.HeroLeague, LocalDate.now(), 15.364,
-                Map.BraxisOutpost, Region.CN, new HashSet<>(Collections.singleton(null)));
-        Match match3 = new Match(3, TypeOfMatch.Brawl, LocalDate.now(), 0.3654, Map.DragonShire, Region.NA,
-                new HashSet<>(Collections.singleton(null)));
-        Match match4 = new Match(4, TypeOfMatch.Unknown, LocalDate.now(), 9856.99, Map.Unknown, Region.Unknown,
-                new HashSet<>(Collections.singleton(null)));
+        Match match1 = new Match(1, TypeOfMatch.getTypeOfMatchById(1L), LocalDate.now(), 600.0,
+                Map.getMapById(1L), Region.getRegionById(1L), new Team(), new Team());
+        Match match2 = new Match(2, TypeOfMatch.getTypeOfMatchById(3L), LocalDate.now(), 15.364,
+                Map.getMapById(4L), Region.getRegionById(3L), new Team(), new Team());
+        Match match3 = new Match(3, TypeOfMatch.getTypeOfMatchById(5L), LocalDate.now(), 0.3654,
+                Map.getMapById(6L), Region.getRegionById(4L), new Team(), new Team());
+        Match match4 = new Match(4, TypeOfMatch.getTypeOfMatchById(0L), LocalDate.now(), 9856.99,
+                Map.getMapById(0L), Region.getRegionById(0L), new Team(), new Team());
 
         matches.add(match1);
         matches.add(match2);
@@ -109,7 +107,7 @@ class MatchAdapter implements MatchPort {
         List<Match> matchesFiltered = matches;
 
         if(matchFiltered.getType() != null && !matchFiltered.getType().equals("")) {
-            matchesFiltered = matchesFiltered.stream().filter(match -> match.getType().name().contains(matchFiltered.getType())).
+            matchesFiltered = matchesFiltered.stream().filter(match -> match.getType().getTypeOfMatch().contains(matchFiltered.getType())).
                     collect(Collectors.toList());
         }
 
@@ -124,7 +122,7 @@ class MatchAdapter implements MatchPort {
         }
 
         if(matchFiltered.getMap() != null) {
-            matchesFiltered = matchesFiltered.stream().filter(match -> match.getMap().name().contains(matchFiltered.getMap().name()))
+            matchesFiltered = matchesFiltered.stream().filter(match -> match.getMap().getMap().contains(matchFiltered.getMap().getMap()))
                     .collect(Collectors.toList());
         }
 

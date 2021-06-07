@@ -5,7 +5,7 @@ import com.epolsoft.hero.domain.Spell;
 import com.epolsoft.hero.domain.SpellJpa;
 import com.epolsoft.hero.mapper.SpellJpaMapper;
 import com.epolsoft.hero.port.out.SpellPort;
-import com.epolsoft.hero.repo.SpellRepository;
+import com.epolsoft.hero.repository.SpellRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

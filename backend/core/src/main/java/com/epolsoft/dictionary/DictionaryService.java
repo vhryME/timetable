@@ -15,8 +15,8 @@ class DictionaryService {
     private final DictionaryServiceLocator locator;
 
 
-    public Map<String, Map<Integer, String>> getAllDictionaries() {
-        Map<String, Map<Integer, String>> dictionary = new HashMap<>();
+    public Map<String, Map<Long, String>> getAllDictionaries() {
+        Map<String, Map<Long, String>> dictionary = new HashMap<>();
 
         locator.getDictionaryServices().values().forEach(dictionaryRegistry ->
                 dictionary.put(dictionaryRegistry.getNameOfDictionary(), dictionaryRegistry.getAllDictionaries()));
@@ -25,21 +25,21 @@ class DictionaryService {
     }
 
 
-    public Map<Integer, String> getAllDictionariesByName(String dictionaryName) {
+    public Map<Long, String> getAllDictionariesByName(String dictionaryName) {
         DictionaryUseCase<?> dictionaryUseCase = locator.getDictionaryService(dictionaryName);
 
         return dictionaryUseCase.getAllDictionaries();
     }
 
 
-    public Map<Integer, String> getDictionaryById(String dictionaryName, Integer id) {
+    public Map<Long, String> getDictionaryById(String dictionaryName, Long id) {
         DictionaryUseCase<?> dictionaryUseCase = locator.getDictionaryService(dictionaryName);
 
         return dictionaryUseCase.getDictionaryById(id);
     }
 
 
-    public Map<Integer, String> getDictionariesByName(String dictionaryName, String name, Long count) {
+    public Map<Long, String> getDictionariesByName(String dictionaryName, String name, Long count) {
         DictionaryUseCase<?> dictionaryUseCase = locator.getDictionaryService(dictionaryName);
 
         return dictionaryUseCase.getDictionariesByName(name, count);

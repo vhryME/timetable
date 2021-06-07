@@ -21,32 +21,40 @@ import java.util.Set;
 public interface TalentDtoMapper {
 
     default Set<Talent> talentDtoInToTalentWithInheritance(Set<TalentDtoIn> talents) {
-        Set<Talent> talentsWithInheritance = new HashSet<>();
+        if(talents != null) {
+            Set<Talent> talentsWithInheritance = new HashSet<>();
 
-        talents.forEach(talentDtoIn ->{
-            if(talentDtoIn instanceof ActiveTalentDtoIn){
-                talentsWithInheritance.add(activeTalentDtoInToActiveTalent((ActiveTalentDtoIn) talentDtoIn));
-            } else if (talentDtoIn instanceof PassiveTalentDtoIn) {
-                talentsWithInheritance.add(passiveTalentDtoInToPassiveTalent((PassiveTalentDtoIn) talentDtoIn));
-            }
-        });
+            talents.forEach(talentDtoIn -> {
+                if (talentDtoIn instanceof ActiveTalentDtoIn) {
+                    talentsWithInheritance.add(activeTalentDtoInToActiveTalent((ActiveTalentDtoIn) talentDtoIn));
+                } else if (talentDtoIn instanceof PassiveTalentDtoIn) {
+                    talentsWithInheritance.add(passiveTalentDtoInToPassiveTalent((PassiveTalentDtoIn) talentDtoIn));
+                }
+            });
 
-        return talentsWithInheritance;
+            return talentsWithInheritance;
+        }
+
+        return null;
     }
 
 
     default Set<TalentDtoOut> talentToTalentDtoOutWithInheritance(Set<Talent> talents) {
-        Set<TalentDtoOut> talentsWithInheritance = new HashSet<>();
+        if (talents != null) {
+            Set<TalentDtoOut> talentsWithInheritance = new HashSet<>();
 
-        talents.forEach(talent ->{
-            if(talent instanceof ActiveTalent){
-                talentsWithInheritance.add(activeTalentToActiveTalentDtoOut((ActiveTalent) talent));
-            } else if (talent instanceof PassiveTalent) {
-                talentsWithInheritance.add(passiveTalentToPassiveTalentDtoOut((PassiveTalent) talent));
-            }
-        });
+            talents.forEach(talent -> {
+                if (talent instanceof ActiveTalent) {
+                    talentsWithInheritance.add(activeTalentToActiveTalentDtoOut((ActiveTalent) talent));
+                } else if (talent instanceof PassiveTalent) {
+                    talentsWithInheritance.add(passiveTalentToPassiveTalentDtoOut((PassiveTalent) talent));
+                }
+            });
 
-        return talentsWithInheritance;
+            return talentsWithInheritance;
+        }
+
+        return null;
     }
 
 

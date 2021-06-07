@@ -9,17 +9,25 @@ import com.epolsoft.hero.dto.out.SpellDtoOut;
 import com.epolsoft.mapper.DtoMapper;
 import com.epolsoft.mapper.SingleMapper;
 import org.mapstruct.Mapper;
+import org.springframework.data.domain.Page;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Mapper
 public interface SpellDtoMapper extends DtoMapper<SpellDtoIn, Spell, SpellDtoOut> {
-//
-//    Spell spellDtoInToSpell(SpellDtoIn spellDtoIn);
-//
-//
-//    SpellDtoOut spellToSpellDtoOut(Spell spell);
-//
-//
+
     SpellAuditDtoOut spellAuditToSpellAuditDtoOut(SpellAudit spellAudit);
+
+
+    default List<SpellAuditDtoOut> spellsAuditToSpellsAuditDtpOut(List<SpellAudit> spellsAudit) {
+        return spellsAudit.stream().map(this::spellAuditToSpellAuditDtoOut).collect(Collectors.toList());
+    }
+
+
+    default Page<SpellAuditDtoOut> spellAuditPageToSpellAuditDtoOutPage(Page<SpellAudit> spellAuditPage) {
+        return spellAuditPage.map(this::spellAuditToSpellAuditDtoOut);
+    }
 
 }

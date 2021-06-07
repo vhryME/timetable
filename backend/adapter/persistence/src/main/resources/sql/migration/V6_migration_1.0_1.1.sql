@@ -29,7 +29,7 @@ DO $$
                 hero_object := (SELECT (to_jsonb(OLD.*) || jsonb_build_object('spells', spells) || jsonb_build_object('talents', talents)));
 
                 INSERT INTO hero_history (hero, revision_by, revision_timestamp, revision_action)
-                VALUES (hero_object, current_user, current_timestamp, 'UPDATE');
+                VALUES (hero_object, current_user, current_timestamp, 'DELETE');
 
                 RETURN OLD;
             ELSIF (TG_OP = 'UPDATE') THEN

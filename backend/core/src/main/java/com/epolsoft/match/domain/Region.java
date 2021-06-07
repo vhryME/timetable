@@ -2,19 +2,44 @@ package com.epolsoft.match.domain;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
 
+
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public enum Region {
-    NA(1), EU(2), KR(3), CN(4), Unknown(0);
+public class Region {
+
+    private Long id;
+
+    private String Region;
 
 
-    public Integer id;
+    private static final List<Region> regions;
 
-    public static Region getRegionById(Integer id) {
-        for (Region region : Region.values()) {
+
+    static {
+        regions = new ArrayList<>();
+
+        regions.add(new Region(0L, "Unknown"));
+        regions.add(new Region(1L, "EU"));
+        regions.add(new Region(2L, "KR"));
+        regions.add(new Region(3L, "CN"));
+        regions.add(new Region(4L, "NA"));
+    }
+
+
+    public static List<Region> values() {
+        return regions;
+    }
+
+
+    public static Region getRegionById(Long id) {
+        for (Region region : regions) {
             if(region.id.equals(id)) {
                 return region;
             }
@@ -23,13 +48,14 @@ public enum Region {
         return null;
     }
 
-    public static Integer getIdByRegion(Region region) {
-        for (Region roleTemp : Region.values()) {
+    public static Long getIdByRegion(Region region) {
+        for (Region roleTemp : regions) {
             if(roleTemp.equals(region)) {
                 return region.id;
             }
         }
 
-        return 0;
+        return 0L;
     }
+
 }

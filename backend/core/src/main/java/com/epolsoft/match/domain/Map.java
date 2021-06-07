@@ -2,23 +2,57 @@ package com.epolsoft.match.domain;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
 
+
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public enum Map {
+public class Map {
 
-    AlteracPass(1), BattleFieldOfEternity(2), BlackheartsBay(3), BraxisOutpost(4), CursedHollow(5),
-    DragonShire(6), GardenOfTerror(7), HanamuraTemple(8), HauntedMines(9), InfernalShines(10),
-    LostCavern(11), SilverCity(12), SkyTemple(13), TombOfTheSpiderQueen(14), TowersOfDoom(15),
-    VolskayaFoundry(15), WarheadJunction(16), Unknown(0);
+    private Long id;
+
+    private String map;
 
 
-    public Integer id;
+    private static final List<Map> maps;
 
-    public static Map getMapById(Integer id) {
-        for (Map map : Map.values()) {
+
+    static {
+        maps = new ArrayList<>();
+
+        maps.add(new Map(0L, "Unknown"));
+        maps.add(new Map(1L, "AlteracPass"));
+        maps.add(new Map(2L, "BattleFieldOfEternity"));
+        maps.add(new Map(3L, "BlackheartsBay"));
+        maps.add(new Map(4L, "BraxisOutpost"));
+        maps.add(new Map(5L, "CursedHollow"));
+        maps.add(new Map(6L, "DragonShire"));
+        maps.add(new Map(7L, "GardenOfTerror"));
+        maps.add(new Map(8L, "HanamuraTemple"));
+        maps.add(new Map(9L, "HauntedMines"));
+        maps.add(new Map(10L, "InfernalShines"));
+        maps.add(new Map(11L, "LostCavern"));
+        maps.add(new Map(12L, "SilverCity"));
+        maps.add(new Map(13L, "SkyTemple"));
+        maps.add(new Map(14L, "TombOfTheSpiderQueen"));
+        maps.add(new Map(15L, "VolskayaFoundry"));
+        maps.add(new Map(16L, "WarheadJunction"));
+        maps.add(new Map(17L, "WarheadJunction"));
+    }
+
+
+    public static List<Map> values() {
+        return maps;
+    }
+
+
+    public static Map getMapById(Long id) {
+        for (Map map : maps) {
             if(map.id.equals(id)) {
                 return map;
             }
@@ -27,13 +61,14 @@ public enum Map {
         return null;
     }
 
-    public static Integer getIdByMap(Map map) {
-        for (Map mapTemp : Map.values()) {
+    public static Long getIdByMap(Map map) {
+        for (Map mapTemp : maps) {
             if(mapTemp.equals(map)) {
                 return map.id;
             }
         }
 
-        return 0;
+        return 0L;
     }
+
 }

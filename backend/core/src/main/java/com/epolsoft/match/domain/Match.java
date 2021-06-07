@@ -26,6 +26,8 @@ public class Match {
 
     private Region region;
 
-    private Set<Team> teams;
+    private Team team1;
+
+    private Team team2;
 
 }

@@ -14,8 +14,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.data.domain.Page;
 
-import java.time.LocalDate;
-import java.util.function.Function;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Mapper(uses = {MapDtoMapper.class, TeamDtoMapper.class, DateMapper.class,
@@ -40,6 +40,11 @@ public interface MatchDtoMapper {
     FullMatchDtoOut matchToFullMatchDtoOut(Match match);
 
 
+    default List<MatchDtoOut> matchesToMatchesDtoOut(List<Match> matches) {
+        return matches.stream().map(this::matchToMatchDtoOut).collect(Collectors.toList());
+    }
+
+
     default Page<MatchDtoOut> pageToPageOut(Page<Match> page) {
         return page.map(this::matchToMatchDtoOut);
     }
@@ -48,12 +53,11 @@ public interface MatchDtoMapper {
     @Mapper
     interface TypeOfMatchMapper {
 
-        default String asString(TypeOfMatch type) {
-            return type != null ? type.name() : null;
-        }
+        default TypeOfMatch map(Long id) { return TypeOfMatch.getTypeOfMatchById(id); }
 
-        default TypeOfMatch asType(String type) {
-            return type != null ? TypeOfMatch.valueOf(type) : null;
+
+        default Long map(TypeOfMatch type) {
+            return TypeOfMatch.getIdByTypeOfMatch(type);
         }
 
     }
@@ -62,11 +66,11 @@ public interface MatchDtoMapper {
     @Mapper
     interface RegionMapper {
 
-        default Region map(int id) {
+        default Region map(Long id) {
             return Region.getRegionById(id);
         }
 
-        default Integer map(Region region) {
+        default Long map(Region region) {
             return Region.getIdByRegion(region);
         }
 

@@ -19,23 +19,23 @@ public class DictionaryController {
 
 
     @GetMapping
-    public Map<String, Map<Integer, String>> getAllDictionaries() {
+    public Map<String, Map<Long, String>> getAllDictionaries() {
         return service.getAllDictionaries();
     }
 
     @GetMapping("{dictionaryName}")
-    public Map<Integer, String> getAllDictionariesByName(@PathVariable String dictionaryName) {
+    public Map<Long, String> getAllDictionariesByName(@PathVariable String dictionaryName) {
         return service.getAllDictionariesByName(dictionaryName);
     }
 
 
     @GetMapping("{dictionaryName}/{id}")
-    public Map<Integer, String> getDictionaryById(@PathVariable Integer id, @PathVariable String dictionaryName) {
+    public Map<Long, String> getDictionaryById(@PathVariable Long id, @PathVariable String dictionaryName) {
         return service.getDictionaryById(dictionaryName, id);
     }
 
     @GetMapping("{dictionaryName}/{name}/{count}")
-    public Map<Integer, String> getAllDictionariesByName(@PathVariable String dictionaryName, @PathVariable String name,
+    public Map<Long, String> getAllDictionariesByName(@PathVariable String dictionaryName, @PathVariable String name,
                                          @PathVariable Long count) {
         return service.getDictionariesByName(dictionaryName, name, count);
     }

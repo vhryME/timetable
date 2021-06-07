@@ -59,11 +59,7 @@ class MatchController {
 
     @GetMapping
     public List<MatchDtoOut> getAllMatches() {
-        List<MatchDtoOut> matches = new ArrayList<>();
-
-        useCase.findAllMatches().forEach(match -> matches.add(mapper.matchToMatchDtoOut(match)));
-
-        return matches;
+        return mapper.matchesToMatchesDtoOut(useCase.findAllMatches());
     }
 
 

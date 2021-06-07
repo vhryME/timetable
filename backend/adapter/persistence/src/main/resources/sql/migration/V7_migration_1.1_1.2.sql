@@ -7,7 +7,7 @@ DO $$
         CREATE TABLE spell_audit (
             id BIGINT,
             spell_id BIGINT NOT NULL,
-            uuid VARCHAR(255) UNIQUE,
+            uuid VARCHAR(255) NOT NULL,
             name VARCHAR(255) NOT NULL,
             description VARCHAR(255) NOT NULL,
             icon VARCHAR(255) NOT NULL,

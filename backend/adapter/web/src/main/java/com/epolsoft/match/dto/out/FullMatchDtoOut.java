@@ -4,12 +4,9 @@ package com.epolsoft.match.dto.out;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
 
 @Data
@@ -34,6 +31,10 @@ public class FullMatchDtoOut {
 
     @NotNull
     @Valid
-    private Set<TeamDtoOut> teams;
+    private TeamDtoOut teamDtoOut1;
+
+    @NotNull
+    @Valid
+    private TeamDtoOut teamDtoOut2;
 
 }
