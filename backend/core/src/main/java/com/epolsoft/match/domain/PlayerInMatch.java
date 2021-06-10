@@ -1,5 +1,6 @@
 package com.epolsoft.match.domain;
 
+
 import com.epolsoft.hero.domain.Hero;
 import com.epolsoft.hero.domain.Talent;
 import lombok.AllArgsConstructor;
@@ -8,11 +9,11 @@ import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public
-class PlayerInMatch {
+public class PlayerInMatch {
 
     private Long id;
 

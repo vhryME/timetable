@@ -42,8 +42,8 @@ export const schemaGen = (context) => {
           return {
             ...acc,
             [curr.uuid]:
-              <div className={"option-main"}>
-                <div className={"option-text"}>
+              <div className={"hero--option-main"}>
+                <div className={"hero--option-text"}>
                   {curr.name}
                 </div>
                 <UniversalAvatar src={curr.icon} disabled size={24}/>

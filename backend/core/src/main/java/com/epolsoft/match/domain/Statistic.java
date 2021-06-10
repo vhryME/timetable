@@ -1,8 +1,10 @@
 package com.epolsoft.match.domain;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 @Data
 @NoArgsConstructor
@@ -33,7 +35,7 @@ public class Statistic {
 
     private Double experience;
 
-    private Double timeInRevive; //seconds, mill. seconds
+    private Double timeInRevive;
 
     private Integer takeCamps;
 

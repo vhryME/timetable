@@ -15,7 +15,9 @@ import java.lang.annotation.Target;
 public @interface TeamConstraint {
 
     String message() default "Invalid team";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 
 }

@@ -3,7 +3,6 @@ package com.epolsoft.web;
 
 import io.swagger.annotations.ApiParam;
 import lombok.Data;
-import lombok.Getter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Pageable;
@@ -34,14 +33,13 @@ public class SwaggerConfiguration {
 
     @Data
     private static class SwaggerPageable {
-
-        @ApiParam(value = "Number of records per page", example = "0")
-        @Nullable
-        private Integer size;
-
-        @ApiParam(value = "Results page you want to retrieve (0..N)", example = "0")
+        @ApiParam(value = "Results page you want to retrieve (0..N)")
         @Nullable
         private Integer page;
+
+        @ApiParam(value = "Number of records per page")
+        @Nullable
+        private Integer size;
 
         @ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.")
         @Nullable

@@ -70,5 +70,4 @@ public class Map {
 
         return 0L;
     }
-
 }

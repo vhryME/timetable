@@ -1,4 +1,4 @@
-import {Validator} from "../../components/common/universalForm";
+import {Validator} from "../../../../components/common/universalForm";
 
 export default {
     name: "match",
@@ -32,7 +32,8 @@ export default {
 
         winner: {
             type: "switch",
-            label: "Winner"
+            label: "Winner",
+            options: ["Team 1", "Team 2"]
         },
     },
 };
