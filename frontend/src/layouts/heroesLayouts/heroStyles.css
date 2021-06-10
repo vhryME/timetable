@@ -1,21 +1,32 @@
-.main-container {
+.hero--main-container {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.icon-upload {
-    width: 200px;
-}
-
-.form-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-.footer-buttons {
+.hero--icon-upload {
+    width: 150px;
+}
+
+.hero--form-container {
+    display: flex;
+    width: 700px;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.hero--form {
+    width: 80%;
+}
+
+.hero--modal-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.hero--footer-buttons {
     display: flex;
     position: fixed;
     right: 10px;
@@ -23,26 +34,23 @@
     justify-content: center;
 }
 
-.button {
+.hero--button {
     margin: 10px;
     width: 70px;
     height: 70px;
     font-size: 20px;
 }
 
-.tabs {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.hero--tabs {
+    width: 100%;
 }
 
-.option-main {
+.hero--option-main {
     display: flex;
     align-items: center;
 }
 
-.option-text {
+.hero--option-text {
     flex: 1;
     white-space: nowrap;
     overflow: hidden;

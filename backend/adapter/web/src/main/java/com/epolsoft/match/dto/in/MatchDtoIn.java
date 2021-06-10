@@ -1,21 +1,21 @@
 package com.epolsoft.match.dto.in;
 
 
+import com.epolsoft.match.validator.TeamConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.Collections;
-import java.util.HashSet;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@TeamConstraint
 public class MatchDtoIn {
 
     private String type = "Unknown";

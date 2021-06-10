@@ -9,8 +9,12 @@ import {UniversalForm} from "../universalForm";
 import PropTypes from "prop-types";
 
 class UniversalTable extends React.Component {
-  state = {
-    dictionaries: this.props.dictionaries.data
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      dictionaries: this.props.dictionaries.data,
+    }
   }
 
   getFields = () => {
@@ -20,6 +24,7 @@ class UniversalTable extends React.Component {
         title: colInfo.label || colInfo,
         dataIndex: column,
         key: column,
+        ellipsis: colInfo.type === "longString",
         sorter: colInfo.sorter
           ? colInfo.sorter
           : false,
@@ -35,6 +40,7 @@ class UniversalTable extends React.Component {
       columnsArr.push({
         title: "Actions",
         dataIndex: "actions",
+        width: "90px",
         render: (_, record) =>
           this.props.data && this.props.data.length >= 1 ? (
             <div>
@@ -79,6 +85,7 @@ class UniversalTable extends React.Component {
           key={this.props.data}
           columns={this.getFields()}
           dataSource={this.props.data}
+          scroll={{y: this.props.scroll}}
           rowClassName={this.props.rowClassName}
           components={this.props.components}
           expandable={this.props.expandable}
@@ -94,6 +101,8 @@ UniversalTable.propTypes = {
   actions: PropTypes.objectOf(PropTypes.func),
   data: PropTypes.array,
   columns: PropTypes.object.isRequired,
+  expandable: PropTypes.object,
+  scroll: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 }
 
 UniversalTable.defaultProps = {

@@ -35,7 +35,10 @@ export const columns = (context) => {
             {text}
           </div>,
     },
-    description: "Description",
+    description: {
+      type: "longString",
+      label: "Description",
+    },
     levelOfAccess: "Required LVL",
     type: "Type",
   };

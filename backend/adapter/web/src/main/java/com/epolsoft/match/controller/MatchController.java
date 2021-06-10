@@ -1,6 +1,7 @@
 package com.epolsoft.match.controller;
 
 
+import com.epolsoft.hero.mapper.TalentDtoMapper;
 import com.epolsoft.match.domain.Match;
 import com.epolsoft.match.dto.in.MatchDtoIn;
 import com.epolsoft.match.dto.in.MatchDtoInFiltered;
@@ -27,6 +28,7 @@ class MatchController {
 
     private final MatchUseCase useCase;
     private final MatchDtoMapper mapper;
+    private final TalentDtoMapper talentDtoMapper;
 
 
     @DeleteMapping("{id}")

@@ -46,11 +46,11 @@ export default {
     return <Checkbox disabled={readonly} style={readonly ? {marginLeft: "10px"} : undefined} checked={false}/>;
   },
 
-  switch: (context) => {
+  switch: (context, {options}) => {
     const {readonly} = context.props;
     return <Switch
-      unCheckedChildren="Team 1"
-      checkedChildren="Team 2"/>
+      unCheckedChildren={options[0]}
+      checkedChildren={options[1]}/>
   },
 
   number: (context) => {

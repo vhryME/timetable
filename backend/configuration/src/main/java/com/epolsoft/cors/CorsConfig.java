@@ -10,6 +10,7 @@ import java.util.Collections;
 
 @Configuration
 public class CorsConfig {
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         final CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -25,4 +26,5 @@ public class CorsConfig {
 
         return source;
     }
+
 }

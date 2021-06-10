@@ -2,18 +2,14 @@ package com.epolsoft.match.service;
 
 
 import com.epolsoft.match.domain.Match;
-import com.epolsoft.match.domain.Region;
 import com.epolsoft.match.port.in.MatchUseCase;
 import com.epolsoft.match.port.out.MatchPort;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 
