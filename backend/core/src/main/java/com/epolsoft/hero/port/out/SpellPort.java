@@ -10,9 +10,7 @@ public interface SpellPort {
 
     void deleteSpell(Long id);
 
-
     Spell updateSpell(Long id, Spell spell);
-
 
     List<Spell> getAllSpells();
 

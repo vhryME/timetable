@@ -10,6 +10,7 @@ import com.epolsoft.hero.dto.in.TalentDtoIn;
 import com.epolsoft.hero.dto.out.ActiveTalentDtoOut;
 import com.epolsoft.hero.dto.out.PassiveTalentDtoOut;
 import com.epolsoft.hero.dto.out.TalentDtoOut;
+import com.epolsoft.mapper.DtoMapper;
 import com.epolsoft.match.mapper.PlayerInMatchDtoMapper;
 import org.mapstruct.Mapper;
 

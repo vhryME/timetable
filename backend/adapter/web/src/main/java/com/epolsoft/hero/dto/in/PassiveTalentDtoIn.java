@@ -17,8 +17,8 @@ public class PassiveTalentDtoIn extends TalentDtoIn {
 
 
     @Builder
-    public PassiveTalentDtoIn(String type, String name, String description, String icon, String key, Integer levelOfAccess, String spell) {
-        super(type, name, description, icon, key, levelOfAccess);
+    public PassiveTalentDtoIn(Long id, String name, String description, String icon, String key, Integer levelOfAccess, String spell) {
+        super(id, name, description, icon, key, levelOfAccess);
         this.spell = spell;
     }
 

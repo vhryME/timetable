@@ -23,8 +23,7 @@ import lombok.NonNull;
 })
 public class TalentDtoIn {
 
-    @JsonProperty(value = "type")
-    private String type;
+    private Long id;
 
     @NonNull
     private String name;

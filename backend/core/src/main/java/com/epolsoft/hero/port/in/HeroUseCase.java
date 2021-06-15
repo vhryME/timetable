@@ -11,19 +11,19 @@ import java.util.List;
 
 public interface HeroUseCase {
 
-    Hero getHero(Integer id);
+    Hero find(Long id);
 
 
-    void deleteHero(Integer id);
+    void delete(Long id);
 
 
-    Hero saveNewHero(Hero hero);
+    Hero create(Hero hero);
 
 
-    Hero updateHero(Integer id, Hero hero);
+    Hero update(Long id, Hero hero);
 
 
-    List<Hero> findAllHeroes();
+    List<Hero> findAll();
 
 
     Page<Hero> findPageOfHero(Pageable pageable,  HeroPort.HeroFiltered heroFiltered);

@@ -1,18 +1,23 @@
 package com.epolsoft.hero.mapper;
 
 
-import com.epolsoft.hero.domain.Hero;
-import com.epolsoft.hero.domain.HeroJpa;
-import com.epolsoft.hero.domain.Role;
-import com.epolsoft.hero.domain.RoleJpa;
+import com.epolsoft.hero.domain.*;
 import com.epolsoft.mapper.DateMapper;
 import com.epolsoft.mapper.JpaMapper;
 import org.mapstruct.Mapper;
-import org.springframework.stereotype.Component;
+import org.springframework.data.domain.Page;
 
 
-@Mapper(uses = {SpellJpaMapper.class, TalentJpaMapper.class, DateMapper.class, HeroJpaMapper.RoleJpaMapper.class})
+@Mapper(uses = {SpellJpaMapper.class, TalentJpaMapper.class, DateMapper.class, HeroJpaMapper.RoleJpaMapper.class,
+HeroJpaMapper.StatusJpaMapper.class})
 public interface HeroJpaMapper extends JpaMapper<HeroJpa, Hero> {
+
+    default Page<Hero> jpaHeroPageToHeroPage(Page<HeroJpa> heroJpaPage){
+      return heroJpaPage.map(this::jpaEntityToEntity);
+    };
+
+    @Mapper
+    interface StatusJpaMapper extends JpaMapper<StatusJpa, Status> {}
 
     @Mapper
     interface RoleJpaMapper extends JpaMapper<RoleJpa, Role> {}

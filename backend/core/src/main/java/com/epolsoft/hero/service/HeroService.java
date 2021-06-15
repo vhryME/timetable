@@ -22,36 +22,36 @@ class HeroService implements HeroUseCase {
 
     @Override
     @SneakyThrows
-    public Hero getHero(Integer id) {
-        return port.findHeroById(id);
+    public Hero find(Long id) {
+        return port.find(id);
     }
 
 
     @Override
     @SneakyThrows
-    public void deleteHero(Integer id) {
-        port.deleteHero(id);
+    public void delete(Long id) {
+        port.delete(id);
     }
 
 
     @Override
     @SneakyThrows
-    public Hero saveNewHero(Hero hero) {
-        return port.saveNewHero(hero);
+    public Hero create(Hero hero) {
+        return port.create(hero);
     }
 
 
     @Override
     @SneakyThrows
-    public Hero updateHero(Integer id, Hero hero) {
-        return port.updateHero(id, hero);
+    public Hero update(Long id, Hero hero) {
+        return port.update(id, hero);
     }
 
 
     @Override
     @SneakyThrows
-    public List<Hero> findAllHeroes() {
-        return port.findAllHeroes();
+    public List<Hero> findAll() {
+        return port.findAll();
     }
 
 

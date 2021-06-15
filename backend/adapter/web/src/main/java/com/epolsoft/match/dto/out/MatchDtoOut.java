@@ -16,7 +16,7 @@ import java.util.Set;
 public class MatchDtoOut {
 
     @NotNull
-    private Integer id;
+    private Long id;
 
     @NotNull
     private String type;

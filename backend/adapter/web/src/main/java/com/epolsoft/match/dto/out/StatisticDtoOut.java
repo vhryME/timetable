@@ -31,7 +31,7 @@ public class StatisticDtoOut {
     private Double damageToEnemies;
 
     @NotNull
-    private Double damageToNPC;
+    private Double damageToNpc;
 
     @NotNull
     private Double healToTeammate;

@@ -70,7 +70,7 @@ public class FileStorageAdapter implements FileStoragePort {
     @Override
     @Transactional
     public List<File> findAllFiles() {
-        return fileJpaMapper.listEntityToListJpaEntity(repository.findAll());
+        return fileJpaMapper.listJpaEntityToListEntity(repository.findAll());
     }
 
 }

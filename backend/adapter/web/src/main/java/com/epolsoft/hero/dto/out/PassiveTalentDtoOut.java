@@ -17,8 +17,8 @@ public class PassiveTalentDtoOut extends TalentDtoOut {
 
 
     @Builder
-    public PassiveTalentDtoOut(String type, Long id, String name, String description, String icon, String key, Integer levelOfAccess, String spell) {
-        super(type, id, name, description, icon, key, levelOfAccess);
+    public PassiveTalentDtoOut(Long id, String name, String description, String icon, String key, Integer levelOfAccess, String spell) {
+        super(id, name, description, icon, key, levelOfAccess);
         this.spell = spell;
     }
 

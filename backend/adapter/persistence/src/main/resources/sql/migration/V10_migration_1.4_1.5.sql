@@ -13,6 +13,12 @@ DO $$
             date_of_creation TIMESTAMP NOT NULL
         );
 
+        CREATE TYPE status AS ENUM(
+            'Draft', 'Active', 'Delete'
+        );
+
+        ALTER TABLE hero
+        ADD COLUMN status status;
 
         UPDATE public.version SET date_of_migration = NOW();
         UPDATE public.version SET status = 'Успешно';

@@ -25,7 +25,7 @@ public class Statistic {
 
     private Double damageToEnemies;
 
-    private Double damageToNPC;
+    private Double damageToNpc;
 
     private Double healToTeammate;
 

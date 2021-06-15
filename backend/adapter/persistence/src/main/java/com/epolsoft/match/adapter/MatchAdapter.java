@@ -1,138 +1,152 @@
 package com.epolsoft.match.adapter;
 
 
-import com.epolsoft.match.domain.*;
-import com.epolsoft.match.domain.Map;
+import com.epolsoft.hero.domain.HeroJpa;
+import com.epolsoft.hero.domain.TalentJpa;
+import com.epolsoft.hero.repository.HeroRepository;
+import com.epolsoft.hero.repository.TalentRepository;
+import com.epolsoft.match.domain.Match;
+import com.epolsoft.match.domain.MatchJpa;
+import com.epolsoft.match.domain.PlayerInMatchJpa;
+import com.epolsoft.match.domain.PlayerJpa;
+import com.epolsoft.match.mapper.MatchJpaMapper;
 import com.epolsoft.match.port.out.MatchPort;
+import com.epolsoft.match.repository.MatchRepository;
+import com.epolsoft.match.repository.PlayerRepository;
+import com.epolsoft.match.specification.MatchSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 
 @Component
 @RequiredArgsConstructor
 class MatchAdapter implements MatchPort {
 
-    private List<Match> matches;
+    private final MatchRepository matchRepository;
 
+    private final HeroRepository heroRepository;
 
-    @PostConstruct
-    public void init() {
-        matches = new ArrayList<>();
+    private final TalentRepository talentRepository;
 
-        Match match1 = new Match(1, TypeOfMatch.getTypeOfMatchById(1L), LocalDate.now(), 600.0,
-                Map.getMapById(1L), Region.getRegionById(1L), new Team(), new Team());
-        Match match2 = new Match(2, TypeOfMatch.getTypeOfMatchById(3L), LocalDate.now(), 15.364,
-                Map.getMapById(4L), Region.getRegionById(3L), new Team(), new Team());
-        Match match3 = new Match(3, TypeOfMatch.getTypeOfMatchById(5L), LocalDate.now(), 0.3654,
-                Map.getMapById(6L), Region.getRegionById(4L), new Team(), new Team());
-        Match match4 = new Match(4, TypeOfMatch.getTypeOfMatchById(0L), LocalDate.now(), 9856.99,
-                Map.getMapById(0L), Region.getRegionById(0L), new Team(), new Team());
+    private final PlayerRepository playerRepository;
 
-        matches.add(match1);
-        matches.add(match2);
-        matches.add(match3);
-        matches.add(match4);
+    private final MatchJpaMapper matchJpaMapper;
+
+    @Override
+    @Transactional
+    public Match find(Long id) throws Exception {
+        MatchJpa matchJpa = matchRepository.findById(id).get();
+
+        return matchJpaMapper.jpaEntityToEntity(matchJpa);
     }
 
 
     @Override
-    public Match findMatchById(Integer id) throws Exception {
-        return matches.get(id);
+    @Transactional
+    public void delete(Long id) throws Exception {
+        matchRepository.deleteById(id);
     }
 
-
     @Override
-    public void deleteMatch(Integer id) throws Exception {
-        matches.remove(id);
+    @Transactional
+    public Match create(Match match) {
+        MatchJpa matchJpa = matchJpaMapper.entityToJpaEntity(match);
+
+        List<HeroJpa> heroes = heroRepository.findAll();
+        List<TalentJpa> talents = talentRepository.findAll();
+        List<PlayerJpa> players = playerRepository.findAll();
+
+        Set<PlayerInMatchJpa> playersFromTeam1 = matchJpa.getTeam1().getPlayers();
+        Set<PlayerInMatchJpa> playersFromTeam2 = matchJpa.getTeam2().getPlayers();
+
+        setIdsForHeroesOfPlayersInMatchInSaveMethod(playersFromTeam1, heroes);
+        setIdsForHeroesOfPlayersInMatchInSaveMethod(playersFromTeam2, heroes);
+
+        setIdsForTalentsOfPlayersInMatchInSaveMethod(playersFromTeam1, talents);
+        setIdsForTalentsOfPlayersInMatchInSaveMethod(playersFromTeam2, talents);
+
+        setIdsForPlayersOfPlayersInMatchInSaveMethod(playersFromTeam1, players);
+        setIdsForPlayersOfPlayersInMatchInSaveMethod(playersFromTeam2, players);
+
+        matchRepository.save(matchJpa);
+
+        return matchJpaMapper.jpaEntityToEntity(matchJpa);
     }
 
-
     @Override
-    public Match saveNewMatch(Match match) {
-        matches.add(match);
+    @Transactional
+    public Match update(Long id, Match match) throws Exception {
+        MatchJpa current = matchRepository.findById(id).get();
 
-        int index = matches.indexOf(match);
-
-        if(index >= 0) {
-            match.setId(index);
-            return matches.get(index);
+        if (current != null) {
+            current = matchJpaMapper.entityToJpaEntity(match);
         }
+        matchRepository.save(current);
 
-        return null;
+        return matchJpaMapper.jpaEntityToEntity(current);
     }
 
 
     @Override
-    public Match updateMatch(Integer id, Match match) throws Exception {
-        if(matches.get(id) != null) {
-            match.setId(id);
-            matches.set(id, match);
-        }
+    @Transactional
+    public List<Match> findAll() throws Exception {
+        List<MatchJpa> jpaMatches = matchRepository.findAll();
 
-        int index = matches.indexOf(match);
-
-        if(index >= 0) {
-            return matches.get(index);
-        }
-
-        return null;
-    }
-
-
-    @Override
-    public List<Match> findAllMatches() throws Exception {
-        return matches;
+        return matchJpaMapper.listJpaEntityToListEntity(jpaMatches);
     }
 
 
     @Override
     public Page<Match> findPageOfMatch(Pageable pageable) throws Exception {
-        int start = (int)pageable.getOffset();
-        int end = Math.min((start + pageable.getPageSize()), matches.size());
+        Page<MatchJpa> jpaMatches = matchRepository.findAll(pageable);
 
-        return new PageImpl<>(matches.subList(start, end), pageable, matches.size());
+        return matchJpaMapper.jpaMatchPageToMatchPage(jpaMatches);
     }
 
 
     @Override
-    public Page<Match> findPageOfMatchFiltered(Pageable pageable, MatchFiltered matchFiltered) throws Exception {
-        List<Match> matchesFiltered = matches;
-
-        if(matchFiltered.getType() != null && !matchFiltered.getType().equals("")) {
-            matchesFiltered = matchesFiltered.stream().filter(match -> match.getType().getTypeOfMatch().contains(matchFiltered.getType())).
-                    collect(Collectors.toList());
+    public Page<Match> findPageOfMatchFiltered(Pageable pageable, MatchPort.MatchFiltered matchFiltered) throws Exception {
+        if (matchFiltered != null) {
+            return matchRepository.findAll(MatchSpecification.filter(matchFiltered), pageable).
+                    map(matchJpaMapper::jpaEntityToEntity);
         }
 
-        if(matchFiltered.getDate() != null) {
-            matchesFiltered = matchesFiltered.stream().filter(match -> match.getDate().equals(matchFiltered.getDate())).
-                    collect(Collectors.toList());
-        }
-
-        if(matchFiltered.getDuration() != null) {
-            matchesFiltered = matchesFiltered.stream().filter(match -> match.getDuration().equals(matchFiltered.getDuration())).
-                    collect(Collectors.toList());
-        }
-
-        if(matchFiltered.getMap() != null) {
-            matchesFiltered = matchesFiltered.stream().filter(match -> match.getMap().getMap().contains(matchFiltered.getMap().getMap()))
-                    .collect(Collectors.toList());
-        }
-
-        int start = (int) pageable.getOffset();
-        int end = Math.min((start + pageable.getPageSize()), matchesFiltered.size());
-
-        return new PageImpl<>(matchesFiltered.subList(start, end), pageable, matchesFiltered.size());
+        return null;
     }
 
+
+    public void setIdsForHeroesOfPlayersInMatchInSaveMethod(Set<PlayerInMatchJpa> players,
+                                                            List<HeroJpa> heroes) {
+        players.forEach(player -> heroes.forEach(hero -> {
+            if (player.getHero().getName().equals(hero.getName())) {
+                player.setHero(hero);
+            }
+        }));
+    }
+
+
+    public void setIdsForTalentsOfPlayersInMatchInSaveMethod(Set<PlayerInMatchJpa> players,
+                                                             List<TalentJpa> talents) {
+        players.forEach(player -> talents.forEach(talent -> player.getTalents().forEach(playerTalent -> {
+            if (playerTalent.getName().equals(talent.getName())) {
+                playerTalent.setId(talent.getId());
+            }
+        })));
+    }
+
+
+    public void setIdsForPlayersOfPlayersInMatchInSaveMethod(Set<PlayerInMatchJpa> playersFromMatch,
+                                                             List<PlayerJpa> players) {
+        playersFromMatch.forEach(playerFromMatch -> players.forEach(player -> {
+            if (playerFromMatch.getPlayer().getLogin().equals(player.getLogin())) {
+                playerFromMatch.getPlayer().setId(player.getId());
+            }
+        }));
+    }
 }

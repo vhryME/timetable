@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class StatisticDtoIn {
 
+    private Long id;
+
     @NotNull
     private Integer level;
 
@@ -31,7 +33,7 @@ public class StatisticDtoIn {
     private Double damageToEnemies;
 
     @NotNull
-    private Double damageToNPC;
+    private Double damageToNpc;
 
     @NotNull
     private Double healToTeammate;

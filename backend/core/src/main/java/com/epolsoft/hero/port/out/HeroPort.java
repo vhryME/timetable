@@ -17,19 +17,19 @@ import java.util.Set;
 
 public interface HeroPort {
 
-    Hero findHeroById(Integer id) throws Exception;
+    Hero find(Long id) throws Exception;
 
 
-    void deleteHero(Integer id) throws Exception;
+    void delete(Long id) throws Exception;
 
 
-    Hero saveNewHero(Hero hero) throws Exception;
+    Hero create(Hero hero) throws Exception;
 
 
-    Hero updateHero(Integer id, Hero hero) throws Exception;
+    Hero update(Long id, Hero hero) throws Exception;
 
 
-    List<Hero> findAllHeroes() throws Exception;
+    List<Hero> findAll() throws Exception;
 
 
     Page<Hero> findPageOfHero(Pageable pageable) throws Exception;

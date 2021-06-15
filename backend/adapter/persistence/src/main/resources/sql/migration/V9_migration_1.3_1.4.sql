@@ -39,6 +39,12 @@ DO $$
             AFTER INSERT OR UPDATE OR DELETE ON spell
             FOR EACH ROW EXECUTE PROCEDURE spell_audit_trigger();
 
+        ALTER TABLE hero_talent
+        DROP CONSTRAINT hero_talent_pkey;
+
+        ALTER TABLE player_in_match_talent
+        DROP CONSTRAINT player_in_match_talent_pkey;
+
         UPDATE public.version SET date_of_migration = NOW();
         UPDATE public.version SET status = 'Успешно';
     EXCEPTION

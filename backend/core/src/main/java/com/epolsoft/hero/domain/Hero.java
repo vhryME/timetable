@@ -12,7 +12,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class Hero {
 
-    private Integer id;
+    private Long id;
 
     private String name;
 
@@ -23,6 +23,8 @@ public class Hero {
     private Boolean isMelee;
 
     private LocalDate dateOfCreation;
+
+    private Status status;
 
     private Set<Spell> spells;
 

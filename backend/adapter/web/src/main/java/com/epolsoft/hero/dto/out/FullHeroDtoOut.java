@@ -1,6 +1,7 @@
 package com.epolsoft.hero.dto.out;
 
 
+import com.epolsoft.hero.domain.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,8 @@ public class FullHeroDtoOut {
 
     @NotNull
     private String dateOfCreation;
+
+    private String status;
 
     @NotNull
     @Valid

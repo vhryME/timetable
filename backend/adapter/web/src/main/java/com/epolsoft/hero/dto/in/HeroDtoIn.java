@@ -1,6 +1,7 @@
 package com.epolsoft.hero.dto.in;
 
 
+import com.epolsoft.hero.domain.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,8 +15,9 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-//@TalentConstraint
 public class HeroDtoIn {
+
+    private Long id;
 
     @NotNull
     private String name;
@@ -30,15 +32,15 @@ public class HeroDtoIn {
     @NotNull
     private String dateOfCreation;
 
+    private String status;
+
     @NotNull
     @Valid
     @Size(min = 5)
     private Set<SpellDtoIn> spells;
 
     @NotNull
-//    @Valid
+    @Valid
     private Set<TalentDtoIn> talents;
-
-    private TalentDtoIn[] talents_;
 
 }

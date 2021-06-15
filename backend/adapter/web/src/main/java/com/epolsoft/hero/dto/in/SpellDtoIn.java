@@ -15,6 +15,8 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class SpellDtoIn {
 
+    private Long id;
+
     @NotNull
     private String name;
 

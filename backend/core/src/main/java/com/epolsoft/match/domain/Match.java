@@ -14,7 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class Match {
 
-    private Integer id;
+    private Long id;
 
     private TypeOfMatch type;
 

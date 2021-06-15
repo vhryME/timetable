@@ -17,21 +17,21 @@ public class ActiveTalentDtoIn extends TalentDtoIn {
     @NotNull
     @Min(1)
     @Max(300)
-    private Double cost;
+    private Double manaCost;
 
     @NotNull
     @Min(1)
     @Max(300)
-    private Double timeOfRecovery;
+    private Double cooldown;
 
 
 
     @Builder
-    public ActiveTalentDtoIn(String type, String name, String description, String icon, String key, Integer levelOfAccess,
-                              Double cost, Double timeOfRecovery) {
-        super(type, name, description, icon, key, levelOfAccess);
-        this.cost = cost;
-        this.timeOfRecovery = timeOfRecovery;
+    public ActiveTalentDtoIn(Long id, String name, String description, String icon, String key, Integer levelOfAccess,
+                              Double manaCost, Double cooldown) {
+        super(id, name, description, icon, key, levelOfAccess);
+        this.manaCost = manaCost;
+        this.cooldown = cooldown;
     }
 
 }

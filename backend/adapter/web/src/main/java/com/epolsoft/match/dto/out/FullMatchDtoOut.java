@@ -31,10 +31,10 @@ public class FullMatchDtoOut {
 
     @NotNull
     @Valid
-    private TeamDtoOut teamDtoOut1;
+    private TeamDtoOut team1;
 
     @NotNull
     @Valid
-    private TeamDtoOut teamDtoOut2;
+    private TeamDtoOut team2;
 
 }

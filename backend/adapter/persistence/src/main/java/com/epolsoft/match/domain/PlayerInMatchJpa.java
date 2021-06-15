@@ -5,6 +5,8 @@ import com.epolsoft.hero.domain.TalentJpa;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -17,18 +19,18 @@ import java.util.Set;
 public class PlayerInMatchJpa {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "player", referencedColumnName = "id")
     private PlayerJpa player;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "hero", referencedColumnName = "id")
-    private HeroJpa heroJpa;
+    private HeroJpa hero;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(
             name = "player_in_match_talent",
             joinColumns = @JoinColumn(name = "player_in_match_id"),
@@ -36,7 +38,7 @@ public class PlayerInMatchJpa {
     )
     private Set<TalentJpa> talents;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     @JoinColumn(name = "statistic", referencedColumnName = "id")
     private StatisticJpa statistic;
 }
