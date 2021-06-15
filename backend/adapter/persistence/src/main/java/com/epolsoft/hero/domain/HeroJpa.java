@@ -1,11 +1,13 @@
 package com.epolsoft.hero.domain;
 
+import com.epolsoft.hero.converter.SQLEnumType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -16,6 +18,10 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "hero")
+@TypeDef(
+        name = "sql_enum",
+        typeClass = SQLEnumType.class
+)
 public class HeroJpa {
 
     @Id
@@ -35,6 +41,7 @@ public class HeroJpa {
     private LocalDate dateOfCreation;
 
     @Enumerated(EnumType.STRING)
+    @Type(type = "sql_enum")
     private StatusJpa status;
 
     @OneToMany(cascade = CascadeType.ALL)

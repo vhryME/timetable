@@ -1,7 +1,7 @@
 package com.epolsoft.hero.domain;
 
 public enum StatusJpa {
-    Draft,
-    Active,
-    Delete
+    DRAFT,
+    ACTIVE,
+    DELETE
 }

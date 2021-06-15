@@ -39,7 +39,7 @@ class HeroAdapter implements HeroPort {
     public void delete(Long id) throws Exception {
         HeroJpa hero = heroRepository.findById(id).get();
 
-        hero.setStatus(StatusJpa.Delete);
+        hero.setStatus(StatusJpa.DELETE);
 
         heroRepository.save(hero);
     }
@@ -50,7 +50,7 @@ class HeroAdapter implements HeroPort {
     public Hero create(Hero hero) throws Exception {
         HeroJpa heroJpa = heroJpaMapper.entityToJpaEntity(hero);
 
-        heroJpa.setStatus(StatusJpa.Draft);
+        heroJpa.setStatus(StatusJpa.DRAFT);
 
         heroRepository.save(heroJpa);
 
