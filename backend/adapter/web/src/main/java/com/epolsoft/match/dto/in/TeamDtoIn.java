@@ -20,6 +20,8 @@ import java.util.Set;
 @TeamConstraint
 public class TeamDtoIn {
 
+    private Long id;
+
     @NotNull
     @Valid
     @Size(min = 5, max = 5)

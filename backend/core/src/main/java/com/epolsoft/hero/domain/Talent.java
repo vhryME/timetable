@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Talent {
 
-    private String type;
+//    private String type;
 
     private Long id;
 

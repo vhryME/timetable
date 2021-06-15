@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class StatisticJpa {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Integer level;
@@ -25,13 +25,13 @@ public class StatisticJpa {
 
     private Integer killStreak;
 
-    private Integer death;
+    private Integer deaths;
 
-    private Double damageToEnemy;
+    private Double damageToEnemies;
 
     private Double damageToNpc;
 
-    private Double healToTeamMate;
+    private Double healToTeammate;
 
     private Double healToYourself;
 

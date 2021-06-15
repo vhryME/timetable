@@ -32,14 +32,14 @@ class MatchController {
 
 
     @DeleteMapping("{id}")
-    public void deleteMatch(@PathVariable("id") Integer id) {
-        useCase.deleteMatch(id);
+    public void deleteMatch(@PathVariable("id") Long id) {
+        useCase.delete(id);
     }
 
 
     @GetMapping("{id}")
-    public FullMatchDtoOut getMatch(@PathVariable("id") Integer id) {
-        return mapper.matchToFullMatchDtoOut(useCase.getMatch(id));
+    public FullMatchDtoOut getMatch(@PathVariable("id") Long id) {
+        return mapper.matchToFullMatchDtoOut(useCase.find(id));
     }
 
 
@@ -47,13 +47,13 @@ class MatchController {
     public MatchDtoOut saveNewMatch(@RequestBody @Valid MatchDtoIn matchDtoIn) {
         Match match = mapper.matchDtoInToMatch(matchDtoIn);
 
-        return mapper.matchToMatchDtoOut(useCase.saveNewMatch(match));
+        return mapper.matchToMatchDtoOut(useCase.create(match));
     }
 
 
     @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public MatchDtoOut updateMatch(@PathVariable("id") Integer id, @RequestBody @Valid MatchDtoIn matchDtoIn) {
-        Match match = useCase.updateMatch(id, mapper.matchDtoInToMatch(matchDtoIn));
+    public MatchDtoOut updateMatch(@PathVariable("id") Long id, @RequestBody @Valid MatchDtoIn matchDtoIn) {
+        Match match = useCase.update(id, mapper.matchDtoInToMatch(matchDtoIn));
 
         return mapper.matchToMatchDtoOut(match);
     }
@@ -61,7 +61,7 @@ class MatchController {
 
     @GetMapping
     public List<MatchDtoOut> getAllMatches() {
-        return mapper.matchesToMatchesDtoOut(useCase.findAllMatches());
+        return mapper.matchesToMatchesDtoOut(useCase.findAll());
     }
 
 

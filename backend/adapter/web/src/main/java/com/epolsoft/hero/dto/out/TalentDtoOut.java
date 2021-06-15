@@ -24,9 +24,6 @@ import javax.validation.constraints.NotNull;
 })
 public class TalentDtoOut {
 
-    @JsonProperty(value = "type")
-    private String type;
-
     @NotNull
     private Long id;
 

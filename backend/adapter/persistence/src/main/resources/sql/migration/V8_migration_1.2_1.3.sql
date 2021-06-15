@@ -5,11 +5,11 @@ DO $$
         UPDATE public.version SET version_number = '1.3' WHERE version_number = '1.2';
 
         ALTER TABLE spell
-            ADD COLUMN mana_cost INT DEFAULT 0,
-            ADD COLUMN cooldown FLOAT DEFAULT 0.00;
+        ADD COLUMN mana_cost INT DEFAULT 0,
+        ADD COLUMN cooldown FLOAT DEFAULT 0.00;
 
         ALTER TABLE passive_talent
-            RENAME COLUMN spell_id TO spell_uuid;
+        RENAME COLUMN spell_id TO spell_uuid;
 
 
         ALTER TABLE passive_talent

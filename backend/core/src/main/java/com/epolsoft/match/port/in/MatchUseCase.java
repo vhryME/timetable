@@ -11,15 +11,15 @@ import java.util.List;
 
 public interface MatchUseCase {
 
-    Match getMatch(Integer id);
+    Match find(Long id);
 
-    void deleteMatch(Integer id);
+    void delete(Long id);
 
-    Match saveNewMatch(Match match);
+    Match create(Match match);
 
-    Match updateMatch(Integer id, Match match);
+    Match update(Long id, Match match);
 
-    List<Match> findAllMatches();
+    List<Match> findAll();
 
     Page<Match> findPageOfMatch(Pageable pageable, MatchPort.MatchFiltered matchFiltered);
 

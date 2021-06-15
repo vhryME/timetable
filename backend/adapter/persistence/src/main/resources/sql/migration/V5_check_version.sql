@@ -9,5 +9,3 @@ $$
        END IF;
     END;
 $$;
-
-call check_version_db('1.0');

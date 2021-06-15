@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 public
 class ActiveTalent extends Talent {
 
-    private Double cost;
+    private Double manaCost;
 
-    private Double timeOfRecovery;
+    private Double cooldown;
 
 }

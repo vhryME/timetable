@@ -22,8 +22,6 @@ public interface TalentJpaMapper extends JpaMapper<TalentJpa, Talent> {
                 } else if (talentJpa instanceof PassiveTalentJpa) {
                     talentsWithInheritance.add(passiveTalentJpaToPassiveTalent((PassiveTalentJpa) talentJpa));
                 }
-
-                talentsWithInheritance.add(jpaEntityToEntity(talentJpa));
             });
 
             return talentsWithInheritance;
@@ -43,8 +41,6 @@ public interface TalentJpaMapper extends JpaMapper<TalentJpa, Talent> {
                 } else if (talent instanceof PassiveTalent) {
                     talentsWithInheritance.add(passiveTalentToPassiveTalentJpa((PassiveTalent) talent));
                 }
-
-                talentsWithInheritance.add(entityToJpaEntity(talent));
             });
 
             return talentsWithInheritance;
@@ -53,11 +49,10 @@ public interface TalentJpaMapper extends JpaMapper<TalentJpa, Talent> {
         return null;
     }
 
-
     ActiveTalent activeTalentJpaToActiveTalent(ActiveTalentJpa activeTalentJpa);
 
 
-    PassiveTalent passiveTalentJpaToPassiveTalent(PassiveTalentJpa activeTalentDtoIn);
+    PassiveTalent passiveTalentJpaToPassiveTalent(PassiveTalentJpa passiveTalentJpa);
 
 
     ActiveTalentJpa activeTalentToActiveTalentJpa(ActiveTalent activeTalent);

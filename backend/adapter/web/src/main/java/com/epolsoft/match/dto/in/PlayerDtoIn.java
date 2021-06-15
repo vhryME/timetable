@@ -14,6 +14,8 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class PlayerDtoIn {
 
+    private Long id;
+
     @NotNull
     private String login;
 

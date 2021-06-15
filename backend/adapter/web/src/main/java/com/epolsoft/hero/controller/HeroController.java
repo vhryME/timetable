@@ -32,15 +32,15 @@ class HeroController {
     private final TalentDtoMapper talentDtoMapper;
 
 
-    @DeleteMapping("{id}")
-    public void deleteHero(@PathVariable("id") Integer id) {
-        useCase.deleteHero(id);
+    @PutMapping("{id}")
+    public void deleteHero(@PathVariable("id") Long id) {
+        useCase.delete(id);
     }
 
 
     @GetMapping("{id}")
-    public FullHeroDtoOut getHero(@PathVariable("id") Integer id) {
-        Hero hero = useCase.getHero(id);
+    public FullHeroDtoOut getHero(@PathVariable("id") Long id) {
+        Hero hero = useCase.find(id);
 
         FullHeroDtoOut fullHeroDtoOut = mapper.heroToFullHeroDtoOut(hero);
         fullHeroDtoOut.setTalents(talentDtoMapper.talentToTalentDtoOutWithInheritance(hero.getTalents()));
@@ -54,16 +54,16 @@ class HeroController {
         Hero hero = mapper.inToEntity(heroDtoIn);
         hero.setTalents(talentDtoMapper.talentDtoInToTalentWithInheritance(heroDtoIn.getTalents()));
 
-        return mapper.entityToOut(useCase.saveNewHero(hero));
+        return mapper.entityToOut(useCase.create(hero));
     }
 
 
     @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public HeroDtoOut updateHero(@PathVariable("id") Integer id, @RequestBody @Valid HeroDtoIn heroDtoIn) {
+    public HeroDtoOut updateHero(@PathVariable("id") Long id, @RequestBody @Valid HeroDtoIn heroDtoIn) {
         Hero heroForUpdate = mapper.inToEntity(heroDtoIn);
         heroForUpdate.setTalents(talentDtoMapper.talentDtoInToTalentWithInheritance(heroDtoIn.getTalents()));
 
-        Hero hero = useCase.updateHero(id, heroForUpdate);
+        Hero hero = useCase.update(id, heroForUpdate);
 
         return mapper.entityToOut(hero);
     }
@@ -71,7 +71,7 @@ class HeroController {
 
     @GetMapping
     public List<HeroDtoOut> getAllHeroes() {
-        return mapper.entitiesToOutList(useCase.findAllHeroes());
+        return useCase.findAll().stream().map(mapper::entityToOut).collect(Collectors.toList());
     }
 
 

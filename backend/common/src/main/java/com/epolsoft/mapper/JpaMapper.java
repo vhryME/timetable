@@ -4,21 +4,19 @@ package com.epolsoft.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public interface JpaMapper<JPA, Entity> {
+public interface JpaMapper<JpaENTITY, ENTITY> {
 
-    JPA entityToJpaEntity(Entity entity);
-
-
-    Entity jpaEntityToEntity (JPA JPA);
+    JpaENTITY entityToJpaEntity(ENTITY entity);
 
 
-    default List<JPA> listJpaEntityToListEntity(List<Entity> list) {
+    ENTITY jpaEntityToEntity (JpaENTITY jpaEntity);
+
+    default List<JpaENTITY> listEntityToListJpaEntity(List<ENTITY> list) {
         return list.stream().map(this::entityToJpaEntity).collect(Collectors.toList());
     }
 
 
-    default List<Entity> listEntityToListJpaEntity(List<JPA> list) {
+    default List<ENTITY> listJpaEntityToListEntity(List<JpaENTITY> list) {
         return list.stream().map(this::jpaEntityToEntity).collect(Collectors.toList());
     }
-
 }

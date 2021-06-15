@@ -22,36 +22,36 @@ class MatchService implements MatchUseCase {
 
     @Override
     @SneakyThrows
-    public Match getMatch(Integer id) {
-        return port.findMatchById(id);
+    public Match find(Long id) {
+        return port.find(id);
     }
 
 
     @Override
     @SneakyThrows
-    public void deleteMatch(Integer id) {
-        port.deleteMatch(id);
+    public void delete(Long id) {
+        port.delete(id);
     }
 
 
     @Override
     @SneakyThrows
-    public Match saveNewMatch(Match match) {
-        return port.saveNewMatch(match);
+    public Match create(Match match) {
+        return port.create(match);
     }
 
 
     @Override
     @SneakyThrows
-    public Match updateMatch(Integer id, Match match) {
-        return port.updateMatch(id, match);
+    public Match update(Long id, Match match) {
+        return port.update(id, match);
     }
 
 
     @Override
     @SneakyThrows
-    public List<Match> findAllMatches() {
-        return port.findAllMatches();
+    public List<Match> findAll() {
+        return port.findAll();
     }
 
 

@@ -19,20 +19,20 @@ public class ActiveTalentDtoOut extends TalentDtoOut {
     @NotNull
     @Min(1)
     @Max(300)
-    private Double cost;
+    private Double manaCost;
 
     @NotNull
     @Min(1)
     @Max(300)
-    private Double timeOfRecovery;
+    private Double cooldown;
 
 
     @Builder
-    public ActiveTalentDtoOut(String type, Long id, String name, String description, String icon, String key, Integer levelOfAccess,
-                              Double cost, Double timeOfRecovery) {
-        super(type, id, name, description, icon, key, levelOfAccess);
-        this.cost = cost;
-        this.timeOfRecovery = timeOfRecovery;
+    public ActiveTalentDtoOut(Long id, String name, String description, String icon, String key, Integer levelOfAccess,
+                              Double manaCost, Double cooldown) {
+        super(id, name, description, icon, key, levelOfAccess);
+        this.manaCost = manaCost;
+        this.cooldown = cooldown;
     }
 
 }

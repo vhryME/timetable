@@ -18,6 +18,8 @@ import java.util.Set;
 @TeamConstraint
 public class MatchDtoIn {
 
+    private Long id;
+
     private String type = "Unknown";
 
     @NotNull
@@ -27,12 +29,14 @@ public class MatchDtoIn {
 
     private Integer regionId = 0;
 
-    @NotNull
-    @Valid
-    private TeamDtoIn teamDtoIn1;
+    private Double duration;
 
     @NotNull
     @Valid
-    private TeamDtoIn teamDtoIn2;
+    private TeamDtoIn team1;
+
+    @NotNull
+    @Valid
+    private TeamDtoIn team2;
 
 }

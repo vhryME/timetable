@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public class HeroDtoOut {
 
     @NotNull
-    private Integer id;
+    private Long id;
 
     @NotNull
     private String name;

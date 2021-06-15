@@ -11,11 +11,12 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "type")
-public class TypeJpa {
+public class TypeOfMatchJpa {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String type;
+    @Column(name = "type")
+    private String typeOfMatch;
 }

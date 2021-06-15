@@ -19,6 +19,8 @@ import java.util.Set;
 @TalentConstraint
 public class PlayerInMatchDtoIn {
 
+    private Long id;
+
     @NotNull
     @Valid
     private PlayerDtoIn player;

@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class PlayerJpa {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String login;

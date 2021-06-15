@@ -15,7 +15,7 @@ import java.util.Set;
 public class TeamJpa {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Boolean isWinner;
@@ -24,7 +24,7 @@ public class TeamJpa {
 
     private Double experienceOfTeam;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "team")
-    private Set<PlayerInMatchJpa> player;
+    private Set<PlayerInMatchJpa> players;
 }
