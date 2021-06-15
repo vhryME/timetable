@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public enum Status {
-    Draft(0L), Active(1L), Delete(2L);
+    DRAFT(0L), ACTIVE(1L), DELETE(2L);
 
     private Long id;
 

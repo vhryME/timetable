@@ -14,7 +14,7 @@ DO $$
         );
 
         CREATE TYPE status AS ENUM(
-            'Draft', 'Active', 'Delete'
+            'DRAFT', 'ACTIVE', 'DELETE'
         );
 
         ALTER TABLE hero
