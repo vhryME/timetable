@@ -1,0 +1,19 @@
+{
+  "admissionDate": "25.11.2021",
+  "fullName": "string",
+  "lastname": "string",
+  "name": "string",
+  "surname": "string",
+  "universityRoles": [
+    {
+      "id": 1
+    }
+  ],
+  "user": {
+    "email": "string@mail.ru",
+    "role": {
+      "id": 2
+    },
+    "username": "string"
+  }
+}

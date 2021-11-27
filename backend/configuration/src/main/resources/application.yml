@@ -7,13 +7,25 @@ spring.datasource:
   db_ip: ${DB_IP:localhost}
   db_port: ${DB_PORT:5432}
   db_name: ${DB_NAME:postgres}
-  platform: postgres
+  db_schema: ${DB_SCHEMA:timetable}
   driverClassName: org.postgresql.Driver
-  url: jdbc:postgresql://${spring.datasource.db_ip}:${spring.datasource.db_port}/${spring.datasource.db_name}
+  url: jdbc:postgresql://${spring.datasource.db_ip}:${spring.datasource.db_port}/${spring.datasource.db_name}?currentSchema=${spring.datasource.db_schema}
   username: ${POSTGRES_USERNAME:postgres}
-  password: ${POSTGRES_PASSWORD:admin}
+  password: ${POSTGRES_PASSWORD:11gamane}
 
-
+#SECURITY
+security:
+  oauth2:
+    client:
+      clientId: 27689494110-9atu1pd9er9brgeiemhgisu3pv616cjd.apps.googleusercontent.com
+      clientSecret: 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
+      clientAuthenticationScheme: form
+      accessTokenUri: https://www.googleapis.com/oauth2/v4/token
+      scope: openid,email,profile
+      userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+    resource:
+      userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
+      preferTokenInfo: 'true'
 
 #JPA
 spring.jpa:
@@ -28,6 +40,7 @@ spring.jpa:
         entity_copy_observer: allow
 
 
+#PAGE
 spring.data.web:
   pageable:
     default-page-size: 10
@@ -48,6 +61,7 @@ spring:
 
 
 #FILE
-com.epolsoft:
+com.vhry:
   file:
-    path: ${FILE_PATH:hots-trainee.files}
+    path: ${FILE_PATH:timetable.files}
+

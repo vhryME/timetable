@@ -1,4 +1,4 @@
-rootProject.name = 'host-trainee'
+rootProject.name = 'timetable'
 
 includeBuild 'backend'
 include 'frontend'

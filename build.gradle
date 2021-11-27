@@ -1,5 +1,5 @@
 allprojects {
-    group = 'com.epolsoft'
+    group = 'com.vhry'
     version = '0.1.0'
 }
 

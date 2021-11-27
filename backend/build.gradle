@@ -5,7 +5,7 @@ plugins {
     id 'io.franzbecker.gradle-lombok' version "${lombokPluginVersion}"
 }
 
-group = 'com.epolsoft'
+group = 'com.vhry'
 version = '0.1.0'
 
 apply plugin: 'java'
@@ -23,12 +23,12 @@ repositories {
 }
 
 compileJava {
-    sourceCompatibility = 11
-    targetCompatibility = 11
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 }
 
 springBoot {
-    mainClassName = 'com.epolsoft.Application'
+    mainClassName = 'com.vhry.Application'
 }
 
 dependencyManagement {
@@ -62,8 +62,8 @@ subprojects {
     }
 
     compileJava {
-        sourceCompatibility = 11
-        targetCompatibility = 11
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
 
         options.compilerArgs += [
                 '-Amapstruct.suppressGeneratorTimestamp=true',

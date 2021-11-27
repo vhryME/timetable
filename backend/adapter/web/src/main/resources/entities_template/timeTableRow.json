@@ -1,0 +1,65 @@
+{
+  "group": {
+    "id": 1,
+    "curator": {
+      "id" : 1,
+      "admissionDate": "2018-11-21",
+      "fullName": "string",
+      "lastname": "string",
+      "name": "string",
+      "surname": "string",
+      "universityRoles": [
+        {
+          "id": 4
+        }
+      ],
+      "user": {
+        "id": 1,
+        "email": "string@mail.ru",
+        "password": "string",
+        "role": {
+          "id": 1
+        },
+        "username": "string"
+      }
+    },
+    "name": "string",
+    "students": [
+      {
+        "id" : 2,
+        "admissionDate": "2018-11-21",
+        "fullName": "string",
+        "lastname": "string",
+        "name": "string",
+        "surname": "string",
+        "universityRoles": [
+          {
+            "id": 1
+          }
+        ],
+        "user": {
+          "id" : 2,
+          "email": "string@mail.ru",
+          "password": "string",
+          "role": {
+            "id": 2
+          },
+          "username": "string"
+        }
+      }
+    ]
+  },
+  "lessons": [
+    {
+      "id" : 1,
+      "date": "2018-11-21",
+      "endDateTime": "2018-11-21T11:13:13.274",
+      "name": "string",
+      "shortName": "string",
+      "startDateTime": "2018-11-21T11:13:13.274",
+      "type": {
+        "id": 1
+      }
+    }
+  ]
+}
