@@ -1,15 +1,15 @@
-package com.vhry.user.domain.person.domain;
+package com.vhry.user.person.domain;
 
 import com.vhry.common.JpaAccessor;
 import com.vhry.dictionary.universityRole.UniversityRoleJpa;
-import com.vhry.user.domain.UserJpa;
+import com.vhry.user.common.domain.UserJpa;
+import com.vhry.timeTable.domain.group.domain.GroupJpa;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Set;
 
 @Data
@@ -55,5 +55,10 @@ public class PersonJpa extends JpaAccessor {
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "university_role_id"))
     private Set<UniversityRoleJpa> universityRoles;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_id", nullable = false, columnDefinition = "NOT NULL")
+    private GroupJpa group;
 
 }

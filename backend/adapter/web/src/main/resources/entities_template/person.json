@@ -15,5 +15,57 @@
       "id": 2
     },
     "username": "string"
-  }
+  },
+  "groups": [
+    {
+      "id": 1,
+      "curator": {
+        "id" : 1,
+        "admissionDate": "2018-11-21",
+        "fullName": "string",
+        "lastname": "string",
+        "name": "string",
+        "surname": "string",
+        "universityRoles": [
+          {
+            "id": 4
+          }
+        ],
+        "user": {
+          "id": 1,
+          "email": "string@mail.ru",
+          "password": "string",
+          "role": {
+            "id": 1
+          },
+          "username": "string"
+        }
+      },
+      "name": "string",
+      "students": [
+        {
+          "id" : 2,
+          "admissionDate": "2018-11-21",
+          "fullName": "string",
+          "lastname": "string",
+          "name": "string",
+          "surname": "string",
+          "universityRoles": [
+            {
+              "id": 1
+            }
+          ],
+          "user": {
+            "id" : 2,
+            "email": "string@mail.ru",
+            "password": "string",
+            "role": {
+              "id": 2
+            },
+            "username": "string"
+          }
+        }
+      ]
+    }
+  ]
 }

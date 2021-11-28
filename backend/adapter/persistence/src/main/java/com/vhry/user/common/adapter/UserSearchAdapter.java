@@ -1,12 +1,12 @@
-package com.vhry.user.adapter;
+package com.vhry.user.common.adapter;
 
 import com.vhry.user.common.domain.User;
 import com.vhry.mapper.JpaMapper;
-import com.vhry.user.domain.UserJpa;
-import com.vhry.user.mapper.UserJpaMapper;
+import com.vhry.user.common.mapper.UserJpaMapper;
+import com.vhry.user.common.repository.UserJpaRepository;
+import com.vhry.user.common.specification.UserSpecifications;
+import com.vhry.user.common.domain.UserJpa;
 import com.vhry.user.common.port.out.UserSearchPort;
-import com.vhry.user.repository.UserJpaRepository;
-import com.vhry.user.specification.UserSpecifications;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Component;

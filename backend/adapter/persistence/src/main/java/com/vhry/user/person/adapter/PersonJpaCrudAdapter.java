@@ -1,11 +1,11 @@
-package com.vhry.user.domain.person.adapter;
+package com.vhry.user.person.adapter;
 
 import com.vhry.mapper.JpaMapper;
 import com.vhry.user.person.domain.Person;
-import com.vhry.user.domain.person.domain.PersonJpa;
-import com.vhry.user.domain.person.mapper.PersonJpaMapper;
+import com.vhry.user.person.domain.PersonJpa;
+import com.vhry.user.person.mapper.PersonJpaMapper;
 import com.vhry.user.person.port.out.PersonCrudPort;
-import com.vhry.user.domain.person.reposirory.PersonJpaRepository;
+import com.vhry.user.person.reposirory.PersonJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;

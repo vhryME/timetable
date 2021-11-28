@@ -6,10 +6,7 @@ import com.vhry.timeTable.common.port.in.TimeTableRowSpecUseCase;
 import com.vhry.timetable.dto.timetable.out.TimeTableRowDtoOut;
 import com.vhry.timetable.mapper.TimeTableRowDtoMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,8 +22,6 @@ public class TimeTableSpecController {
 
     private final TimeTableRowSpecUseCase specUseCase;
 
-    private final DateStringMapper dateStringMapper;
-
 
     @GetMapping(TIMETABLE_BY_DATE)
     public List<TimeTableRowDtoOut> findByDate(@RequestParam String date) {
@@ -41,6 +36,13 @@ public class TimeTableSpecController {
                 specUseCase.findByDateBetween(
                         DateStringMapper.asLocalDate(from, DATE_FORMAT),
                         DateStringMapper.asLocalDate(to, DATE_FORMAT)));
+    }
+
+    @GetMapping(TIMETABLE_BY_DATE_AND_GROUP + "/{facultyId}")
+    public List<TimeTableRowDtoOut> findByDateAndFaculty(@RequestParam String date, @PathVariable Long facultyId) {
+        return dtoMapper.toOut(
+                specUseCase.findByDateAndFaculty(
+                        DateStringMapper.asLocalDate(date, DATE_FORMAT), facultyId));
     }
 
     @GetMapping(TIMETABLE_BY_GROUP)

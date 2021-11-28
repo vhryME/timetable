@@ -5,6 +5,7 @@ import com.vhry.exception.ErrorCodeEnum;
 import com.vhry.timeTable.common.domain.TimeTableRow;
 import com.vhry.timeTable.common.port.in.TimeTableRowSpecUseCase;
 import com.vhry.timeTable.common.port.out.TimeTableRowSpecPort;
+import com.vhry.timeTable.faculty.port.in.FacultyCrudUseCase;
 import com.vhry.timeTable.group.port.in.GroupCrudUseCase;
 import com.vhry.user.person.port.in.PersonCrudUseCase;
 import com.vhry.util.Maps;
@@ -25,6 +26,8 @@ public class TimeTableRowSpecService implements TimeTableRowSpecUseCase {
 
     private final PersonCrudUseCase personCrudUseCase;
 
+    private final FacultyCrudUseCase facultyCrudUseCase;
+
 
     @Override
     public List<TimeTableRow> findByDate(LocalDate date) {
@@ -34,6 +37,16 @@ public class TimeTableRowSpecService implements TimeTableRowSpecUseCase {
     @Override
     public List<TimeTableRow> findByDateBetween(LocalDate from, LocalDate to) {
         return specPort.findByDateBetween(from, to);
+    }
+
+    @Override
+    public List<TimeTableRow> findByDateAndFaculty(LocalDate date, Long facultyId) {
+        return specPort.findByDateAndFaculty(date,
+                Optional.ofNullable(
+                        facultyCrudUseCase.findById(facultyId)).orElseThrow(
+                        () -> new AppException(ErrorCodeEnum.E3001, Maps.<String, Object>builder()
+                                .put("facultyId", facultyId)
+                                .build())));
     }
 
     @Override

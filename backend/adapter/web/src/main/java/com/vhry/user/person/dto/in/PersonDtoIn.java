@@ -2,6 +2,7 @@ package com.vhry.user.person.dto.in;
 
 import com.vhry.common.DtoInAccessor;
 import com.vhry.dictionary.DictionaryDtoIn;
+import com.vhry.timetable.dto.group.in.GroupDtoIn;
 import com.vhry.user.common.dto.in.UserDtoIn;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -39,6 +40,10 @@ public class PersonDtoIn extends DtoInAccessor {
     @NotNull
     @Valid
     private Set<DictionaryDtoIn> universityRoles;
+
+    @NotNull
+    @Valid
+    private GroupDtoIn group;
 
     @NotBlank
     private String admissionDate;

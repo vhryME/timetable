@@ -2,6 +2,7 @@ package com.vhry.user.person.domain;
 
 import com.vhry.dictionary.universityRole.UniversityRole;
 import com.vhry.domain.IdAccessorUpdated;
+import com.vhry.timeTable.group.domain.Group;
 import com.vhry.user.common.domain.User;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,6 +25,8 @@ public class Person extends IdAccessorUpdated {
     private User user;
 
     private Set<UniversityRole> universityRoles;
+
+    private Group group;
 
     private LocalDate admissionDate;
 

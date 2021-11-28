@@ -1,17 +1,14 @@
-package com.vhry.user.adapter;
+package com.vhry.user.common.adapter;
 
 import com.vhry.exception.AppException;
 import com.vhry.user.common.domain.User;
-import com.vhry.mapper.JpaMapper;
-import com.vhry.user.domain.UserJpa;
-import com.vhry.user.mapper.UserJpaMapper;
+import com.vhry.user.common.mapper.UserJpaMapper;
 import com.vhry.user.common.port.out.UserCrudPort;
-import com.vhry.user.repository.UserJpaRepository;
+import com.vhry.user.common.repository.UserJpaRepository;
 import com.vhry.util.Maps;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

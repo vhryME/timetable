@@ -31,6 +31,7 @@ INSERT INTO timetable.university_roles_dict(id, value) VALUES (1, 'Студен�
 INSERT INTO timetable.university_roles_dict(id, value) VALUES (2, 'Староста');
 INSERT INTO timetable.university_roles_dict(id, value) VALUES (3, 'Член профкома');
 INSERT INTO timetable.university_roles_dict(id, value) VALUES (4, 'Преподаватель');
+INSERT INTO timetable.university_roles_dict(id, value) VALUES (5, 'Куратор');
 
 INSERT INTO timetable.lesson_types_dict(id, value) VALUES (1, 'Лекция');
 INSERT INTO timetable.lesson_types_dict(id, value) VALUES (2, 'Лабораторная работа');

@@ -3,9 +3,10 @@ package com.vhry.timetable.domain.speciality.domain;
 import com.vhry.common.JpaAccessor;
 import com.vhry.timeTable.domain.faculty.domain.FacultyJpa;
 import com.vhry.timeTable.domain.group.domain.GroupJpa;
-import com.vhry.user.domain.person.domain.PersonJpa;
+import com.vhry.user.person.domain.PersonJpa;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -26,9 +27,12 @@ public class SpecialityJpa extends JpaAccessor {
     @Column(name = "name", nullable = false, columnDefinition = "NOT NULL")
     private String name;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(
             mappedBy = "speciality",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
     private Set<GroupJpa> groups;
 
     @ManyToMany(fetch = FetchType.LAZY)

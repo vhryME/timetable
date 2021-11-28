@@ -104,21 +104,21 @@ public interface MappingsDtoTemplate {
     @Named(PERSON_DTO_MAPPING + IN)
     @Mapping(target = "user", qualifiedByName = USER_DTO_MAPPING + IN)
     @Mapping(target = "universityRoles", qualifiedByName = UNIVERSITY_ROLE_DTO_MAPPING + IN)
+    @Mapping(target = "group", qualifiedByName = GROUP_DTO_MAPPING + IN)
     Person map(PersonDtoIn universityRoleDtoIn);
 
     @Named(PERSON_DTO_MAPPING + OUT)
     @Mapping(target = "user", qualifiedByName = USER_DTO_MAPPING + OUT)
     @Mapping(target = "universityRoles", qualifiedByName = UNIVERSITY_ROLE_DTO_MAPPING + OUT)
+    @Mapping(target = "group", qualifiedByName = GROUP_DTO_MAPPING + OUT)
     PersonDtoOut map(Person universityRole);
 
 
     @Named(GROUP_DTO_MAPPING + IN)
-    @Mapping(target = "curator", qualifiedByName = PERSON_DTO_MAPPING + IN)
     @Mapping(target = "students", qualifiedByName = PERSON_DTO_MAPPING + IN)
     Group map(GroupDtoIn universityRoleDtoIn);
 
     @Named(GROUP_DTO_MAPPING + OUT)
-    @Mapping(target = "curator", qualifiedByName = PERSON_DTO_MAPPING + OUT)
     @Mapping(target = "students", qualifiedByName = PERSON_DTO_MAPPING + OUT)
     GroupDtoOut map(Group universityRole);
 

@@ -16,7 +16,8 @@ public enum ErrorCodeEnum {
     E2001(AUTHORIZATION, "User was not found by username: usernameValue"),
 
     E3001(CORE, "Getting timetable by group was rejected: group by id: groupId was not found in DB"),
-    E3002(CORE, "Getting timetable by student was rejected: student by id: student was not found in DB");
+    E3002(CORE, "Getting timetable by student was rejected: student by id: studentId was not found in DB"),
+    E3003(CORE, "Getting timetable by student was rejected: faculty by id: facultyId was not found in DB");
 
     ModuleEnum module;
     String description;

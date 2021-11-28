@@ -12,6 +12,8 @@ public interface TimeTableRowSpecUseCase {
 
     List<TimeTableRow> findByDateBetween(LocalDate from, LocalDate to);
 
+    List<TimeTableRow> findByDateAndFaculty(LocalDate date, Long facultyId);
+
     List<TimeTableRow> findByGroup(Long groupId);
 
     List<TimeTableRow> findByStudent(Long studentId);

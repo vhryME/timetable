@@ -21,6 +21,7 @@ public class EndpointConstants {
     public static final String TIMETABLE_API = TIMETABLE_PROJECT_API + "/timetable";
     public static final String TIMETABLE_BY_DATE = "/byDate";
     public static final String TIMETABLE_BETWEEN_DATE = "/betweenDate";
+    public static final String TIMETABLE_BY_DATE_AND_GROUP = "/byDateAndFaculty";
     public static final String TIMETABLE_BY_GROUP = "/byGroup";
     public static final String TIMETABLE_BY_STUDENT = "/byStudent";
 

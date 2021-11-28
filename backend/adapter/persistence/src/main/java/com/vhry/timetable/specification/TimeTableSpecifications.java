@@ -1,5 +1,6 @@
 package com.vhry.timetable.specification;
 
+import com.vhry.timeTable.faculty.domain.Faculty;
 import com.vhry.timetable.domain.TimeTableRowJpa;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -18,6 +19,19 @@ public class TimeTableSpecifications {
         return (root, query, cb) -> cb.between(root
                 .joinSet("lessons", JoinType.LEFT)
                 .get("date"), from, to);
+    }
+
+    public static Specification<TimeTableRowJpa> findByDateAndFaculty(LocalDate date, Faculty faculty) {
+        return (root, query, cb) -> cb.and(
+                cb.equal(root
+                        .joinSet("lessons", JoinType.LEFT)
+                        .get("date"), date),
+                cb.equal(root
+                        .join("group", JoinType.LEFT)
+                        .join("speciality", JoinType.LEFT)
+                        .join("faculty", JoinType.LEFT)
+                        .get("id"), faculty.getId())
+        );
     }
 
     public static Specification<TimeTableRowJpa> findByGroup(Long groupId) {

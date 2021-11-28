@@ -4,6 +4,7 @@ import com.vhry.common.JpaAccessor;
 import com.vhry.timetable.domain.speciality.domain.SpecialityJpa;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -24,6 +25,8 @@ public class FacultyJpa extends JpaAccessor {
     @Column(name = "name", nullable = false, columnDefinition = "NOT NULL")
     private String name;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(
             mappedBy = "faculty",
             fetch = FetchType.LAZY)

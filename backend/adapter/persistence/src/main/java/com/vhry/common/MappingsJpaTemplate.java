@@ -15,11 +15,11 @@ import com.vhry.timeTable.domain.group.domain.GroupJpa;
 import com.vhry.timeTable.lesson.domain.Lesson;
 import com.vhry.timeTable.domain.lesson.domain.LessonJpa;
 import com.vhry.user.person.domain.Person;
-import com.vhry.user.domain.person.domain.PersonJpa;
+import com.vhry.user.person.domain.PersonJpa;
 import com.vhry.timetable.domain.speciality.domain.SpecialityJpa;
 import com.vhry.timeTable.common.domain.TimeTableRow;
 import com.vhry.timetable.domain.TimeTableRowJpa;
-import com.vhry.user.domain.UserJpa;
+import com.vhry.user.common.domain.UserJpa;
 import org.mapstruct.*;
 
 @MapperConfig(mappingInheritanceStrategy = MappingInheritanceStrategy.AUTO_INHERIT_ALL_FROM_CONFIG)
@@ -99,12 +99,10 @@ public interface MappingsJpaTemplate {
 
 
     @Named(GROUP_MAPPING)
-    @Mapping(target = "curator", qualifiedByName = PERSON_MAPPING)
     @Mapping(target = "students", qualifiedByName = PERSON_MAPPING)
     Group map(GroupJpa universityRoleJpa);
 
     @Named(GROUP_MAPPING + IN)
-    @Mapping(target = "curator", qualifiedByName = PERSON_MAPPING + IN)
     @Mapping(target = "students", qualifiedByName = PERSON_MAPPING + IN)
     GroupJpa map(Group universityRole);
 

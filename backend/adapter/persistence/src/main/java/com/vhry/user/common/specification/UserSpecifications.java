@@ -1,6 +1,6 @@
-package com.vhry.user.specification;
+package com.vhry.user.common.specification;
 
-import com.vhry.user.domain.UserJpa;
+import com.vhry.user.common.domain.UserJpa;
 import org.springframework.data.jpa.domain.Specification;
 
 public class UserSpecifications {

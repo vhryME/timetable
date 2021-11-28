@@ -1,4 +1,4 @@
-package com.vhry.user.domain;
+package com.vhry.user.common.domain;
 
 import com.vhry.common.JpaAccessor;
 import com.vhry.dictionary.role.RoleJpa;

@@ -1,6 +1,6 @@
-package com.vhry.user.repository;
+package com.vhry.user.common.repository;
 
-import com.vhry.user.domain.UserJpa;
+import com.vhry.user.common.domain.UserJpa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

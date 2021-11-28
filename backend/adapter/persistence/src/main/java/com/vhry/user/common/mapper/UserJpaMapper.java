@@ -1,9 +1,9 @@
-package com.vhry.user.mapper;
+package com.vhry.user.common.mapper;
 
 import com.vhry.common.MappingsJpaTemplate;
 import com.vhry.user.common.domain.User;
 import com.vhry.mapper.JpaMapper;
-import com.vhry.user.domain.UserJpa;
+import com.vhry.user.common.domain.UserJpa;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

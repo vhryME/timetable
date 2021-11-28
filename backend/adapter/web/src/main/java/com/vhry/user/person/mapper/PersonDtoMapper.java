@@ -20,6 +20,7 @@ public interface PersonDtoMapper extends DtoMapper<PersonDtoIn, Person, PersonDt
     @Override
     @Mapping(target = "user", qualifiedByName = USER_DTO_MAPPING + IN)
     @Mapping(target = "universityRoles", qualifiedByName = UNIVERSITY_ROLE_DTO_MAPPING + IN)
+    @Mapping(target = "group", qualifiedByName = GROUP_DTO_MAPPING + IN)
     @Mapping(target = "admissionDate",
             expression = "java( DateStringMapper.asLocalDate(personDtoIn.getAdmissionDate(), DateFormatConstants.DATE_FORMAT) )")
     Person fromIn(PersonDtoIn personDtoIn);
@@ -27,6 +28,7 @@ public interface PersonDtoMapper extends DtoMapper<PersonDtoIn, Person, PersonDt
     @Override
     @Mapping(target = "user", qualifiedByName = USER_DTO_MAPPING + OUT)
     @Mapping(target = "universityRoles", qualifiedByName = UNIVERSITY_ROLE_DTO_MAPPING + OUT)
+    @Mapping(target = "group", qualifiedByName = GROUP_DTO_MAPPING + OUT)
     PersonDtoOut toOut(Person person);
 
 }

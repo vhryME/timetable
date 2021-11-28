@@ -8,14 +8,6 @@ CREATE TABLE timetable.persons_university_roles_relation
     CONSTRAINT persons_university_roles_fkey FOREIGN KEY (university_role_id) REFERENCES timetable.university_roles_dict (id)
 );
 
-CREATE TABLE timetable.groups_persons_relation
-(
-    group_id  BIGINT NOT NULL,
-    person_id BIGINT NOT NULL,
-    CONSTRAINT groups_persons_fkey FOREIGN KEY (person_id) REFERENCES timetable.persons (id),
-    CONSTRAINT persons_groups_fkey FOREIGN KEY (group_id) REFERENCES timetable.groups (id)
-);
-
 CREATE TABLE timetable.time_table_rows_lessons_relation
 (
     time_table_row_id BIGINT NOT NULL,

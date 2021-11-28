@@ -15,12 +15,10 @@ import static com.vhry.common.MappingsJpaTemplate.PERSON_MAPPING;
 public interface GroupJpaMapper extends JpaMapper<Group, GroupJpa> {
 
     @Override
-    @Mapping(target = "curator", qualifiedByName = PERSON_MAPPING)
     @Mapping(target = "students", qualifiedByName = PERSON_MAPPING)
     Group fromJpaEntity(GroupJpa groupJpa);
 
     @Override
-    @Mapping(target = "curator", qualifiedByName = PERSON_MAPPING + IN)
     @Mapping(target = "students", qualifiedByName = PERSON_MAPPING + IN)
     GroupJpa toJpaEntity(Group group);
 }

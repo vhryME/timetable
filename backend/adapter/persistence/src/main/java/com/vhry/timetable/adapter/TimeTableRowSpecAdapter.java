@@ -2,6 +2,7 @@ package com.vhry.timetable.adapter;
 
 import com.vhry.mapper.JpaMapper;
 import com.vhry.timeTable.common.domain.TimeTableRow;
+import com.vhry.timeTable.faculty.domain.Faculty;
 import com.vhry.timeTable.group.domain.Group;
 import com.vhry.timeTable.common.port.out.TimeTableRowSpecPort;
 import com.vhry.timetable.domain.TimeTableRowJpa;
@@ -45,6 +46,11 @@ public class TimeTableRowSpecAdapter implements TimeTableRowSpecPort {
     @Override
     public List<TimeTableRow> findByDateBetween(LocalDate from, LocalDate to) {
         return findBySpec(TimeTableSpecifications.findByDateBetween(from, to));
+    }
+
+    @Override
+    public List<TimeTableRow> findByDateAndFaculty(LocalDate date, Faculty faculty) {
+        return findBySpec(TimeTableSpecifications.findByDateAndFaculty(date, faculty));
     }
 
     @Override
