@@ -21,19 +21,6 @@ public class TimeTableSpecifications {
                 .get("date"), from, to);
     }
 
-    public static Specification<TimeTableRowJpa> findByDateAndFaculty(LocalDate date, Faculty faculty) {
-        return (root, query, cb) -> cb.and(
-                cb.equal(root
-                        .joinSet("lessons", JoinType.LEFT)
-                        .get("date"), date),
-                cb.equal(root
-                        .join("group", JoinType.LEFT)
-                        .join("speciality", JoinType.LEFT)
-                        .join("faculty", JoinType.LEFT)
-                        .get("id"), faculty.getId())
-        );
-    }
-
     public static Specification<TimeTableRowJpa> findByGroup(Long groupId) {
         return (root, query, cb) -> cb.equal(root
                 .get("group")
@@ -45,6 +32,14 @@ public class TimeTableSpecifications {
                 .join("group")
                 .joinSet("students", JoinType.LEFT)
                 .get("id"), studentId);
+    }
+
+    public static Specification<TimeTableRowJpa> findByFaculty(Long facultyId) {
+        return (root, query, cb) -> cb.equal(root
+                .join("group", JoinType.LEFT)
+                .join("speciality", JoinType.LEFT)
+                .join("faculty", JoinType.LEFT)
+                .get("id"), facultyId);
     }
 
 }

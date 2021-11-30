@@ -12,6 +12,10 @@ public class AppException extends RuntimeException {
     ErrorCodeEnum errorCode;
     private Map<String, Object> properties;
 
+    public AppException(ErrorCodeEnum errorCode) {
+        this.errorCode = errorCode;
+    }
+
     public AppException(ErrorCodeEnum errorCode, String message) {
         super(message);
         this.errorCode = errorCode;
