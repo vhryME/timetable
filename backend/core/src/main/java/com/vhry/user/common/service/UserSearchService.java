@@ -22,6 +22,11 @@ public class UserSearchService implements UserSearchUseCase {
     }
 
     @Override
+    public User findUserByEmail(String email) {
+        return searchPort.findUserByEmail(email);
+    }
+
+    @Override
     public List<User> findUsersByRole(RoleEnum role) {
         return searchPort.findUsersByRole(role.id);
     }

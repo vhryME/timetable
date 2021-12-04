@@ -15,7 +15,7 @@ CREATE TABLE timetable.users
 CREATE TABLE timetable.faculties
 (
     id         BIGINT       NOT NULL DEFAULT nextval('timetable.faculties_seq'::REGCLASS) PRIMARY KEY,
-    name       VARCHAR(40)  NOT NULL,
+    name       VARCHAR(50)  NOT NULL,
     short_name VARCHAR(7)   NOT NULL,
     updated_at TIMESTAMP    NOT NULL DEFAULT current_timestamp,
     updated_by VARCHAR(128) NOT NULL DEFAULT current_user
@@ -24,7 +24,8 @@ CREATE TABLE timetable.faculties
 CREATE TABLE timetable.specialities
 (
     id         BIGINT       NOT NULL DEFAULT nextval('timetable.specialities_seq'::REGCLASS) PRIMARY KEY,
-    name       VARCHAR(40)  NOT NULL,
+    name       VARCHAR(70)  NOT NULL,
+    short_name VARCHAR(7)   NOT NULL,
     faculty_id BIGINT       NOT NULL,
     updated_at TIMESTAMP    NOT NULL DEFAULT current_timestamp,
     updated_by VARCHAR(128) NOT NULL DEFAULT current_user,

@@ -9,6 +9,8 @@ public interface UserSearchUseCase {
 
     User findUserByUserName(String userName);
 
+    User findUserByEmail(String email);
+
     List<User> findUsersByRole(RoleEnum role);
 
 }

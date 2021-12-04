@@ -21,10 +21,6 @@ public class GroupDtoOut extends DtoOutAccessor {
 
     @NotNull
     @Valid
-    private PersonDtoOut curator;
-
-    @NotNull
-    @Valid
     private Set<PersonDtoOut> students;
 
 }

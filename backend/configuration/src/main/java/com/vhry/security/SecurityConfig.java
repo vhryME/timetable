@@ -2,10 +2,10 @@ package com.vhry.security;
 
 import com.vhry.common.EndpointConstants;
 import com.vhry.dictionary.role.Role;
-import com.vhry.dictionary.role.RoleDictionaryService;
 import com.vhry.dictionary.role.RoleEnum;
 import com.vhry.user.common.domain.User;
 import com.vhry.user.common.port.in.UserCrudUseCase;
+import com.vhry.user.common.port.in.UserSearchUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
@@ -25,6 +25,8 @@ import java.util.Optional;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserCrudUseCase userCrudUseCase;
+
+    private final UserSearchUseCase userSearchUseCase;
 
 
     @Override
@@ -49,12 +51,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             role.setValue(RoleEnum.USER.roleName);
 
             return Optional
-                    .ofNullable(userCrudUseCase.findById(id))
-                    .orElse(userCrudUseCase.persist(new User()
-                            .setId(id)
-                            .setEmail((String) map.get("email"))
-                            .setRole(role)
-                            .setUsername((String) map.get("email"))));
+                    .of(userSearchUseCase.findUserByEmail((String) map.get("email")))
+                    .orElseGet(() ->
+                            userCrudUseCase.persist(new User()
+                                    .setId(id)
+                                    .setEmail((String) map.get("email"))
+                                    .setRole(role)
+                                    .setUsername((String) map.get("email"))));
         };
     }
 

@@ -9,6 +9,8 @@ public interface UserSearchPort extends SpecPort {
 
     User findUserByUserName(String userName);
 
+    User findUserByEmail(String email);
+
     List<User> findUsersByRole(Long id);
 
 }

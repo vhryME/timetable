@@ -21,7 +21,7 @@ public class UserJpa extends JpaAccessor {
     private BigInteger id;
 
     @Size(max = 128, message = "Username limit: 128 chars")
-    @Column(name = "username", nullable = false, columnDefinition = "NOT NULL")
+    @Column(name = "username", nullable = false, columnDefinition = "NOT NULL", unique = true)
     private String username;
 
     @Size(max = 128, message = "Email limit: 128 chars")

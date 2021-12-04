@@ -38,6 +38,11 @@ public class UserSearchAdapter implements UserSearchPort {
     }
 
     @Override
+    public User findUserByEmail(String email) {
+        return (User) findOneBySpec(UserSpecifications.findByUserName(email));
+    }
+
+    @Override
     public List<User> findUsersByRole(Long roleId) {
         return findBySpec(UserSpecifications.findByRole(roleId));
     }

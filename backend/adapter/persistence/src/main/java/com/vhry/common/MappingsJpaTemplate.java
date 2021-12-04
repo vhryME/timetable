@@ -8,17 +8,17 @@ import com.vhry.dictionary.universityRole.UniversityRole;
 import com.vhry.dictionary.universityRole.UniversityRoleJpa;
 import com.vhry.user.common.domain.User;
 import com.vhry.timeTable.faculty.domain.Faculty;
-import com.vhry.timeTable.domain.faculty.domain.FacultyJpa;
+import com.vhry.timetable.faculty.domain.FacultyJpa;
 import com.vhry.timeTable.faculty.domain.Speciality;
 import com.vhry.timeTable.group.domain.Group;
-import com.vhry.timeTable.domain.group.domain.GroupJpa;
+import com.vhry.timetable.group.domain.GroupJpa;
 import com.vhry.timeTable.lesson.domain.Lesson;
-import com.vhry.timeTable.domain.lesson.domain.LessonJpa;
+import com.vhry.timetable.lesson.domain.LessonJpa;
 import com.vhry.user.person.domain.Person;
 import com.vhry.user.person.domain.PersonJpa;
-import com.vhry.timetable.domain.speciality.domain.SpecialityJpa;
+import com.vhry.timetable.speciality.domain.SpecialityJpa;
 import com.vhry.timeTable.common.domain.TimeTableRow;
-import com.vhry.timetable.domain.TimeTableRowJpa;
+import com.vhry.timetable.common.domain.TimeTableRowJpa;
 import com.vhry.user.common.domain.UserJpa;
 import org.mapstruct.*;
 
@@ -90,20 +90,22 @@ public interface MappingsJpaTemplate {
     @Named(PERSON_MAPPING)
     @Mapping(target = "user", qualifiedByName = USER_MAPPING)
     @Mapping(target = "universityRoles", qualifiedByName = UNIVERSITY_ROLE_MAPPING)
+    @Mapping(target = "group", qualifiedByName = GROUP_MAPPING)
     Person map(PersonJpa universityRoleJpa);
 
     @Named(PERSON_MAPPING + IN)
     @Mapping(target = "user", qualifiedByName = USER_MAPPING + IN)
     @Mapping(target = "universityRoles", qualifiedByName = UNIVERSITY_ROLE_MAPPING + IN)
+    @Mapping(target = "group", qualifiedByName = GROUP_MAPPING + IN)
     PersonJpa map(Person universityRole);
 
 
     @Named(GROUP_MAPPING)
-    @Mapping(target = "students", qualifiedByName = PERSON_MAPPING)
+    @Mapping(target = "students", ignore = true)
     Group map(GroupJpa universityRoleJpa);
 
     @Named(GROUP_MAPPING + IN)
-    @Mapping(target = "students", qualifiedByName = PERSON_MAPPING + IN)
+    @Mapping(target = "students", ignore = true)
     GroupJpa map(Group universityRole);
 
 

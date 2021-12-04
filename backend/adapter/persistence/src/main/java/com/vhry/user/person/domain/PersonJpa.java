@@ -3,7 +3,7 @@ package com.vhry.user.person.domain;
 import com.vhry.common.JpaAccessor;
 import com.vhry.dictionary.universityRole.UniversityRoleJpa;
 import com.vhry.user.common.domain.UserJpa;
-import com.vhry.timeTable.domain.group.domain.GroupJpa;
+import com.vhry.timetable.group.domain.GroupJpa;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
