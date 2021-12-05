@@ -54,10 +54,7 @@ public interface SpecPort<Entity, JpaEntity> {
 
     default Entity findOneBySpec(Specification<JpaEntity> specification, JpaMapper<Entity, JpaEntity> jpaMapper) {
         return jpaMapper.fromJpaEntity(
-                getJpaSpecificationExecutor().findOne(specification).orElseThrow(
-                        () -> new AppException(E1005, Maps.<String, Object>builder()
-                                .put("spec", specification.toString())
-                                .build())));
+                getJpaSpecificationExecutor().findOne(specification).orElse(null));
     }
 
     default long count(Specification<JpaEntity> specification) {
