@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             role.setValue(RoleEnum.USER.roleName);
 
             return Optional
-                    .of(userSearchUseCase.findUserByEmail((String) map.get("email")))
+                    .ofNullable(userSearchUseCase.findUserByEmail((String) map.get("email")))
                     .orElseGet(() ->
                             userCrudUseCase.persist(new User()
                                     .setId(id)

@@ -22,7 +22,7 @@ class UniversalTable extends React.Component {
       const colInfo = this.props.columns[column];
       return {
         title: colInfo.label || colInfo,
-        dataIndex: column,
+        dataIndex: colInfo.dataIndex ? colInfo.dataIndex : column,
         key: column,
         ellipsis: colInfo.type === "longString",
         sorter: colInfo.sorter
@@ -107,7 +107,7 @@ UniversalTable.propTypes = {
 
 UniversalTable.defaultProps = {
   readonly: false,
-  actions: {},
+  // actions: {},
   data: [],
 }
 

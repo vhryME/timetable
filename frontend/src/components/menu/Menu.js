@@ -1,7 +1,7 @@
 import React from "react";
 
 import {Menu} from 'antd';
-import {UsergroupAddOutlined, BookOutlined} from '@ant-design/icons';
+import {UsergroupAddOutlined, BookOutlined, TableOutlined} from '@ant-design/icons';
 import {Link} from "react-router-dom";
 
 class MenuComponent extends React.Component {
@@ -10,9 +10,7 @@ class MenuComponent extends React.Component {
   };
 
   toggleCollapsed = () => {
-    this.setState({
-      collapsed: !this.state.collapsed,
-    });
+    this.setState({ collapsed: !this.state.collapsed });
   };
 
   render() {
@@ -30,6 +28,10 @@ class MenuComponent extends React.Component {
         </Menu.Item>
         <Menu.Item key="2" icon={<BookOutlined style={{fontSize: "30px"}}/>}>
           <Link to="/matches">Matches</Link>
+        </Menu.Item>
+
+        <Menu.Item key="timetable" icon={<TableOutlined style={{fontSize: "30px"}}/>}>
+          <Link to="/timetable">Timetable</Link>
         </Menu.Item>
       </Menu>
     );

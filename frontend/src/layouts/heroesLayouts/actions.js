@@ -1,7 +1,6 @@
 import actionFactory from "../../redux/actionFactory";
 import basicEntities from "../../redux/basicEntities";
 import basicActions from "../../redux/basicActions";
-import api from "../../helpers/api";
 
 export function getAllHeroes() {
   return actionFactory({

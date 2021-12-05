@@ -7,6 +7,7 @@ import "./styles.css";
 import {HeroesTable, HeroForm} from "../heroesLayouts";
 import Menu from "../../components/menu/Menu";
 import {MatchesTable, MatchForm} from "../matchesLayouts";
+import TimetableLayout from "../timetableLayout/TimetableLayout";
 
 class MainLayout extends React.Component {
   render() {
@@ -49,6 +50,10 @@ class MainLayout extends React.Component {
               </Route>
               <Route exact path="/matches">
                 <MatchesTable/>
+              </Route>
+
+              <Route exact path="/timetable">
+                <TimetableLayout/>
               </Route>
 
             </Switch>

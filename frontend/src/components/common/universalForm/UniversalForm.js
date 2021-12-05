@@ -19,10 +19,6 @@ class UniversalForm extends React.Component {
         }
     }
 
-    state = {
-        dictionaries: this.props.dictionaries.data
-    }
-
     formRef = React.createRef();
 
     renderButtons() {
@@ -110,12 +106,6 @@ class UniversalForm extends React.Component {
 
     componentDidMount() {
         this.forceUpdate();
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.dictionaries !== this.props.dictionaries) {
-            this.setState({dictionaries: this.props.dictionaries.data});
-        }
     }
 
     dataPreprocess() {

@@ -11,7 +11,7 @@ spring.datasource:
   driverClassName: org.postgresql.Driver
   url: jdbc:postgresql://${spring.datasource.db_ip}:${spring.datasource.db_port}/${spring.datasource.db_name}?currentSchema=${spring.datasource.db_schema}
   username: ${POSTGRES_USERNAME:postgres}
-  password: ${POSTGRES_PASSWORD:11gamane}
+  password: ${POSTGRES_PASSWORD:admin}
 
 #SECURITY
 security:
