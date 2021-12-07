@@ -3,6 +3,8 @@ package com.vhry.timeTable.common.service;
 import com.vhry.exception.AppException;
 import com.vhry.exception.ErrorCodeEnum;
 import com.vhry.timeTable.common.domain.TimeTableRow;
+import com.vhry.timeTable.common.domain.TimeTableRowWithWorkingDays;
+import com.vhry.timeTable.common.mapper.TimeTableRowWithWorkingDaysMapper;
 import com.vhry.timeTable.common.port.in.TimeTableRowSpecUseCase;
 import com.vhry.timeTable.common.port.out.TimeTableRowSpecPort;
 import com.vhry.timeTable.faculty.domain.Faculty;
@@ -15,9 +17,11 @@ import com.vhry.util.Maps;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +34,8 @@ public class TimeTableRowSpecService implements TimeTableRowSpecUseCase {
     private final PersonCrudUseCase personCrudUseCase;
 
     private final FacultyCrudUseCase facultyCrudUseCase;
+
+    private final TimeTableRowWithWorkingDaysMapper timeTableRowWithWorkingDaysMapper;
 
 
     private Faculty findFacultyForSpec(Long facultyId) {
@@ -63,69 +69,80 @@ public class TimeTableRowSpecService implements TimeTableRowSpecUseCase {
     }
 
     @Override
-    public List<TimeTableRow> findByDate(LocalDate date) {
-        return specPort.findByDate(
-                checkDateForSpec(date));
+    public List<TimeTableRowWithWorkingDays> findByDate(LocalDate date) {
+        return timeTableRowWithWorkingDaysMapper.convertTimeTable(
+                specPort.findByDate(
+                        checkDateForSpec(date)));
     }
 
     @Override
-    public List<TimeTableRow> findByDateBetween(LocalDate from, LocalDate to) {
-        return specPort.findByDateBetween(
-                checkDateForSpec(from), checkDateForSpec(to));
+    public List<TimeTableRowWithWorkingDays> findByDateBetween(LocalDate from, LocalDate to) {
+        return timeTableRowWithWorkingDaysMapper.convertTimeTable(
+                specPort.findByDateBetween(
+                        checkDateForSpec(from), checkDateForSpec(to)));
     }
 
     @Override
-    public List<TimeTableRow> findByFaculty(Long facultyId) {
-        return specPort.findByFaculty(
-                findFacultyForSpec(facultyId));
+    public List<TimeTableRowWithWorkingDays> findByFaculty(Long facultyId) {
+        return timeTableRowWithWorkingDaysMapper.convertTimeTable(
+                specPort.findByFaculty(
+                        findFacultyForSpec(facultyId)));
     }
 
     @Override
-    public List<TimeTableRow> findByDateAndFaculty(LocalDate date, Long facultyId) {
-        return specPort.findByDateAndFaculty(
-                checkDateForSpec(date), findFacultyForSpec(facultyId));
+    public List<TimeTableRowWithWorkingDays> findByDateAndFaculty(LocalDate date, Long facultyId) {
+        return timeTableRowWithWorkingDaysMapper.convertTimeTable(
+                specPort.findByDateAndFaculty(
+                        checkDateForSpec(date), findFacultyForSpec(facultyId)));
     }
 
     @Override
-    public List<TimeTableRow> findByBetweenDateAndFaculty(LocalDate from, LocalDate to, Long facultyId) {
-        return specPort.findByBetweenDateAndFaculty(
-                checkDateForSpec(from), checkDateForSpec(to), findFacultyForSpec(facultyId));
+    public List<TimeTableRowWithWorkingDays> findByBetweenDateAndFaculty(LocalDate from, LocalDate to, Long facultyId) {
+        return timeTableRowWithWorkingDaysMapper.convertTimeTable(
+                specPort.findByBetweenDateAndFaculty(
+                        checkDateForSpec(from), checkDateForSpec(to), findFacultyForSpec(facultyId)));
     }
 
     @Override
-    public List<TimeTableRow> findByGroup(Long groupId) {
-        return specPort.findByGroup(
-                findGroupForSpec(groupId));
+    public List<TimeTableRowWithWorkingDays> findByGroup(Long groupId) {
+        return timeTableRowWithWorkingDaysMapper.convertTimeTable(
+                specPort.findByGroup(
+                        findGroupForSpec(groupId)));
     }
 
     @Override
-    public List<TimeTableRow> findByGroupAndDate(Long groupId, LocalDate date) {
-        return specPort.findByGroupAndDate(
-                findGroupForSpec(groupId), checkDateForSpec(date));
+    public List<TimeTableRowWithWorkingDays> findByGroupAndDate(Long groupId, LocalDate date) {
+        return timeTableRowWithWorkingDaysMapper.convertTimeTable(
+                specPort.findByGroupAndDate(
+                        findGroupForSpec(groupId), checkDateForSpec(date)));
     }
 
     @Override
-    public List<TimeTableRow> findByBetweenDateAndGroup(LocalDate from, LocalDate to, Long groupId) {
-        return specPort.findByBetweenDateAndGroup(
-                checkDateForSpec(from), checkDateForSpec(to), findGroupForSpec(groupId));
+    public List<TimeTableRowWithWorkingDays> findByBetweenDateAndGroup(LocalDate from, LocalDate to, Long groupId) {
+        return timeTableRowWithWorkingDaysMapper.convertTimeTable(
+                specPort.findByBetweenDateAndGroup(
+                        checkDateForSpec(from), checkDateForSpec(to), findGroupForSpec(groupId)));
     }
 
     @Override
-    public List<TimeTableRow> findByStudent(Long personId) {
-        return specPort.findByStudent(
-                findStudentForSpec(personId));
+    public List<TimeTableRowWithWorkingDays> findByStudent(Long personId) {
+        return timeTableRowWithWorkingDaysMapper.convertTimeTable(
+                specPort.findByStudent(
+                        findStudentForSpec(personId)));
     }
 
     @Override
-    public List<TimeTableRow> findByStudentAndDate(Long personId, LocalDate date) {
-        return specPort.findByStudentAndDate(
-                findStudentForSpec(personId), checkDateForSpec(date));
+    public List<TimeTableRowWithWorkingDays> findByStudentAndDate(Long personId, LocalDate date) {
+        return timeTableRowWithWorkingDaysMapper.convertTimeTable(
+                specPort.findByStudentAndDate(
+                        findStudentForSpec(personId), checkDateForSpec(date)));
     }
 
     @Override
-    public List<TimeTableRow> findByBetweenDateAndStudent(LocalDate from, LocalDate to, Long personId) {
-        return specPort.findByBetweenDateAndStudent(
-                checkDateForSpec(from), checkDateForSpec(to), findStudentForSpec(personId));
+    public List<TimeTableRowWithWorkingDays> findByBetweenDateAndStudent(LocalDate from, LocalDate to, Long personId) {
+        return timeTableRowWithWorkingDaysMapper.convertTimeTable(
+                specPort.findByBetweenDateAndStudent(
+                        checkDateForSpec(from), checkDateForSpec(to), findStudentForSpec(personId)));
     }
 
 }

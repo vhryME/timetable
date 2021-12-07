@@ -1,9 +1,5 @@
 package com.vhry.user.common.controller;
 
-import com.vhry.common.CrudController;
-import com.vhry.user.common.domain.User;
-import com.vhry.mapper.DtoMapper;
-import com.vhry.port.in.CrudUseCase;
 import com.vhry.user.common.dto.in.UserDtoIn;
 import com.vhry.user.common.dto.out.UserDtoOut;
 import com.vhry.user.common.mapper.UserDtoMapper;
@@ -24,9 +20,9 @@ import static com.vhry.common.EndpointConstants.USER_API;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserDtoMapper dtoMapper;
-
     private final UserCrudUseCase crudUseCase;
+
+    private final UserDtoMapper dtoMapper;
 
 
     @PostMapping

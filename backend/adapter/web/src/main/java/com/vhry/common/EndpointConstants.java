@@ -7,12 +7,6 @@ public class EndpointConstants {
     public static final String API = "/api";
     public static final String TIMETABLE_PROJECT_API = TIMETABLE + API;
 
-    /* ---------------------------------------- AUTHORIZATION --------------------------------------------------------*/
-    public static final String AUTH_API = "/authorization";
-    public static final String AUTH_LOGIN = "/login";
-    public static final String AUTH_LOGOUT = "/logout";
-    public static final String AUTH_REGISTRATION = "/registration";
-
     /* ---------------------------------------- DICTIONARIES ---------------------------------------------------------*/
     public static final String DICTIONARY_API = TIMETABLE_PROJECT_API + "/dictionary";
 
@@ -37,8 +31,15 @@ public class EndpointConstants {
     //PERSON
     public static final String PERSON_API = TIMETABLE_PROJECT_API + "/person";
 
+    //AUTH
+    public static final String AUTH_API = TIMETABLE_PROJECT_API + "/auth";
+    public static final String AUTH_ME_INFO = "/me";
+
     //FILE
     public static final String FILE_API = TIMETABLE_PROJECT_API + "/file";
     public static final String FILE_CONTENT = "/content";
+
+    //FACULTY
+    public static final String FACULTY_API = TIMETABLE_PROJECT_API + "/faculty";
 
 }
