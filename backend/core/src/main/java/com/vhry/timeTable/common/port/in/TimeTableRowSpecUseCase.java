@@ -1,6 +1,7 @@
 package com.vhry.timeTable.common.port.in;
 
 import com.vhry.timeTable.common.domain.TimeTableRow;
+import com.vhry.timeTable.common.domain.TimeTableRowWithWorkingDays;
 import com.vhry.timeTable.faculty.domain.Faculty;
 import com.vhry.timeTable.group.domain.Group;
 import com.vhry.user.person.domain.Person;
@@ -10,26 +11,26 @@ import java.util.List;
 
 public interface TimeTableRowSpecUseCase {
 
-    List<TimeTableRow> findByDate(LocalDate date);
+    List<TimeTableRowWithWorkingDays> findByDate(LocalDate date);
 
-    List<TimeTableRow> findByDateBetween(LocalDate from, LocalDate to);
+    List<TimeTableRowWithWorkingDays> findByDateBetween(LocalDate from, LocalDate to);
 
-    List<TimeTableRow> findByFaculty(Long facultyId);
+    List<TimeTableRowWithWorkingDays> findByFaculty(Long facultyId);
 
-    List<TimeTableRow> findByDateAndFaculty(LocalDate date, Long facultyId);
+    List<TimeTableRowWithWorkingDays> findByDateAndFaculty(LocalDate date, Long facultyId);
 
-    List<TimeTableRow> findByBetweenDateAndFaculty(LocalDate from, LocalDate to, Long facultyId);
+    List<TimeTableRowWithWorkingDays> findByBetweenDateAndFaculty(LocalDate from, LocalDate to, Long facultyId);
 
-    List<TimeTableRow> findByGroup(Long groupId);
+    List<TimeTableRowWithWorkingDays> findByGroup(Long groupId);
 
-    List<TimeTableRow> findByGroupAndDate(Long groupId, LocalDate date);
+    List<TimeTableRowWithWorkingDays> findByGroupAndDate(Long groupId, LocalDate date);
 
-    List<TimeTableRow> findByBetweenDateAndGroup(LocalDate from, LocalDate to, Long groupId);
+    List<TimeTableRowWithWorkingDays> findByBetweenDateAndGroup(LocalDate from, LocalDate to, Long groupId);
 
-    List<TimeTableRow> findByStudent(Long personId);
+    List<TimeTableRowWithWorkingDays> findByStudent(Long personId);
 
-    List<TimeTableRow> findByStudentAndDate(Long personId, LocalDate date);
+    List<TimeTableRowWithWorkingDays> findByStudentAndDate(Long personId, LocalDate date);
 
-    List<TimeTableRow> findByBetweenDateAndStudent(LocalDate from, LocalDate to, Long personId);
+    List<TimeTableRowWithWorkingDays> findByBetweenDateAndStudent(LocalDate from, LocalDate to, Long personId);
 
 }

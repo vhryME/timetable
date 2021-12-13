@@ -2,7 +2,7 @@ package com.vhry.user.person.dto.in;
 
 import com.vhry.common.DtoInAccessor;
 import com.vhry.dictionary.DictionaryDtoIn;
-import com.vhry.timetable.dto.group.in.GroupDtoIn;
+import com.vhry.timetable.common.dto.group.in.GroupDtoIn;
 import com.vhry.user.common.dto.in.UserDtoIn;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
