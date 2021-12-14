@@ -5,7 +5,7 @@ import com.vhry.user.person.dto.out.PersonDtoOut;
 import com.vhry.user.person.mapper.PersonDtoMapper;
 import com.vhry.user.person.port.in.AuthUseCase;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,10 +23,10 @@ public class AuthController {
     private final PersonDtoMapper dtoMapper;
 
 
-    @GetMapping(AUTH_ME_INFO)
-    public PersonDtoOut me() {
-        return dtoMapper.toOut(
-                authUseCase.me( ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getEmail() ));
-    }
+//    @GetMapping(AUTH_ME_INFO)
+//    public PersonDtoOut me() {
+//        return dtoMapper.toOut(
+//                authUseCase.me( ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getEmail() ));
+//    }
 
 }
