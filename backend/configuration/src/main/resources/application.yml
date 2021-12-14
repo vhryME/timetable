@@ -14,18 +14,18 @@ spring.datasource:
   password: ${POSTGRES_PASSWORD:11gamane}
 
 #SECURITY
-security:
-  oauth2:
-    client:
-      clientId: 27689494110-9atu1pd9er9brgeiemhgisu3pv616cjd.apps.googleusercontent.com
-      clientSecret: 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
-      clientAuthenticationScheme: form
-      accessTokenUri: https://www.googleapis.com/oauth2/v4/token
-      scope: openid,email,profile
-      userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
-    resource:
-      userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
-      preferTokenInfo: 'true'
+#security:
+#  oauth2:
+#    client:
+#      clientId: 27689494110-9atu1pd9er9brgeiemhgisu3pv616cjd.apps.googleusercontent.com
+#      clientSecret: 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
+#      clientAuthenticationScheme: form
+#      accessTokenUri: https://www.googleapis.com/oauth2/v4/token
+#      scope: openid,email,profile
+#      userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+#    resource:
+#      userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
+#      preferTokenInfo: 'true'
 
 #JPA
 spring.jpa:
