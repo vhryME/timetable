@@ -1,20 +1,17 @@
 import React from "react";
 import {List, Modal, Tag} from "antd";
 import {UniversalForm, Validator} from "../../components/common/universalForm";
-import {actions as skillActions, schema as skillSchema} from "../heroesLayouts/config/oneHero/skillFormConfig";
-import {v4 as uuidv4} from "uuid";
+import axios from "../../helpers/axios";
 
-export const actions = (context) => {
-    return {
-        onAdd: () => console.log("onAdd timetable"),
-        onEdit: (value) => console.log("onEdit timetable"),
-        onDelete: (value) => console.log("onDelete timetable")
-    };
-};
-
-const lessonEditingSchema = {
+export const lessonEditingSchema = (types, groups, groupsDisabled) => ({
     name: "Lesson",
     fields: {
+        group: {
+            label: "Group",
+            type: "enum",
+            options: groups,
+            disabled: groupsDisabled
+        },
         name: {
             label: "Name",
             type: "string",
@@ -23,110 +20,114 @@ const lessonEditingSchema = {
         type: {
             label: "Type",
             type: "enum",
-            rules: [Validator.required()]
+            rules: [Validator.required()],
+            options: types
         },
-        place: {
-            label: "Place",
-            type: "string",
+        date: {
+            label: "Date",
+            type: "date",
+        },
+        startDateTime: {
+            label: "Start time",
+            type: "time"
+        },
+        endDateTime: {
+            label: "End time",
+            type: "time"
         }
     }
-}
+})
 
-const formLessonEditingModal = (lesson) => {
+export const formLessonEditingModal = ({lesson, groups, group}) => {
     const modal = Modal.confirm();
 
-    modal.update({
-        title: `Lesson editing`,
-        content: <UniversalForm schema={lessonEditingSchema}
-                                data={lesson}
-                                labelsSpan={6}
-                                wrappersSpan={16}
-                                actions={{
-                                    onSubmit: (values) => { console.log(values); modal.destroy()},
-                                    onCancel: () => { console.log("editing cancelled"); modal.destroy() }
-                                }}/>,
-        cancelButtonProps: {hidden: true},
-        okButtonProps: {hidden: true}
-    })
+    console.log(lesson, "clicked");
+
+    axios.get("/timetables/api/dictionary/lessonType").then(response =>
+        modal.update({
+            title: lesson && lesson.id ? `Lesson editing` : `Lesson adding`,
+            content: <UniversalForm schema={lessonEditingSchema(response.data, groups, lesson && lesson.id)}
+                                    data={{...lesson, group}}
+                                    labelsSpan={6}
+                                    wrappersSpan={16}
+                                    actions={{
+                                        onSubmit: (values) => {
+                                            console.log(values);
+                                            modal.destroy()
+                                        },
+                                        onCancel: () => {
+                                            console.log("editing cancelled");
+                                            modal.destroy()
+                                        }
+                                    }}/>,
+            cancelButtonProps: {hidden: true},
+            okButtonProps: {hidden: true}
+        })
+    )
 }
 
-const tagsDictionary = {
-    1: { color: "magenta", name: "lecture" },
-    2: { color: "green", name: "practice" },
-    3: { color: "cyan", name: "lab" }
-}
+const tagsColorsDictionary = ["magenta", "volcano", "lime", "cyan", "geekblue", "purple"]
 
 const tagsRender = (lessonType) => {
-    return <Tag color={tagsDictionary[lessonType].color}>{tagsDictionary[lessonType].name}</Tag>
+    return <Tag color={tagsColorsDictionary[lessonType.id] ?? "purple"}>{lessonType.value}</Tag>
 }
 
-const lessonRender = (lesson) => {
-    return <List.Item>
-        <List.Item.Meta
-            title={<a onClick={() => formLessonEditingModal(lesson)}>{lesson.name} {tagsRender(lesson.type)}</a>}
-            description={lesson.place}/>
-    </List.Item>
-}
-
-const dayRender = (day) => {
+const dayRender = (day, record) => {
     return <List
         dataSource={day}
-        renderItem={lessonRender}
+        renderItem={(lesson) => <List.Item>
+                <List.Item.Meta
+                    title={<a onClick={() =>
+                        formLessonEditingModal({
+                            lesson: {
+                                ...lesson,
+                                type: lesson.type.id.toString()
+                            },
+                            group: record.group.name
+                        })}>
+                        {lesson.shortName}
+                        {tagsRender(lesson.type)}</a>}
+                    description={lesson.name}/>
+            </List.Item>
+        }
     />
 }
 
 export const columns = () => {
     return {
         group: {
-            label: "Group"
+            label: "Group",
+            dataIndex: ["group", "name"]
         },
         monday: {
             label: "Monday",
-            dataIndex: ["lessons", "monday"],
-            customRender: (item) => dayRender(item)
+            dataIndex: ["monday"],
+            customRender: dayRender
         },
         tuesday: {
             label: "Tuesday",
-            dataIndex: ["lessons", "tuesday"],
-            customRender: (item) => dayRender(item)
+            dataIndex: ["tuesday"],
+            customRender: dayRender
         },
         wednesday: {
             label: "Wednesday",
-            dataIndex: ["lessons", "wednesday"],
-            customRender: (item) => dayRender(item)
+            dataIndex: ["wednesday"],
+            customRender: dayRender
         },
         thursday: {
             label: "Thursday",
-            dataIndex: ["lessons", "thursday"],
-            customRender: (item) => dayRender(item)
+            dataIndex: ["thursday"],
+            customRender: dayRender
         },
         friday: {
             label: "Friday",
-            dataIndex: ["lessons", "friday"],
-            customRender: (item) => dayRender(item)
+            dataIndex: ["friday"],
+            customRender: dayRender
         },
         saturday: {
             label: "Saturday",
-            dataIndex: ["lessons", "saturday"],
-            customRender: (item) => dayRender(item)
+            dataIndex: ["saturday"],
+            customRender: dayRender
         },
     };
 };
-
-export const schema = {
-    name: "heroesFilter",
-    fields: {
-        group: { label: "Group", type: "enum" },
-        faculty: { label: "Faculty", type: "enum" }
-    }
-};
-
-export const filterActions = (context) => {
-    return {
-        onSubmit: (value) => console.log("filter submitted"),
-        onClear: (ref) => {
-            ref.resetFields();
-            console.log("filter cleared");
-        }
-    }
-}

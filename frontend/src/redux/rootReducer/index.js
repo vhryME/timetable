@@ -15,6 +15,8 @@ const oneMatchReducer = (state = initialState, action) => reducerFactory(entitie
 const allMatchesReducer = (state = initialState, action) => reducerFactory(entities.MATCHES, state, action);
 
 const dictionaries = (state = initialState, action) => reducerFactory(entities.DICTIONARIES, state, action);
+const timetable = (state = initialState, action) => reducerFactory(entities.CLASSES, state, action);
+const faculties = (state = initialState, action) => reducerFactory(entities.FACULTIES, state, action);
 
 export const rootReducer = combineReducers({
   heroes: combineReducers({
@@ -25,5 +27,8 @@ export const rootReducer = combineReducers({
     current: oneMatchReducer,
     all: allMatchesReducer
   }),
+
+  faculties,
+  timetable,
   dictionaries,
 });

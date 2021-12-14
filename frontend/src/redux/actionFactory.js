@@ -2,7 +2,7 @@ import states from "./basicActionStates";
 import api from "../helpers/api";
 
 const ActionFactory = (config) => {
-  const {entity, action, func, url, method = "GET", values, toPayload = true, postProc = data => data} = config;
+  const {entity, action, func, url, method, values, toPayload = true, postProc = data => data} = config;
   return async function (dispatch) {
     dispatch({type: entity + action + states["LOADING"]});
 

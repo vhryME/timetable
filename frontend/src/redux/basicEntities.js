@@ -5,4 +5,8 @@ export default {
 
   MATCH: "MATCH_",
   MATCHES: "MATCHES_",
+
+  CLASSES: "CLASSES_",
+  USER: "USER_",
+  FACULTIES: "FACULTIES_"
 };

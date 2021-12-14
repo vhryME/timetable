@@ -9,7 +9,7 @@ module.exports = merge(common, {
     contentBase: "./public",
     historyApiFallback: true,
     proxy: {
-      "/api": {
+      "/timetables": {
         target: "http://localhost:9090",
         secure: false,
         changeOrigin: true,

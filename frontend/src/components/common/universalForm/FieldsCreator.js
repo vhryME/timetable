@@ -1,5 +1,6 @@
 import React from "react";
 import {Input, Checkbox, Select, DatePicker, TimePicker, Switch} from "antd";
+import context from "react-redux/lib/components/Context";
 
 const {Option} = Select;
 
@@ -65,13 +66,16 @@ export default {
     );
   },
 
-  enum: (context, {options}) => {
+  weekPicker: (context) => <DatePicker picker="week"/>,
+
+  enum: (context, {options, onChange, disabled}) => {
     const {readonly} = context.props;
 
     return (
       <Select
-        disabled={readonly}
+        disabled={readonly || disabled || undefined}
         bordered={!readonly}
+        onChange={onChange}
         style={readonly ? {color: "black"} : undefined}
       >
         {Array.isArray(options) && options.map((option) =>

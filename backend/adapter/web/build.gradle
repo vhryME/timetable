@@ -3,7 +3,7 @@ dependencies {
     implementation project(':core')
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    compile('org.springframework.boot:spring-boot-starter-security')
+//    compile('org.springframework.boot:spring-boot-starter-security')
     compile group: 'io.springfox', name: 'springfox-swagger-ui', version: "$springfoxSwaggerUiVersion"
     compile group: 'io.springfox', name: 'springfox-swagger2', version: "$springfoxSwagger2Version"
 }

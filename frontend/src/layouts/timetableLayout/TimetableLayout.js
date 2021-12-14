@@ -2,53 +2,98 @@ import React from "react";
 import {Spin} from "antd";
 import {withRouter} from "react-router-dom";
 import {UniversalTable} from "../../components/common/universalTable";
-import {columns, schema, actions, filterActions} from "./config";
-
-const data = [{
-    group: "ВМСиС",
-    lessons: {
-        monday: [ { name: "Lesson 1 M", type: 1, place: "CAB 1" },
-            { name: "Lesson 2 M", type: 1, place: "CAB 1" }],
-        tuesday: [ { name: "Lesson 1 T", type: 2, place: "CAB 1235" },
-            { name: "Lesson 2 T", type: 1, place: "CAB 5321" }],
-        wednesday: [ { name: "Lesson 1 W", type: 3, place: "CAB 623" },
-            { name: "Lesson 2 W", type: 2, place: "CAB 734" }],
-        thursday: [ { name: "Lesson 1 TH", type: 1, place: "CAB 23" },
-            { name: "Lesson 2 TH", type: 2, place: "CAB 32" }],
-        friday: [ { name: "Lesson 1 F", type: 1, place: "CAB 626" },
-            { name: "Lesson 2 F", type: 3, place: "CAB 43" }],
-        saturday: [ { name: "Lesson 1 S", type: 3, place: "CAB 53" },
-            { name: "Lesson 2 S", type: 1, place: "CAB 263" }]
-    }
-}];
+import {columns, formLessonEditingModal} from "./config";
+import moment from "moment";
+import {getClassesByDate, getClassesByFacultyByDate, getClassesByGroupByDate} from "./actions";
 
 class TimetableLayout extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: true
+            loading: true,
+            selectedFaculty: null
         }
     }
 
-    filter = {
-        schema: schema,
-        actions: filterActions(this),
+    filterActions = () => ({
+        onSubmit: (values) => {
+            let {date, faculty, group} = values;
+            date = moment(date ? date : Date.now()).format("DD.MM.YYYY")
+            if (group) return this.props.getClassesByGroupByDate({date, group});
+            if (faculty) return this.props.getClassesByFacultyByDate({date, faculty});
+            return this.props.getClassesByDate({date});
+        },
+        onClear: (ref) => {
+            ref.resetFields();
+            console.log("filter cleared");
+        }
+    })
+
+    generateSchema = () => {
+        const {data: faculties} = this.props.faculties;
+
+        let groupsValues = {};
+        let facultiesValues = {};
+
+        faculties && faculties.reduce((acc, curr) => facultiesValues[curr.id] = curr.name)
+        this.state.selectedFaculty && faculties
+            .find(item => item.id == this.state.selectedFaculty)
+            .specialities
+            .reduce((acc, curr) =>
+                curr.groups[0] && curr.groups.map(item => groupsValues[item.id] = item.name), [])
+
+        return {
+            name: "heroesFilter",
+            fields: {
+                faculty: {
+                    label: "Faculty",
+                    type: "enum",
+                    options: facultiesValues,
+                    onChange: (value) => this.setState({selectedFaculty: value})
+                },
+                group: {
+                    label: "Group",
+                    type: "enum",
+                    options: groupsValues
+                },
+                date: {label: "Week", type: "weekPicker"}
+            }
+        }
+    };
+
+    generateFilter = () => ({
+        schema: this.generateSchema(),
+        actions: this.filterActions(),
         labelsSpan: 3,
         wrappersSpan: 3
-    }
+    })
 
     componentDidMount() {
-        ///MOCK LOADING
-        setTimeout(() => this.setState({loading: false}), 300);
+        this.props.getAllFaculties();
+        this.props.getClassesByDate({date: moment(Date.now()).format("DD.MM.YYYY")});
+        this.setState({loading: true})
+    }
+
+    componentDidUpdate(prevProps, prevState, s) {
+        prevProps != this.props && this.setState({loading: this.props.timetable.loading})
     }
 
     render() {
+        let groups = {};
+
+        this.props.faculties.data[0]
+        && this.props.faculties.data.map(item =>
+            item.specialities.reduce((acc, curr) =>
+                curr.groups[0] && curr.groups.map(item => groups[item.id] = item.name), [])
+        );
+
         return (
             <Spin spinning={this.state.loading}>
                 <UniversalTable
-                    filter={this.filter}
+                    filter={this.generateFilter()}
                     columns={columns()}
-                    data={data}/>
+                    actions={{onAdd: () => formLessonEditingModal({groups})}}
+                    data={this.props.timetable.data}/>
             </Spin>
         );
     }

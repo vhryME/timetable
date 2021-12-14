@@ -4,10 +4,9 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import "./styles.css";
 
-import {HeroesTable, HeroForm} from "../heroesLayouts";
 import Menu from "../../components/menu/Menu";
-import {MatchesTable, MatchForm} from "../matchesLayouts";
-import TimetableLayout from "../timetableLayout/TimetableLayout";
+import {Timetable} from "../timetableLayout";
+import OAuth2RedirectHandler from "../../components/oauth2/OAuth2RedirectHandler";
 
 class MainLayout extends React.Component {
   render() {
@@ -17,44 +16,12 @@ class MainLayout extends React.Component {
           <div className="menu">
             <Menu/>
           </div>
+
           <div className="content" style={{}}>
             <Switch className="content">
-              <Route exact path="/heroes/edit/:id">
-                <HeroForm/>
-              </Route>
 
-              <Route exact path="/heroes/edit/:id">
-                <HeroForm/>
-              </Route>
-              <Route exact path="/matches/edit/:id">
-                <MatchForm/>
-              </Route>
-
-              <Route exact path="/heroes/view/:id">
-                <HeroForm readonly/>
-              </Route>
-              <Route exact path="/matches/view/:id">
-                <MatchForm readonly/>
-              </Route>
-
-              <Route exact path="/heroes/new">
-                <HeroForm/>
-              </Route>
-              <Route exact path="/matches/new">
-                <MatchForm/>
-              </Route>
-
-
-              <Route exact path="/heroes">
-                <HeroesTable/>
-              </Route>
-              <Route exact path="/matches">
-                <MatchesTable/>
-              </Route>
-
-              <Route exact path="/timetable">
-                <TimetableLayout/>
-              </Route>
+              <Route exact path="/timetable" component={Timetable}/>
+              {/*<Route path="/oauth2/redirect" component={OAuth2RedirectHandler}/>*/}
 
             </Switch>
           </div>

@@ -37,7 +37,7 @@ class UniversalTable extends React.Component {
     });
 
     if (this.props.actions && !this.props.readonly) {
-      columnsArr.push({
+      this.props.actions["onDelete"] || this.props.actions["onEdit"] && columnsArr.push({
         title: "Actions",
         dataIndex: "actions",
         width: "90px",
